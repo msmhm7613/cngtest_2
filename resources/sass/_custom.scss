@@ -1,0 +1,15 @@
+@font-face 
+{
+    font-family: iran;
+    src: url('../font/IRANSansWeb.woff');
+}
+
+body,html,*{
+    
+    direction: rtl;
+    font-family: iran;
+    color:#666 !important;
+    
+}
+
+@import 'wizard';
