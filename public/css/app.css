@@ -10904,22 +10904,14 @@ a.text-dark:focus {
   src: url(/fonts/IRANSansWeb.woff?df14582918ca379a280e453bb3cc6ba5);
 }
 
-body,
-html,
-* {
-  direction: rtl;
-  font-family: iran;
-  color: #666 !important;
-}
-
 img.logo {
   width: 5rem;
 }
 
 .wizard {
-  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.3), inset -3px -3px 6px #fff;
-  border-radius: 20px;
   padding-top: 0.2rem;
+  border-radius: 2rem;
+  min-height: 99vh;
 }
 
 .wizard .header {
@@ -10927,5 +10919,82 @@ img.logo {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
+}
+
+.wizard form input {
+  margin-top: 0.7rem;
+}
+
+body {
+  direction: rtl;
+  font-family: iran;
+  color: #666 !important;
+  background-color: #efefef;
+}
+
+.inset {
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -5px -5px 5px rgba(255, 255, 255, 0.5);
+}
+
+.outset {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 5px rgba(255, 255, 255, 0.5);
+}
+
+.eng {
+  text-align: left;
+  direction: rtl;
+  font-family: sans-serif;
+}
+
+form {
+  padding: 2rem;
+}
+
+form input {
+  border: none;
+  outline: none;
+  background: none;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  display: block;
+  width: 100%;
+  color: #666;
+}
+
+form input::-moz-placeholder {
+  font-size: small;
+  font-style: italic;
+}
+
+form input:-ms-input-placeholder {
+  font-size: small;
+  font-style: italic;
+}
+
+form input::placeholder {
+  font-size: small;
+  font-style: italic;
+}
+
+form input.submit {
+  background-color: #3490dc;
+  color: #eee;
+}
+
+form input[type=password]::after {
+  content: "eye";
+}
+
+form input:focus {
+  background-color: rgba(232, 255, 193, 0.5);
+}
+
+.form-control {
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  background: none;
 }
 

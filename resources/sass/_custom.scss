@@ -1,15 +1,76 @@
-@font-face 
+@font-face
 {
     font-family: iran;
     src: url('../font/IRANSansWeb.woff');
 }
 
-body,html,*{
-    
+@import 'variables';
+@import 'mixins';
+@import 'wizard';
+
+body{
+
     direction: rtl;
     font-family: iran;
     color:#666 !important;
-    
+    background-color: #efefef;
+
 }
 
-@import 'wizard';
+p,a,a:hover,a:active,a:link,h1,h2,h3,h4,h5,h6{
+
+}
+
+.inset {
+    box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2),
+                inset -5px -5px 5px rgba(255,255,255,.5);
+}
+.outset {
+    box-shadow:  5px 5px 5px $shadow,
+                 -5px -5px 5px rgba(255,255,255,.5) ;
+}
+
+.eng{
+    text-align: left;
+    direction: rtl;
+    font-family: sans-serif;
+}
+
+form {
+
+    padding:2rem ;
+    input {
+        border: none ;
+        outline: none ;
+        background: none ;
+        border-radius: 2rem;
+        font-size: 1.1rem;
+        padding: .5rem 1rem;
+        display: block;
+        width: 100%;
+        color: #666;
+        &::placeholder {
+            font-size: small;
+            font-style: italic;
+        }
+        &.submit
+        {
+            @include btn($blue,#eee);
+        }
+        &[type="password"]{
+            &::after{
+                content:'eye';
+            }
+        }
+        &:focus{
+            background-color:rgba(#e8ffc1,0.5);
+        }
+    }
+}
+
+.form-control{
+    border-radius: 2rem;
+    border:none;
+    outline:none;
+    background:none;
+}

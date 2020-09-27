@@ -1,18 +1,24 @@
-@import 'logo';
-
+@import "logo";
 
 .wizard {
-
-    box-shadow: inset 3px 3px 6px rgba(0,0,0,.3),
-                inset -3px -3px 6px #fff;
-
-    border-radius: 20px;
     padding-top: 0.2rem;
+    border-radius: 2rem;
+    min-height: 99vh;
 
-    .header{
+    .header {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        text-align: center;
+
     }
+    form{
+        
+        input{
+            margin-top: .7rem;
+        }
+    }
+
 }
+
