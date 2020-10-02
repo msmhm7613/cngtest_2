@@ -26,17 +26,48 @@
                         <fieldset>
                             <legend>Database</legend>
                             <div class="form-group">
-                                <input type="text" name="dbname" id="dbname" placeholder="Database Name" class=" inset eng">
+                                <input type="text" name="dbname" id="dbname" placeholder="Database Name" class=" inset eng"
+                                value="{{ old('dbname') }}"
+                                >
+                                @error('dbname')
+                                    <small class="error">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <input type="text" name="dbusername" id="dbusername" placeholder="Database Username" class=" inset eng">
+                                <input type="text" name="dbusername" id="dbusername" placeholder="Database Username" class=" inset eng"
+                                value="{{ old('dbusername') }}">
+                                @error('dbusername')
+                                <small class="error">
+                                    {{ $message }}
+                                </small>
+                            @enderror
                             </div>
+
+                            <div class="form-group" id="dbpass">
+                                <input type="password" name="dbpassword" id="dbpassword" placeholder="Database Password" class=" inset eng eye"
+                                value="{{ old('dbpassword')?old('dbpassword'):'' }}"
+                                >
+                                <i class="fas fa-eye" id="eye" ></i>
+                                @error('dbpassword')
+                                <small class="error">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+                            </div>
+
                             <div class="form-group">
-                                <input type="password" name="dbpassword" id="dbpassword" placeholder="Database Password" class=" inset eng">
+                                <input type="text" name="dbport" id="db-port" placeholder="Database Port" class=" inset eng"
+                                value="{{ old('dbport')?old('dbport'):'3306' }}"
+                                >
+                                @error('dbport')
+                                    <small class="error">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
                             </div>
-                            <div class="form-group">
-                                <input type="text" name="dbport" id="db-port" placeholder="Database Port" class=" inset eng">
-                            </div>
+
                         </fieldset>
                     </div>
                 </div>
@@ -44,10 +75,27 @@
                 @csrf
                 <div class="row">
                     <div class="col">
-                        <input type="submit" value="Send" class="form-control submit outset">
+                        <input type="submit" value="Next" class="form-control submit outset">
                     </div>
                 </div>
             </form>
         </div>
 </div>
+
+<script>
+    const eye = document.getElementById('eye')
+    const dbpass = document.querySelector('#dbpass #dbpassword')
+    eye.addEventListener('click',toggle)
+    function toggle(e){
+        if ( eye.classList.contains('fa-eye'))
+        {
+            eye.classList.toggle('fa-eye-slash')
+            if ( dbpass.type === 'password' )
+                dbpass.type = 'text'
+            else
+                dbpass.type = 'password'
+        }
+
+    }
+</script>
 @endsection

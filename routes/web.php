@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/setup','App\Http\Controllers\SetupController@index');
+

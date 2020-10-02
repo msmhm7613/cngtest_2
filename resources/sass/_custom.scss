@@ -30,7 +30,7 @@ body{
 
 .eng{
     text-align: left;
-    direction: rtl;
+    direction: ltr;
     font-family: sans-serif;
 }
 
@@ -47,6 +47,7 @@ form {
         display: block;
         width: 100%;
         color: #666;
+        position: relative;
         &::placeholder {
             font-size: small;
             font-style: italic;
@@ -55,14 +56,13 @@ form {
         {
             @include btn($blue,#eee);
         }
-        &[type="password"]{
-            &::after{
-                content:'eye';
-            }
-        }
+
+
         &:focus{
             background-color:rgba(#e8ffc1,0.5);
         }
+
+
     }
 }
 
@@ -72,3 +72,23 @@ form {
     outline:none;
     background:none;
 }
+
+.form-group{
+    position: relative;
+
+    i#eye{
+        color: grey;
+        font-size: 1.1rem;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+    }
+}
+
+small.error{
+    color:$red;
+}
+
+
+

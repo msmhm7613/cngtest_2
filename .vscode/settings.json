@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 8888,
+            "driver": "MySQL",
+            "name": "ts_connection_string",
+            "database": "drbph_db",
+            "username": "admin",
+            "password": ""
+        }
+    ]
+}
