@@ -1,6 +1,7 @@
 <?php
-
+use App\Http\Controllers\PanelController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/setup','App\Http\Controllers\SetupController@index');
 
+Route::get('/panel', [PanelController::class , 'index']);
+
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::post('/welcome' , '\App\Http\Controllers\welController@index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -59,7 +59,7 @@
 
                             <div class="form-group">
                                 <input type="text" name="dbport" id="db-port" placeholder="Database Port" class=" inset eng"
-                                value="{{ old('dbport')?old('dbport'):'3306' }}"
+                                value="{{ old('dbport')?old('dbport'):'8889' }}"
                                 >
                                 @error('dbport')
                                     <small class="error">

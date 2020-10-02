@@ -1,0 +1,26 @@
+div.welcome {
+    small,
+    .small {
+        color: #fefefe;
+        font-size: 60%;
+    }
+}
+
+.navbar
+{
+    display: flex;
+    justify-content: space-between;
+    background-color: $dark;
+    color: #eee;
+
+    a,
+    a:link,
+    a:active{
+        color: #eee;
+    }
+
+    a:hover{
+        
+        text-decoration: none;
+    }
+}

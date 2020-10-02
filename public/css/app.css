@@ -10927,11 +10927,87 @@ img.logo {
   position: relative;
 }
 
+div.welcome small,
+div.welcome .small {
+  color: #fefefe;
+  font-size: 60%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #343a40;
+  color: #eee;
+}
+
+.navbar a,
+.navbar a:link,
+.navbar a:active {
+  color: #eee;
+}
+
+.navbar a:hover {
+  text-decoration: none;
+}
+
+.tabs h1 {
+  padding: 3rem;
+}
+
+.table {
+  margin-top: 3rem;
+}
+
+.tbl-users {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.tbl-users th {
+  background-color: #3490dc;
+}
+
+.tbl-users tr td i.fa-pencil-alt {
+  color: #eee;
+}
+
+.tbl-users td {
+  padding: 0.3rem;
+  transition: background-color 0.5s ease;
+}
+
+.tbl-users td[contenteditable=true] {
+  border: none;
+  outline: none;
+}
+
+.tbl-users td div {
+  position: relative;
+}
+
+.tbl-users td .btn-save {
+  display: none;
+  cursor: pointer;
+  padding: 0%;
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  transition: display 750ms ease;
+  z-index: 999;
+}
+
+.tbl-users td .btn-save i.fa-save {
+  font-size: 1.6rem;
+}
+
 body {
   direction: rtl;
   font-family: iran;
   color: #666 !important;
   background-color: #efefef;
+  text-align: right;
 }
 
 .inset {

@@ -1,0 +1,45 @@
+.table {
+    margin-top: 3rem;
+}
+
+.tbl-users {
+    user-select: none;
+
+    th {
+        background-color: $blue;
+    }
+
+    tr td i.fa-pencil-alt {
+        color: $myLight;
+    }
+
+    td {
+        padding: 0.3rem;
+        transition: background-color 0.5s ease;
+        &[contenteditable="true"] {
+            border: none;
+            outline: none;
+        }
+
+        div {
+            position: relative;
+        }
+
+        
+        .btn-save {
+            display: none;
+            cursor: pointer;
+            padding: 0%;
+
+            position: absolute;
+            top: 0.25rem;
+            left: 0.25rem;
+
+            transition: display 750ms ease;
+            z-index: 999;
+            i.fa-save {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}

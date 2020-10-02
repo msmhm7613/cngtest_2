@@ -7,6 +7,11 @@
 @import 'variables';
 @import 'mixins';
 @import 'wizard';
+@import 'navbar';
+@import 'tabs';
+@import 'tables';
+
+
 
 body{
 
@@ -14,6 +19,7 @@ body{
     font-family: iran;
     color:#666 !important;
     background-color: #efefef;
+    text-align: right;
 
 }
 
@@ -48,6 +54,7 @@ form {
         width: 100%;
         color: #666;
         position: relative;
+        
         &::placeholder {
             font-size: small;
             font-style: italic;
