@@ -31,3 +31,8 @@ Route::post('/welcome' , '\App\Http\Controllers\welController@index');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/addUser', '\App\Http\Controllers\UserController@newUser');
+Route::post('/editUser', '\App\Http\Controllers\UserController@editUser');
+
+

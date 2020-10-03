@@ -11002,11 +11002,15 @@ div.welcome .small {
   font-size: 1.6rem;
 }
 
+.modal-content {
+  background-color: #eee;
+}
+
 body {
   direction: rtl;
   font-family: iran;
   color: #666 !important;
-  background-color: #efefef;
+  background-color: #eee;
   text-align: right;
 }
 
@@ -11028,7 +11032,7 @@ form {
   padding: 2rem;
 }
 
-form input {
+form input.inset {
   border: none;
   outline: none;
   background: none;
@@ -11041,28 +11045,30 @@ form input {
   position: relative;
 }
 
-form input::-moz-placeholder {
+form input.inset::-moz-placeholder {
   font-size: small;
   font-style: italic;
 }
 
-form input:-ms-input-placeholder {
+form input.inset:-ms-input-placeholder {
   font-size: small;
   font-style: italic;
 }
 
-form input::placeholder {
+form input.inset::placeholder {
   font-size: small;
   font-style: italic;
 }
 
-form input.submit {
+form input.inset.submit {
   background-color: #3490dc;
   color: #eee;
 }
 
-form input:focus {
+form input.inset:focus {
   background-color: rgba(232, 255, 193, 0.5);
+  border: none;
+  outline: none;
 }
 
 .form-control {
@@ -11087,5 +11093,13 @@ form input:focus {
 
 small.error {
   color: #e3342f;
+}
+
+select.form-control {
+  border: 1px solid grey;
+}
+
+select.form-control:focus {
+  outline: none;
 }
 

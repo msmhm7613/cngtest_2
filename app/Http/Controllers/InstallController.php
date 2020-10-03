@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InstallController extends Controller
 {
@@ -11,6 +12,9 @@ class InstallController extends Controller
         $db_status = env('DB_INSTALLED',0);
         if ( !$db_status )
             return view ( 'install' );
-        return view('welcome')->with('db',$db_status);
+        elseif (Auth::user())
+            return view('panel');
+        else
+            return view('auth.login');
     }
 }

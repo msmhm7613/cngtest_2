@@ -10,6 +10,7 @@
 @import 'navbar';
 @import 'tabs';
 @import 'tables';
+@import 'modal';
 
 
 
@@ -18,7 +19,7 @@ body{
     direction: rtl;
     font-family: iran;
     color:#666 !important;
-    background-color: #efefef;
+    background-color: #eee;
     text-align: right;
 
 }
@@ -43,7 +44,7 @@ body{
 form {
 
     padding:2rem ;
-    input {
+    input.inset {
         border: none ;
         outline: none ;
         background: none ;
@@ -54,7 +55,7 @@ form {
         width: 100%;
         color: #666;
         position: relative;
-        
+
         &::placeholder {
             font-size: small;
             font-style: italic;
@@ -67,6 +68,9 @@ form {
 
         &:focus{
             background-color:rgba(#e8ffc1,0.5);
+            border:none;
+            outline: none;
+
         }
 
 
@@ -95,6 +99,15 @@ form {
 
 small.error{
     color:$red;
+}
+
+select.form-control{
+    border:1px solid grey;
+}
+
+select.form-control:focus{
+    outline: none;
+    
 }
 
 

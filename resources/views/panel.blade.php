@@ -9,14 +9,18 @@
 
 @extends('layouts.head')
 
-@section('name',Auth::user()->username)
+@if(!Auth::user())
+<script>window.location = "/login";</script>
+@endif
+
+@section('name',Auth::user()->username??"")
 @section ( 'page-title' , 'پنل مدیریت')
 
 @section('content')
 
 
-<div class="container-fluid">
-    <div class="container">
+<div class="">
+    <div class="">
         <div class="navbar">
             <div class="navbar-brand">
                 <div>
@@ -78,15 +82,21 @@
         <h1>
             تنظیمات کاربران
         </h1>
+        @if(in_array(Auth::user()->role, [1,2] ))
+        <button class="btn btn-success" id="newUserBtn">
+            <i class="fas fa-plus"></i>
+            کاربر جدید
+        </button>
+        @endif
 
         <table class="table table-striped tbl-users">
             <tr>
                 <th>ردیف</th>
                 <th>شناسه</th>
                 <th>نام کاربری</th>
-                <th>پسورد</th>
+                <th style="display: none;">پسورد</th>
                 <th>عنوان</th>
-                <th>عملیات</th>
+                <th style="text-align: left;">عملیات</th>
             </tr>
             @php
                 $ind = 1;
@@ -109,8 +119,8 @@
                             </a>
                         </div>
                     </td>
-                    <td>
-                        <div class="d-flex justify-content-between">
+                    <td style="display: none">
+                        <div class="d-flex justify-content-between" >
                             <p>
                                 {{ $user->password }}
                             </p>
@@ -131,14 +141,14 @@
                     </td>
                     <td class="text-left">
                         <div class="hide">
-                            <a href="#" class="btn btn-primary">
+                            <button class="btn btn-info btn-sm" id="btnEdit" data-id={{ $user->id }}>
                                 <i class="fas fa-pencil-alt"></i>
                                 <small>ویرایش</small>
-                            </a>
-                            <a href="#" class="btn btn-danger">
+                            </button>
+                            <button class="btn btn-danger btn-sm" id="btnDel" data-id={{ $user->id }}>
                                 <i class="fas fa-trash-alt"></i>
                                 <small>حذف</small>
-                            </a>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -153,9 +163,161 @@
   </div>
 </div>
 
+{{-- Start of Add Modal --}}
+
+<div class="modal fade" id="create">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" class="form-horizontal">
+                    @csrf
+                    <div class="form-group row add">
+                        {{-- <label for="title" class="control-label col-sm-2">{{ نام کاربری: }}</label> --}}
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" autofocus class=" inset" placeholder="نام کاربری" id="username" name="username">
+                                @error('username')
+                                    <small id="small-1">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" autofocus class=" inset" placeholder="رمز عبور" id="password" name="password">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <select name="role" id="role" class="form-control">
+                                    <option value=1>
+                                        {{ 'مدیر سیستم' }}
+                                    </option>
+                                    <option value=2>
+                                        {{ 'مسئول سایت' }}
+                                    </option>
+                                    <option value=3>
+                                        {{ 'پیمانکار' }}
+                                    </option>
+                                    <option value=4>
+                                        {{ 'انبار' }}
+                                    </option>
+                                    <option value=5>
+                                        {{ 'انبار موقت' }}
+                                    </option>
+                                    <option value=6>
+                                        {{ 'کارگاه' }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="alert alert-danger errors" id="error"></div>
+            <div class="modal-footer">
+                <button class="btn btn-success" type="submit" id="add">
+                    <span class="fas fa-plus"></span>
+                    اضافه
+                </button>
+                <button class="btn btn-info" type="button" data-dismiss="modal"  >
+                    <span class="fas fa-remove"></span>
+                    انصراف
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{{-- End of Add Model --}}
+{{-- Start of Edit Modal --}}
+
+<div class="modal fade" id="edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" class="form-horizontal">
+                    @csrf
+                    <div class="form-group row add">
+                        {{-- <label for="title" class="control-label col-sm-2">{{ نام کاربری: }}</label> --}}
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" autofocus class=" inset" placeholder="نام کاربری" id="username" name="username">
+                                @error('username')
+                                    <small id="small-1">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" autofocus class=" inset" placeholder="رمز عبور" id="password" name="password">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <select name="role" id="role" class="form-control">
+                                    <option value=1>
+                                        {{ 'مدیر سیستم' }}
+                                    </option>
+                                    <option value=2>
+                                        {{ 'مسئول سایت' }}
+                                    </option>
+                                    <option value=3>
+                                        {{ 'پیمانکار' }}
+                                    </option>
+                                    <option value=4>
+                                        {{ 'انبار' }}
+                                    </option>
+                                    <option value=5>
+                                        {{ 'انبار موقت' }}
+                                    </option>
+                                    <option value=6>
+                                        {{ 'کارگاه' }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="alert alert-danger errors" id="error"></div>
+            <div class="modal-footer">
+                <button class="btn btn-success" type="submit" id="edit" >
+                    <span class="fas fa-plus"></span>
+                    ثبت
+                </button>
+                <button class="btn btn-info" type="button" data-dismiss="modal"  >
+                    <span class="fas fa-remove"></span>
+                    انصراف
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{{-- End of Edit Modal --}}
+
 @endsection
 
 @section('js')
     <script src="{{ asset('/js/my.js') }}">
     </script>
+    <script src="{{ asset('/js/modal.js') }}"></script>
 @endsection

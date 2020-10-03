@@ -108,8 +108,8 @@ class SetupController extends Controller
                     $validate = Validator::make(
                         ['username' => $newUser, 'password' => $newUser, 'role' => 1, 'tilte'=> 'admin'],
                         [
-                            'username' => ['required','min:5','max:30','unique'],
-                            'password' => ['required','min:8','max:30'],
+                            'username' => ['required','min:5','max:30'],
+                            'password' => ['required'],
                             'role'      => [''],
                             'title'     => ['']
                         ]
@@ -117,17 +117,15 @@ class SetupController extends Controller
 
                     if ( $validate->fails())
                     {
-                        var_dump(
-                         $validate->errors()->all()
-                        );
+                        var_dump($validate->errors()->all());
                         die();
                     }
 
                     $user = new User();
                     $user->username = $newUser;
                     $user->password = Hash::make('123456789');
-                    $user->role= 1;
-                    $user->title='admin';
+                    $user->role = array_search($newUser,$newUsers) + 1;
+                    $user->title = $title[array_search($newUser,$newUsers)];
                     $user->save();
                     echo '<br><br><b style="color:green;">User insetrted into table.</b><br>';
                 }
