@@ -114,19 +114,7 @@
                             <p>
                                 {{ $user->username }}
                             </p>
-                            <a href="#" title="ذخیره" class="btn-save" contenteditable="false">
-                                <i class="fas fa-save" ></i>
-                            </a>
-                        </div>
-                    </td>
-                    <td style="display: none">
-                        <div class="d-flex justify-content-between" >
-                            <p>
-                                {{ $user->password }}
-                            </p>
-                            <a href="#" title="ذخیره" class="btn-save" >
-                                <i class="fas fa-save"></i>
-                            </a>
+
                         </div>
                     </td>
                     <td >
@@ -134,10 +122,7 @@
                             <p>
                                 {{ $user->title }}
                             </p>
-                            <a href="#" title="ذخیره" class="btn-save" >
-                                <i class="fas fa-save"></i>
-                            </a>
-                        </div>
+                         </div>
                     </td>
                     <td class="text-left">
                         <div class="hide">
@@ -173,7 +158,7 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" class="form-horizontal">
+                <form action="" method="POST" class="form-horizontal" id="insert-user-form">
                     @csrf
                     <div class="form-group row add">
                         {{-- <label for="title" class="control-label col-sm-2">{{ نام کاربری: }}</label> --}}
@@ -220,7 +205,7 @@
                     </div>
                 </form>
             </div>
-            <div class="alert alert-danger errors" id="error"></div>
+            <div class="alert alert-danger errors hidden" id="response"></div>
             <div class="modal-footer">
                 <button class="btn btn-success" type="submit" id="add">
                     <span class="fas fa-plus"></span>
