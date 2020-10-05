@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('Kit');
     }
+    public function contractors()
+    {
+        return $this->hasMany(Cotractor::class);
+    }
 }

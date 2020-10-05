@@ -2,11 +2,17 @@
 
 @section ( 'content' )
 
-<?php use illuminate\Http; ?>
+<?php
+
+use illuminate\Http;
+
+?>
 
 <div class="wizard outset">
 
-
+        @if($errors)
+            {{-- die(var_dump($errors)) --}}
+        @endif
         <div class="row">
             <div class="col header">
                 <img src=" {{ asset('images/logo.png') }} " alt="logo" class='logo'>
@@ -20,7 +26,7 @@
 
         </div>
         <div class="row d-flex justify-content-center align-items-center">
-            <form action="setup" method="post" class="form">
+            <form action="/setup" method="post" class="form">
                 <div class="row">
                     <div class="col">
                         <fieldset>
@@ -79,6 +85,13 @@
                     </div>
                 </div>
             </form>
+            <ul>
+                @if($errors->any())
+                    @foreach($errors->all() as $error)
+                        <li> {{ var_dump($error) }} </li>
+                    @endforeach
+                @endif
+            </ul>
         </div>
 </div>
 

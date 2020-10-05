@@ -10927,6 +10927,11 @@ img.logo {
   position: relative;
 }
 
+.wizard form input[type=submit] {
+  background-color: #3490dc;
+  color: #eee;
+}
+
 div.welcome small,
 div.welcome .small {
   color: #fefefe;
