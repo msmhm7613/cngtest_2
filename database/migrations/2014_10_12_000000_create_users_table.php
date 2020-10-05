@@ -16,12 +16,19 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();
-            //$table->string('email')->unique();
-            //$table->timestamp('email_verified_at')->nullable();
             $table->tinyInteger('role');
             $table->string('title');
             $table->string('password');
             $table->rememberToken();
+            $table->timestamps();
+        });
+        Schema::create('kits', function (Blueprint $table) {
+            $table->id();
+            $table->string('serial')->unique();
+            $table->tinyInteger('status');
+            $table->tinyInteger('pack_status');
+            $table->string('description');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

@@ -43,4 +43,9 @@ class User extends Authenticatable
     ];
 
     public $timestamps = true;
+
+    public function kits()
+    {
+        return $this->hasMany('Kit');
+    }
 }
