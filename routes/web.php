@@ -34,5 +34,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/addUser', '\App\Http\Controllers\UserController@newUser');
 Route::post('/editUser', '\App\Http\Controllers\UserController@editUser');
+Route::post('/deleteUser', '\App\Http\Controllers\UserController@deleteUser');
+Route::get('/selectUser', '\App\Http\Controllers\UserController@selectUser');
+
 
 

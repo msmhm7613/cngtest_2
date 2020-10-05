@@ -96,7 +96,9 @@
                 <th>نام کاربری</th>
                 <th style="display: none;">پسورد</th>
                 <th>عنوان</th>
-                <th style="text-align: left;">عملیات</th>
+                <th style="text-align: left;" class="w-25">
+
+                </th>
             </tr>
             @php
                 $ind = 1;
@@ -124,13 +126,13 @@
                             </p>
                          </div>
                     </td>
-                    <td class="text-left">
-                        <div class="hide">
+                    <td class="text-left operation" >
+                        <div class="hidden">
                             <button class="btn btn-info btn-sm" id="btnEdit" data-id={{ $user->id }}>
-                                <i class="fas fa-pencil-alt"></i>
-                                <small>ویرایش</small>
+                                <i class="fas fa-pencil-alt" data-id={{ $user->id }}></i>
+                                <small data-id={{ $user->id }}>ویرایش</small>
                             </button>
-                            <button class="btn btn-danger btn-sm" id="btnDel" data-id={{ $user->id }}>
+                            <button class="btn btn-danger btn-sm" id="btnDelete" data-id={{ $user->id }}>
                                 <i class="fas fa-trash-alt"></i>
                                 <small>حذف</small>
                             </button>
@@ -223,6 +225,14 @@
 
 
 {{-- End of Add Model --}}
+
+
+{{-- ************************* --}}
+{{-- ************************* --}}
+{{-- ************************* --}}
+{{-- ************************* --}}
+
+
 {{-- Start of Edit Modal --}}
 
 <div class="modal fade" id="edit">
@@ -233,13 +243,19 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" class="form-horizontal">
+                <div class="preloader d-flex justify-content-center align-center text-center flex-column">
+                    {{-- <div class="spinner-border">
+
+                    </div>
+                    <div>Loading...</div> --}}
+                </div>
+                <form action="" method="POST" class="form-horizontal" id="edit-user-form">
                     @csrf
                     <div class="form-group row add">
                         {{-- <label for="title" class="control-label col-sm-2">{{ نام کاربری: }}</label> --}}
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" autofocus class=" inset" placeholder="نام کاربری" id="username" name="username">
+                                <input type="text" autofocus class=" inset" placeholder="نام کاربری" id="editUsername" name="username">
                                 @error('username')
                                     <small id="small-1">
                                         {{ $message }}
@@ -250,12 +266,12 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" autofocus class=" inset" placeholder="رمز عبور" id="password" name="password">
+                                <input type="text" autofocus class=" inset" placeholder="رمز عبور" id="editPassword" name="password">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <select name="role" id="role" class="form-control">
+                                <select name="role" id="editRole" class="form-control">
                                     <option value=1>
                                         {{ 'مدیر سیستم' }}
                                     </option>
@@ -280,7 +296,7 @@
                     </div>
                 </form>
             </div>
-            <div class="alert alert-danger errors" id="error"></div>
+            <div class="alert alert-danger" id="selectResponse"></div>
             <div class="modal-footer">
                 <button class="btn btn-success" type="submit" id="edit" >
                     <span class="fas fa-plus"></span>
@@ -298,6 +314,42 @@
 
 
 {{-- End of Edit Modal --}}
+
+{{-- START OF DELETE USER --}}
+
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title "></h4>
+            </div>
+            <div class="modal-body">
+                <form action="/deleteUser" method="post">
+                    @csrf
+                </form>
+                <span>آیا مطمئنید میخواهید کاربر</span>
+                <span id="sureDeleteUsername"></span>
+                <span id="sureDeleteRole"></span>
+                <span>را حذف کنید؟</span>
+            </div>
+            <div class="modal-footer">
+                <div id="deleteResponse" class="alert alert-danger"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="submit" id="modalBtnDelete" >
+                    <span class="fas fa-delete"></span>
+                    حذف
+                </button>
+                <button class="btn btn-info" id="deleteCancel" type="button"  data-dismiss="modal"  >
+                    <span class="fas fa-cancel"></span>
+                    انصراف
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 @endsection
 
