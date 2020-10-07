@@ -11,6 +11,7 @@
 @import 'tabs';
 @import 'tables';
 @import 'modal';
+@import 'ajax-content';
 
 
 
@@ -21,7 +22,7 @@ body{
     color:#666 !important;
     background-color: #eee;
     text-align: right;
-
+    min-height: 100vh;
 }
 
 
@@ -107,7 +108,7 @@ select.form-control{
 
 select.form-control:focus{
     outline: none;
-    
+
 }
 
 

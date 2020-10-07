@@ -1,13 +1,15 @@
-
-
-function openModal(e, msg) {
+function openModal(e,targetModal, msg) {
     e.preventDefault();
     $('#response').addClass('hidden');
-    $('#create').modal('show');
+    console.log(targetModal[0].id);
+
+    $('#' + targetModal[0].id).modal('show');
     $('.form-horizontal').show();
     $('.modal-title').text(msg);
-    $('#create').on('hidden.bs.modal', function () {
+    $('#' + targetModal[0].id).on('hidden.bs.modal', function () {
+
         location.reload();
+        $('#' + targetModal[0].id).trigger('click');
     })
 }
 
@@ -15,7 +17,7 @@ function openModal(e, msg) {
 
 $(document).on('click', '#newUserBtn', function (e) {
 
-    openModal(e, 'کاربر جدید')
+    openModal(e, $('#create'),'کاربر جدید')
     //function add user
     $('button#add').on('click', function () {
 
@@ -78,8 +80,8 @@ $(document).on('click', '#btnEdit', function (e) {
 
     e.preventDefault();
     id = $(e.currentTarget).attr('data-id');
-    if( id == 1 )
-    return;
+    if (id == 1)
+        return;
     $('#selectResponse').addClass('hidden');
     $('#edit').modal('show');
     $('.form-horizontal').show();
@@ -205,7 +207,6 @@ $(document).on('click', '#btnEdit', function (e) {
     */
 
 
-
 })
 
 
@@ -220,8 +221,8 @@ $(document).on('click', '#btnDelete', function (e) {
 
     e.preventDefault();
     id = $(e.currentTarget).attr('data-id');
-    if( id == 1 )
-    return;
+    if (id == 1)
+        return;
     $('#deleteResponse').addClass('hidden');
     $('#deleteModal').modal('show');
     $('.form-horizontal').show();
@@ -231,7 +232,7 @@ $(document).on('click', '#btnDelete', function (e) {
     })
 
     del_id = $(e.currentTarget).attr('data-id');
-    var del_role ;
+    var del_role;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -265,15 +266,13 @@ $(document).on('click', '#btnDelete', function (e) {
             {
                 type: 'POST',
                 url: '/deleteUser',
-                data: { 'id': del_id, 'role' : del_role },
+                data: { 'id': del_id, 'role': del_role },
                 success: function (d) {
-                    if(d.errors)
-                    {
+                    if (d.errors) {
                         console.log(d);
 
                     }
-                    else
-                    {
+                    else {
                         $('#deleteResponse').text('کاربر حذف شد.');
                         $('#modalBtnDelete').fadeOut(300);
                         $('#deleteCancel').text('بستن');
@@ -283,4 +282,62 @@ $(document).on('click', '#btnDelete', function (e) {
         )
     })
 
+})
+
+
+/* $('#panel-tabs .nav-item').on('click', function (e) {
+    e.preventDefault();
+    //console.log($(e.currentTarget).find('a').first().attr('href'));
+    let activeTab = ($(e.currentTarget).find('a').first().attr('href'));
+
+
+    $.get('/panel', function(data) {
+        console.log( data );
+    })
+
+
+}); */
+
+
+// Insert new workshop
+
+$(document).on('click','#insert-new-workshop-modal-btn',function(e){
+    e.preventDefault();
+    $.ajax({
+        type:"GET",
+        url: 'insertNewWorkshopForm',
+        data: { r: Math.random() },
+        success: function(d){
+            $('.ajax-content').css('opacity','0');
+            $('#preloader').show();
+            $('.ajax-content').first().html(d);
+            $('.ajax-content').css('opacity','1');;
+        }
+    });
+
+})
+
+// Insert new contractor
+
+$(document).on('click','#new-temp-modal-opener-btn',function(e){
+    e.preventDefault();
+    $.ajax({
+        type:"GET",
+        url: 'insert_new_contractor_form',
+        data: { r: Math.random() },
+        success: function(d){
+            $('.ajax-content').css('opacity','0');
+            $('#preloader').show();
+            $('.ajax-content').first().html(d);
+            $('.ajax-content').css('opacity','1');;
+        }
+    });
+
+})
+
+
+// insert new contractor
+$(document).on('click','#insert-new-contractor-form-show-btn',function(e){
+    e.preventDefault();
+    
 })

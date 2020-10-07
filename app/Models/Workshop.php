@@ -5,20 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contractor extends BaseModel
+class Workshop extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name' ,
-        'manager',
-        'description',
+    protected $rules = [
+        'name'      => ['unique', 'required', 'string', 'min:3', 'max:25'],
     ];
 
-    protected $rules = [
-        'name' => ['string','alpha', 'required', 'min:3', 'max:25'],
-        'manager' => ['string','alpha', 'min:3', 'max:25'],
-        'description' => ['nullable'],
+    protected $fillable = [
+
+        'name',
+        'contractor_id',
+        'manager',
+        'phone',
+        'mobile',
+        'address',
+        'description',
     ];
 
     public $timestamps = true;

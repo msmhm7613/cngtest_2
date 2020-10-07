@@ -24,8 +24,8 @@
         </h1>
     </div>
 
-    <div class="account">
-        <a href="logout" class="btn btn-danger">
+    <div class="logout" id="logout">
+        <a href="logout" class="btn btn-danger" id="logout-btn">
             <i class="fas fa-sign-out-alt"></i>
             خروج
         </a>

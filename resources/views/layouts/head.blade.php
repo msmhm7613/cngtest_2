@@ -30,9 +30,14 @@
 </head>
 <body>
 
-    <div class="container">
-
+    <div class="container" id="header">
+        @yield( 'header' )
+    </div>
+    <div class="container" id="main-content">
         @yield ( 'content' )
+    </div>
+    <div class="container" id="footer">
+        @yield( 'footer' )
     </div>
 
     <!-- Scripts

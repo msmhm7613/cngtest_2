@@ -11015,12 +11015,18 @@ div.welcome .small {
   display: none;
 }
 
+.ajax-content {
+  opacity: 1;
+  transition: opacity, 300ms;
+}
+
 body {
   direction: rtl;
   font-family: iran;
   color: #666 !important;
   background-color: #eee;
   text-align: right;
+  min-height: 100vh;
 }
 
 .inset {

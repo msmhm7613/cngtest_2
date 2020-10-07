@@ -11,7 +11,7 @@
                 </div>
                 <div class="cart-body">
                     @guest
-                        <a href="login" class="btn btn-primary">
+                        <a href="/login" class="btn btn-primary">
                             ورود
                         </a>
                     @endguest
