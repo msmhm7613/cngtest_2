@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md text-right bg-light navbar-light side-menu">
     <div class=" navbar-brand w-100 d-flex justify-content-between">
-        <b>
+        <b id="title">
             <i class="fas fa-user">
             </i>
             @if (Auth::user())
@@ -20,10 +20,13 @@
         <div class="collapse navbar-collapse w-100 " id="collapsibleNavbar">
             <ul class=" navbar-nav flex-column w-100 p-0 align-top">
                 <li class="nav-item ">
-                    <a class="nav-link active" href="#">
+
+                    <a class="nav-link active" href="#" data-toggle="collapse" data-target="#dashboard">
                         <i class="fas fa-home "></i>
                         پیشخوان
                     </a>
+                    <div class="collapse" id="dashboard"  data-parent="#accordion">
+                    </div>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" data-target="#store-submenu" href="#">
