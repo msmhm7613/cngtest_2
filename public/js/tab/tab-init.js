@@ -1,6 +1,4 @@
 
-console.log('ready');
-
 $.ajax({
     type: 'GET',
     url: 'init_panel',
@@ -24,7 +22,6 @@ $.ajax({
     },
     success:
         function (data) {
-            console.log(data);
             $('#tab-content').html(data);
         }
 });

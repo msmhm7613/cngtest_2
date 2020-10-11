@@ -10932,33 +10932,6 @@ img.logo {
   color: #eee;
 }
 
-div.welcome small,
-div.welcome .small {
-  color: #fefefe;
-  font-size: 60%;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  background-color: #343a40;
-  color: #eee;
-}
-
-.navbar a,
-.navbar a:link,
-.navbar a:active {
-  color: #eee;
-}
-
-.navbar a:hover {
-  text-decoration: none;
-}
-
-.tabs h1 {
-  padding: 3rem;
-}
-
 .table {
   margin-top: 3rem;
 }
@@ -11018,6 +10991,30 @@ div.welcome .small {
 .ajax-content {
   opacity: 1;
   transition: opacity, 300ms;
+}
+
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.side-menu .top {
+  vertical-align: top;
+}
+
+.side-menu .navbar-collapse {
+  flex-grow: unset;
+}
+
+.side-menu a:hover {
+  background-color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+  .side-menu {
+    justify-content: unset;
+  }
 }
 
 body {
