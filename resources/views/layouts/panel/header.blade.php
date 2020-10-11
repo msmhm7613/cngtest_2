@@ -1,8 +1,14 @@
 <div class="navbar mb-4">
     <div class="navbar-brand">
-        <div>
+        
             {{ env('APP_NAME') }}
-        </div>
+            <div class="version">
+                <small title=" {{ $Version[1] }} ">
+                    {{ $Version[0] }}
+                </small>
+            </div>
+
+
         <div class="welcome">
             <small>
                 شما به عنوان
@@ -16,7 +22,9 @@
 
         </div>
     </div>
+    @guest
 
+    @endguest
     <div class="title">
         <h1 class="text-center">
             <i class="fas fa-user-shield"></i>
@@ -29,6 +37,12 @@
             <i class="fas fa-sign-out-alt"></i>
             خروج
         </a>
+        <div class="datetime pt-2">
+            <small>
+                {{ $Version[2] }}
+            </small>
+
+        </div>
     </div>
 
 </div>
