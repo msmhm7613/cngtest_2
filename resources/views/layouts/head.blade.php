@@ -32,6 +32,7 @@
 
     <div class="container" id="header">
         @yield( 'header' )
+        @include('layouts.panel.header')
     </div>
     <div class="container" id="main-content">
         @yield ( 'content' )

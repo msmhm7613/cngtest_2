@@ -4,7 +4,7 @@
 <div class="">
 
     <div class="text-center">
-        <img src="{{ asset('images/logo.png') }}" alt="" width="150">
+        <img src="{{ asset('images/logo.png') }}" alt="" width="80">
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">

@@ -22,10 +22,10 @@ use App\Models\Kit as kit;
 @section('name', Auth::user()->username ?? '')
 @section('page-title', 'پنل مدیریت')
 
-@section('header')
-    {{-- Header --}}
+{{-- @section('header')
+    {{-- Header 
     @include('layouts.panel.header')
-@endsection
+@endsection --}}
 
 @section('content')
 

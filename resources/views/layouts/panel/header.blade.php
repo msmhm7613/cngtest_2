@@ -1,14 +1,14 @@
 <div class="navbar mb-4">
     <div class="navbar-brand">
-        
+
             {{ env('APP_NAME') }}
-            <div class="version">
+            <div class="version text-warning">
                 <small title=" {{ $Version[1] }} ">
                     {{ $Version[0] }}
                 </small>
             </div>
 
-
+@if(Auth::user())
         <div class="welcome">
             <small>
                 شما به عنوان
@@ -22,9 +22,7 @@
 
         </div>
     </div>
-    @guest
 
-    @endguest
     <div class="title">
         <h1 class="text-center">
             <i class="fas fa-user-shield"></i>
@@ -44,5 +42,5 @@
 
         </div>
     </div>
-
+@endif
 </div>
