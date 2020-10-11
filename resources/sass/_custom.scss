@@ -1,8 +1,28 @@
 @font-face
 {
     font-family: iran;
-    src: url('../font/IRANSansWeb.woff');
+    src: url('../font/IRANSansWeb(FaNum).woff') format('woff');
+    font-weight: normal;
 }
+@font-face
+{
+    font-family: iran;
+    src: url('../font/IRANSansWeb(FaNum)_Black.woff') format('woff');
+    font-weight: bolder;
+}
+@font-face
+{
+    font-family: iran;
+    src: url('../font/IRANSansWeb(FaNum)_Bold.woff') format('woff');
+    font-weight: bold;
+}
+@font-face
+{
+    font-family: iran;
+    src: url('../font/IRANSansWeb(FaNum)_Light.woff') format('woff');
+    font-weight: lighter;
+}
+
 
 @import 'variables';
 @import 'mixins';
@@ -11,17 +31,19 @@
 @import 'modal';
 @import 'ajax-content';
 @import 'side-menu';
+@import 'content-box';
+@import 'content-box/dashboard-workshop.scss';
 
 
 
-body{
+body,html{
 
     direction: rtl;
     font-family: iran;
-    color:#666 !important;
+    color:#666 ;
     background-color: #eee;
     text-align: right;
-    min-height: 100vh;
+    height: 100vh ;
 }
 
 
@@ -107,6 +129,11 @@ select.form-control{
 
 select.form-control:focus{
     outline: none;
+
+}
+
+div.wrapper{
+    height: 100%;
 
 }
 

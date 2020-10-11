@@ -3,7 +3,7 @@
             <h3>
                 {{ env('APP_NAME') }}
             </h3>
-            <small title=" {{ $Version[1] }} " class="text-warning">
+            <small title=" {{ $Version[1] }} " class="eng text-warning">
                ({{  $Version[0]  }})
             </small>
         </div>

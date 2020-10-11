@@ -10901,7 +10901,26 @@ a.text-dark:focus {
 
 @font-face {
   font-family: iran;
-  src: url(/fonts/IRANSansWeb.woff?df14582918ca379a280e453bb3cc6ba5);
+  src: url("/fonts/IRANSansWeb(FaNum).woff?bd6f69a8db87710b2f3fcd6ef75bd3e2") format("woff");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: iran;
+  src: url("/fonts/IRANSansWeb(FaNum)_Black.woff?bea60ea788538ed6b635ad0c519fb0b8") format("woff");
+  font-weight: bolder;
+}
+
+@font-face {
+  font-family: iran;
+  src: url("/fonts/IRANSansWeb(FaNum)_Bold.woff?753b3827c415580e864a545d1a860a5a") format("woff");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: iran;
+  src: url("/fonts/IRANSansWeb(FaNum)_Light.woff?25bd95ce239f04e9457b5cf1c7dac593") format("woff");
+  font-weight: lighter;
 }
 
 img.logo {
@@ -10997,6 +11016,7 @@ img.logo {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow: auto;
 }
 
 .side-menu b#title {
@@ -11031,13 +11051,38 @@ img.logo {
   }
 }
 
-body {
+#content-box {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content-box {
+  display: block;
+  padding: 2rem 1rem;
+}
+
+#content-box .row {
+  margin: 2rem 1px !important;
+}
+
+#content-box .mycard {
+  padding: 1rem;
+  margin: 0;
+  color: #000;
+  font-weight: bolder;
+  border-radius: 5px;
+}
+
+body,
+html {
   direction: rtl;
   font-family: iran;
-  color: #666 !important;
+  color: #666;
   background-color: #eee;
   text-align: right;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .inset {
@@ -11127,5 +11172,9 @@ select.form-control {
 
 select.form-control:focus {
   outline: none;
+}
+
+div.wrapper {
+  height: 100%;
 }
 

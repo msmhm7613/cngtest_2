@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-md text-right bg-light navbar-light side-menu">
+    @csrf
     <div class=" navbar-brand w-100 d-flex justify-content-between">
         <b id="title">
             <i class="fas fa-user">
@@ -21,7 +22,7 @@
             <ul class=" navbar-nav flex-column w-100 p-0 align-top">
                 <li class="nav-item ">
 
-                    <a class="nav-link active" href="#" data-toggle="collapse" data-target="#dashboard">
+                    <a class="nav-link active" href="#" data-toggle="collapse" data-controller="dashboard" id="dashboard-btn" data-target="#dashboard">
                         <i class="fas fa-home "></i>
                         پیشخوان
                     </a>
@@ -29,14 +30,14 @@
                     </div>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" data-target="#store-submenu" href="#">
+                    <a class="nav-link" data-toggle="collapse" data-target="#store-submenu" href="#" id="store-btn">
                         <i class="fas fa-store "></i>
                         انبار و کالا
                     </a>
                     <div class="collapse" id="store-submenu" data-parent="#accordion">
                         <ul class="navbar-nav flex-column w-100">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" id="define-stuff">
                                     معرفی کالا
                                 </a>
                             </li>

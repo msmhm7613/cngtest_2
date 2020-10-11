@@ -1,6 +1,10 @@
 .side-menu
 {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 
+    overflow: auto;
     b#title{
         overflow: hidden;
     }
@@ -9,9 +13,7 @@
         min-width: 100% !important;
 
     }
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+
     .top
     {
         vertical-align: top;

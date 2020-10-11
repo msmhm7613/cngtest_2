@@ -14,4 +14,17 @@ class NewPanelController extends Controller
         else
             return view('auth.login');
     }
+
+    public function getContent(Request $request)
+    {
+        $target = $request->target;
+        switch ($target) {
+            case 'dashboard':
+                return view('contents.dashboard');
+                break;
+
+            default:
+                break;
+        }
+    }
 }
