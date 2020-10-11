@@ -26,7 +26,7 @@ class ShowVersion
         $gitHash = file_get_contents($gitPathBranch);
         $gitDate = date(DATE_ATOM, filemtime($gitPathBranch));
         $gitDate = strtotime($gitDate);
-        $gitDate = Jalalian::forge($gitDate)->format('%A, %d %B %y - %H:%I:%S');
+        $gitDate = Jalalian::forge($gitDate)->format('%A, %d %B %y - %H:%M:%S');
 
         view()->share('Version',[$gitBranchName,$gitDate,Jalalian::now()]);
         return $next($request);
