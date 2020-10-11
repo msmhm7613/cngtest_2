@@ -1,5 +1,9 @@
 .side-menu
 {
+    #accordion {
+        min-width: 100% !important;
+
+    }
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -16,6 +20,23 @@
     a{
         &:hover{
             background-color: #fff;
+        }
+
+    }
+    a.active{
+        position: relative;
+        background-color:white;
+        display: block;
+        &::after{
+            /* position: absolute;
+            content: '';
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color:#eee;
+            left: -2rem;
+            top:0;
+            transform: rotate(45deg);
+            z-index: 9; */
         }
     }
 }

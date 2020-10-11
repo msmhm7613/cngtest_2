@@ -34,5 +34,5 @@ use App\Models\Kit as kit;
 @endsection
 
 @section('js')
-
+    <script src="/js/side-menu.js"></script>
 @endsection
