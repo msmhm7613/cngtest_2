@@ -1,4 +1,4 @@
-@php
+{{-- @php
 use App\Models\User as user;
 use App\Models\Kit as kit;
 
@@ -27,7 +27,7 @@ use App\Models\Kit as kit;
 @section('content')
 
     {{-- tab pane
-    @include('layouts.panel.tab-pane')--}}
+    @include('layouts.panel.tab-pane')
 
     <div id="tab-content">
 
@@ -39,3 +39,4 @@ use App\Models\Kit as kit;
     <script src="{{ asset('/js/my.js') }}"></script>
     <script src="{{ asset('/js/tab/tab-init.js') }}"></script>
 @endsection
+ --}}

@@ -1,34 +1,36 @@
 var mydiv, mya;
 
 
+$(document).on("mouseenter mouseleave", "table.table tr", function (e) {
+    if (e.type == "mouseenter") {
+        // check if it is mouseenter, do something
+        try {
+            if (e.currentTarget.id == 'tr-1') {
+                return;
+            }
+            else {
+                $(this).children('td.operation')[0].firstElementChild.classList.remove('hidden');
+            }
 
-$("tr").on("mouseenter", function (e) {
-    e.preventDefault();
-    try {
-        if (e.currentTarget.id == 'tr-1') {
-            return;
+        } catch (error) {
+            console.log(error)
         }
-        else {
-            $(this).children('td.operation')[0].firstElementChild.classList.remove('hidden');
-        }
+    } else {
+        // if not, mouseleave, do something
+        try {
 
-    } catch (error) {
-        //console.log(error)
+            if (e.currentTarget.id == 'tr-1') {
+                return;
+            }
+            else {
+                $(this).children('td.operation')[0].firstElementChild.classList.add('hidden');
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
     }
+    return;
 });
 
-$("tr").on("mouseleave", function (e) {
-    e.preventDefault();
-    try {
 
-        if (e.currentTarget.id == 'tr-1') {
-            return;
-        }
-        else {
-            $(this).children('td.operation')[0].firstElementChild.classList.add('hidden');
-        }
-
-    } catch (error) {
-        //console.log(error)
-    }
-});

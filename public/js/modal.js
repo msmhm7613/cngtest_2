@@ -1,15 +1,12 @@
-function openModal(e,targetModal, msg) {
+function openModal(e, targetModal, msg) {
     e.preventDefault();
     $('#response').addClass('hidden');
-    console.log(targetModal[0].id);
-
     $('#' + targetModal[0].id).modal('show');
     $('.form-horizontal').show();
     $('.modal-title').text(msg);
     $('#' + targetModal[0].id).on('hidden.bs.modal', function () {
-
-        location.reload();
-        $('#' + targetModal[0].id).trigger('click');
+        let active_item = $('.side-menu a.active');
+        $('#'+active_item[0].id)[0].click();
     })
 }
 
@@ -17,10 +14,9 @@ function openModal(e,targetModal, msg) {
 
 $(document).on('click', '#newUserBtn', function (e) {
 
-    openModal(e, $('#create'),'کاربر جدید')
+    openModal(e, $('#create'), 'کاربر جدید')
     //function add user
     $('button#add').on('click', function () {
-
         $('#response').html("");
         $.ajaxSetup({
             headers: {
@@ -39,10 +35,8 @@ $(document).on('click', '#newUserBtn', function (e) {
             },
             success: function (data) {
                 $('#response').removeClass('hidden')
-                if ((data.errors)) {
+                if (data.errors) {
                     try {
-                        console.log(data)
-
                         if (data.errors.code == "23000") {
                             data.errors.message = "کاربری با این نام قبلا ثبت شده است"
                             $('#response').append('<li>' + data.errors.message + '</li>')
@@ -52,21 +46,18 @@ $(document).on('click', '#newUserBtn', function (e) {
                             $.each(data.errors, function (keyobj, valueobj) {
                                 $('#response').append('<li>' + valueobj + '</li>')
                                 return
-                                //$('#response').append('<li>' + valueobj + '</li>')
                             })
                         }
-
                     } catch (e) {
                         $('#response').append('<li>' + data.errors + '</li>')
                     }
-
-
                 }
                 else {
                     $('#response').text('کاربر جدید ثبت شد')
                     $('#insert-user-form input[type="text"]').val("")
                     $('#response').removeClass('alert-danger', 'hidden').addClass('alert-success')
-                    console.log(data)
+
+
                 }
             }
         })
@@ -87,7 +78,7 @@ $(document).on('click', '#btnEdit', function (e) {
     $('.form-horizontal').show();
     $('.modal-title').text('ویرایش کاربر');
     $('#edit').on('hidden.bs.modal', function () {
-        location.reload();
+
     })
     $('.preloader').addClass('hidden');
     id = $(e.currentTarget).attr('data-id');
@@ -113,7 +104,6 @@ $(document).on('click', '#btnEdit', function (e) {
                         $.each(data.errors, function (keyobj, valueobj) {
                             $('#selectResponse').append('<li>' + valueobj + '</li>')
                             return
-                            //$('#response').append('<li>' + valueobj + '</li>')
                         })
                     }
 
@@ -143,8 +133,6 @@ $(document).on('click', '#btnEdit', function (e) {
      * ********************
      */
     $('button#edit').on('click', function (e) {
-
-
         console.log(e);
         $.ajaxSetup({
             headers: {
@@ -168,8 +156,6 @@ $(document).on('click', '#btnEdit', function (e) {
                     try {
 
                         $('#selectResponse').removeClass('hidden').text("")
-                        console.log(data)
-
                         if (data.errors.code == "23000") {
                             data.errors.message = "کاربری با این نام قبلا ثبت شده است"
                             $('#selectResponse').append('<li>' + data.errors.message + '</li>')
@@ -179,7 +165,6 @@ $(document).on('click', '#btnEdit', function (e) {
                             $.each(data.errors, function (keyobj, valueobj) {
                                 $('#selectResponse').append('<li>' + valueobj + '</li>')
                                 return
-                                //$('#response').append('<li>' + valueobj + '</li>')
                             })
                         }
 
@@ -190,11 +175,8 @@ $(document).on('click', '#btnEdit', function (e) {
 
                 }
                 else {
-                    console.log(data);
                     $('#selectResponse').text('تغییرات جدید ثبت شد')
-                    //$('#edit-user-form input[type="text"]').val("")
                     $('#selectResponse').removeClass('alert-danger', 'hidden').addClass('alert-success')
-                    console.log(data)
                 }
             }
 
@@ -228,7 +210,7 @@ $(document).on('click', '#btnDelete', function (e) {
     $('.form-horizontal').show();
     $('.modal-title').text('حذف کاربر');
     $('#deleteModal').on('hidden.bs.modal', function () {
-        location.reload();
+
     })
 
     del_id = $(e.currentTarget).attr('data-id');
@@ -284,34 +266,19 @@ $(document).on('click', '#btnDelete', function (e) {
 
 })
 
-
-/* $('#panel-tabs .nav-item').on('click', function (e) {
-    e.preventDefault();
-    //console.log($(e.currentTarget).find('a').first().attr('href'));
-    let activeTab = ($(e.currentTarget).find('a').first().attr('href'));
-
-
-    $.get('/panel', function(data) {
-        console.log( data );
-    })
-
-
-}); */
-
-
 // Insert new workshop
 
-$(document).on('click','#insert-new-workshop-modal-btn',function(e){
+$(document).on('click', '#insert-new-workshop-modal-btn', function (e) {
     e.preventDefault();
     $.ajax({
-        type:"GET",
+        type: "GET",
         url: 'insertNewWorkshopForm',
         data: { r: Math.random() },
-        success: function(d){
-            $('.ajax-content').css('opacity','0');
+        success: function (d) {
+            $('.ajax-content').css('opacity', '0');
             $('#preloader').show();
             $('.ajax-content').first().html(d);
-            $('.ajax-content').css('opacity','1');;
+            $('.ajax-content').css('opacity', '1');;
         }
     });
 
@@ -319,17 +286,17 @@ $(document).on('click','#insert-new-workshop-modal-btn',function(e){
 
 // Insert new contractor
 
-$(document).on('click','#new-temp-modal-opener-btn',function(e){
+$(document).on('click', '#new-temp-modal-opener-btn', function (e) {
     e.preventDefault();
     $.ajax({
-        type:"GET",
+        type: "GET",
         url: 'insert_new_contractor_form',
         data: { r: Math.random() },
-        success: function(d){
-            $('.ajax-content').css('opacity','0');
+        success: function (d) {
+            $('.ajax-content').css('opacity', '0');
             $('#preloader').show();
             $('.ajax-content').first().html(d);
-            $('.ajax-content').css('opacity','1');;
+            $('.ajax-content').css('opacity', '1');;
         }
     });
 
@@ -337,7 +304,7 @@ $(document).on('click','#new-temp-modal-opener-btn',function(e){
 
 
 // insert new contractor
-$(document).on('click','#insert-new-contractor-form-show-btn',function(e){
+$(document).on('click', '#insert-new-contractor-form-show-btn', function (e) {
     e.preventDefault();
-    
+
 })

@@ -4,7 +4,7 @@
     src: url('../font/IRANSansWeb(FaNum).woff') format('woff');
     font-weight: normal;
 }
-@font-face
+/*@font-face
 {
     font-family: iran;
     src: url('../font/IRANSansWeb(FaNum)_Black.woff') format('woff');
@@ -22,7 +22,7 @@
     src: url('../font/IRANSansWeb(FaNum)_Light.woff') format('woff');
     font-weight: lighter;
 }
-
+*/
 
 @import 'variables';
 @import 'mixins';
@@ -134,7 +134,7 @@ select.form-control:focus{
 
 div.wrapper{
     height: 100%;
-
+    z-index: -2;
 }
 
 

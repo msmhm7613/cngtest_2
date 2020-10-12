@@ -13,7 +13,7 @@ class InstallController extends Controller
         if ( !$db_status )
             return view ( 'install' );
         elseif (Auth::user())
-            return view('panel');
+            return view('new-panel');
         else
             return view('auth.login');
     }

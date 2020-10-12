@@ -28,7 +28,7 @@ class SetupController extends Controller
         if (!env('DB_INSTALLED', 0)) {
             $this->setupDB($request);
         }
-        return redirect('panel');
+        return redirect('new-panel');
     }
     protected function updateDotEnv($key, $newValue, $delim = '')
     {

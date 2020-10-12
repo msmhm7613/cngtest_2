@@ -39,4 +39,6 @@ use App\Models\Kit as kit;
 
 @section('js')
     <script src="/js/side-menu.js"></script>
+    <script src="/js/my.js"></script>
+    <script src="/js/modal.js"></script>
 @endsection

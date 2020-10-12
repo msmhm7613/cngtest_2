@@ -120,8 +120,8 @@
                         امکانات </a>
                     <div class="collapse" id="settings-submenu" data-parent="#accordion">
                         <ul class="navbar-nav flex-column w-100">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
+                            <li class="nav-item" id="#nav-users-btn">
+                                <a href="#" class="nav-link" data-controller="users" id="side-menu-users-btn">
                                     کاربران </a>
                             </li>
                             <li class="nav-item">

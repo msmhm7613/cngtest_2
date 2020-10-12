@@ -41,7 +41,8 @@ class PanelController extends Controller
 
     public function init(Request $request)
     {
-        try {
+        return view('new-panel');
+        /* try {
 
             $btns = $request->all();
 
@@ -55,6 +56,6 @@ class PanelController extends Controller
             return $html;
         } catch (Exception $ex) {
             return response()->json(['errors' => $ex->getMessage()]);
-        }
+        } */
     }
 }

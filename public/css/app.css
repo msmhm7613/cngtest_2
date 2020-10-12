@@ -10905,23 +10905,25 @@ a.text-dark:focus {
   font-weight: normal;
 }
 
-@font-face {
-  font-family: iran;
-  src: url("/fonts/IRANSansWeb(FaNum)_Black.woff?bea60ea788538ed6b635ad0c519fb0b8") format("woff");
-  font-weight: bolder;
+/*@font-face
+{
+    font-family: iran;
+    src: url('../font/IRANSansWeb(FaNum)_Black.woff') format('woff');
+    font-weight: bolder;
 }
-
-@font-face {
-  font-family: iran;
-  src: url("/fonts/IRANSansWeb(FaNum)_Bold.woff?753b3827c415580e864a545d1a860a5a") format("woff");
-  font-weight: bold;
+@font-face
+{
+    font-family: iran;
+    src: url('../font/IRANSansWeb(FaNum)_Bold.woff') format('woff');
+    font-weight: bold;
 }
-
-@font-face {
-  font-family: iran;
-  src: url("/fonts/IRANSansWeb(FaNum)_Light.woff?25bd95ce239f04e9457b5cf1c7dac593") format("woff");
-  font-weight: lighter;
+@font-face
+{
+    font-family: iran;
+    src: url('../font/IRANSansWeb(FaNum)_Light.woff') format('woff');
+    font-weight: lighter;
 }
+*/
 
 img.logo {
   width: 5rem;
@@ -11056,6 +11058,7 @@ img.logo {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: -1;
 }
 
 #content-box {
@@ -11176,5 +11179,6 @@ select.form-control:focus {
 
 div.wrapper {
   height: 100%;
+  z-index: -2;
 }
 

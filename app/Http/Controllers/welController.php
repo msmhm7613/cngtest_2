@@ -8,6 +8,6 @@ class welController extends Controller
 {
     public function index(Request $req)
     {
-        var_dump($req->username);
+        
     }
 }

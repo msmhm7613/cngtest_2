@@ -39,11 +39,12 @@ Route::post('/editUser', '\App\Http\Controllers\UserController@editUser');
 Route::post('/deleteUser', '\App\Http\Controllers\UserController@deleteUser');
 Route::get('/selectUser', '\App\Http\Controllers\UserController@selectUser');
 
-Route::get('/panel','\App\Http\Controllers\NewPanelController@index');
-Route::post('/panel', '\App\Http\Controllers\NewPanelController@getContent');
+Route::get('/new-panel','\App\Http\Controllers\NewPanelController@index');
+Route::post('/new-panel', '\App\Http\Controllers\NewPanelController@getContent');
 
 Route::get('insertNewWorkshopForm', 'App\Http\Controllers\Workshop\WorkshopController@loadInsertForm');
 Route::get('insert_new_contractor_form', 'App\Http\Controllers\Contractor\ContractorController@loadInsertForm');
 
 Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
+
 

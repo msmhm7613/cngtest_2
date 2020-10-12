@@ -22,7 +22,9 @@ class NewPanelController extends Controller
             case 'dashboard':
                 return view('contents.dashboard');
                 break;
-
+            case 'users':
+                return view('layouts.tables.users');
+                break;
             default:
                 break;
         }

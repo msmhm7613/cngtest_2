@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         if(Auth::user())
         {
-            return redirect('panel')->with(Auth::user()->role??null);
+            return redirect('new-panel')->with(Auth::user()->role??null);
         }
         else
         {

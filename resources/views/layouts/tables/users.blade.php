@@ -1,10 +1,21 @@
 @php
-    use App\Models\User as user;
+use App\Models\User as user;
 @endphp
 
-<div class="tab-pane active" id="users">
+<div class="btns">
+    <a href="#" class="btn btn-success" id="newUserBtn">
+        کاربر جدید
+    </a>
+</div>
+<div class="eng">
+    <?php
+        echo Str::random(8);
+    ?>
+</div>
+
+
     @if (App\Models\User::all()->count())
-        <table class="table table-striped tbl-users">
+        <table class="table table-striped tbl-users " id="tbl-users" style="z-index: 999;">
             <tr>
                 <th>ردیف</th>
                 <th>شناسه</th>
@@ -72,4 +83,8 @@
             </p>
         </div>
     @endif
-</div>
+
+
+@include('layouts.modals.user.insert-new-user')
+@include('layouts.modals.user.edit-user')
+@include('layouts.modals.user.delete-user')
