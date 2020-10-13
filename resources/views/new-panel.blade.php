@@ -38,7 +38,7 @@ use App\Models\Kit as kit;
 @endsection
 
 @section('js')
-    <script src="/js/side-menu.js"></script>
-    <script src="/js/my.js"></script>
-    <script src="/js/modal.js"></script>
+    <script src="{{asset('/js/side-menu.js')}}"></script>
+    <script src="{{asset('/js/my.js')}}"></script>
+    <script src="{{asset('/js/modal.js')}}"></script>
 @endsection

@@ -24,6 +24,14 @@
     @if (App::isLocal())
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endif
+    {!! '<style>' !!}
+        {!! '@font-face{' !!}
+        {!! 'font-family: iran;' !!}
+        {!! 'src:url(' !!}
+        {{ asset('fonts/IRANSansWeb-FaNum.woff') }}
+        {!! ');' !!}
+        {!!  '}'!!}
+    {!! '</style>' !!}
 </head>
 
 <body>
@@ -44,13 +52,11 @@
 
     <!-- Scripts
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js" integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg==" crossorigin="anonymous"></script>
+-->
 
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.3/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js" ></script>
-    -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @yield('js')
 </body>
 
