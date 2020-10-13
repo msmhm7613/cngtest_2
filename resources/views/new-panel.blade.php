@@ -23,15 +23,15 @@ use App\Models\Kit as kit;
         @include ('layouts.panel.side-menu')
     </div>
     <div class="col-md-9">
-        <div id="content-box">
-            <div class="preloader">
-                <div class="spinner-grow text-success"></div>
-                <p class="loading-text">
-                    بارگذاری...
-                </p>
-            </div>
+        <div class="center" id="preloader">
+            <div class="spinner-grow text-success"></div>
+            <p class="loading-text">
+                بارگذاری...
+            </p>
         </div>
+        <div id="content-box">
 
+        </div>
     </div>
 </div>
 @endsection

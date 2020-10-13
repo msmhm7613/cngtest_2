@@ -12,7 +12,11 @@ class Store extends Model
     protected $fillable = [
         'name',
         'user_id',
-        'desc',
+        'creator_user_id',
+        'phone',
+        'mobile',
+        'address',
+        'description',
     ];
 
     public $timestamps = true;

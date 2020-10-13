@@ -22,7 +22,7 @@ class WorkshopController extends Controller
             'user_id'       => ['required', 'numeric'],
 
         ];
-        $validator  = Validator::make();
+        $validator  = Validator::make($request,$rules);
     }
 
     public function loadInsertForm(Request $request)

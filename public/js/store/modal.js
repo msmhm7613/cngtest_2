@@ -1,5 +1,3 @@
-console.log('modal is loaded');
-
 function openModal(e, targetModal, msg) {
     e.preventDefault();
     $('#response').addClass('hidden');
@@ -15,7 +13,7 @@ function openModal(e, targetModal, msg) {
 // insert new user
 
 $(document).on('click', '#newUserBtn', function (e) {
-    console.log('new user btn is clicked');
+
     openModal(e, $('#create'), 'کاربر جدید')
     //function add user
     $('button#add').on('click', function () {

@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-/*@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
@@ -10900,13 +10899,13 @@ a.text-dark:focus {
   }
 }
 
-@font-face {
-  font-family: iran;
-  src: url(/fonts/IRANSansWeb-FaNum.woff?bd6f69a8db87710b2f3fcd6ef75bd3e2) format("woff");
-  font-weight: normal;
-}
-
 /*@font-face
+{
+    font-family: iran;
+    src: url('../font/IRANSansWeb-FaNum.woff') format('woff');
+    font-weight: normal;
+}
+@font-face
 {
     font-family: iran;
     src: url('../font/IRANSansWeb(FaNum)_Black.woff') format('woff');
@@ -11181,5 +11180,13 @@ select.form-control:focus {
 div.wrapper {
   height: 100%;
   z-index: -2;
+}
+
+.center {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 

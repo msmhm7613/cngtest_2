@@ -20,10 +20,15 @@ class NewPanelController extends Controller
         $target = $request->target;
         switch ($target) {
             case 'dashboard':
+
                 return view('contents.dashboard');
                 break;
             case 'users':
                 return view('layouts.tables.users');
+                break;
+            case 'store':
+                sleep(3);
+                return view('store.table');
                 break;
             default:
                 break;

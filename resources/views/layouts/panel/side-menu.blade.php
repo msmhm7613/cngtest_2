@@ -57,7 +57,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" id="store-btn" data-controller="store">
                                     تعریف انبار
                                 </a>
                             </li>
@@ -152,3 +152,4 @@
         </div>
     </div>
 </nav>
+

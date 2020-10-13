@@ -1,10 +1,10 @@
-@font-face
+/*@font-face
 {
     font-family: iran;
     src: url('../font/IRANSansWeb-FaNum.woff') format('woff');
     font-weight: normal;
 }
-/*@font-face
+@font-face
 {
     font-family: iran;
     src: url('../font/IRANSansWeb(FaNum)_Black.woff') format('woff');
@@ -137,5 +137,12 @@ div.wrapper{
     z-index: -2;
 }
 
+.center {
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
 
 
