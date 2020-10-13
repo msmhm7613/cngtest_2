@@ -10901,7 +10901,7 @@ a.text-dark:focus {
 
 @font-face {
   font-family: iran;
-  src: url("/fonts/IRANSansWeb(FaNum).woff?bd6f69a8db87710b2f3fcd6ef75bd3e2") format("woff");
+  src: url(/fonts/IRANSansWeb-FaNum.woff?bd6f69a8db87710b2f3fcd6ef75bd3e2) format("woff");
   font-weight: normal;
 }
 

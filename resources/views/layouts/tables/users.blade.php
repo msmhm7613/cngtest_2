@@ -7,12 +7,14 @@ use App\Models\User as user;
         کاربر جدید
     </a>
 </div>
+
+<!--
 <div class="eng">
     <?php
-        echo Str::random(8);
+        //echo Str::random(8);
     ?>
 </div>
-
+-->
 
     @if (App\Models\User::all()->count())
         <table class="table table-striped tbl-users " id="tbl-users" style="z-index: 999;">

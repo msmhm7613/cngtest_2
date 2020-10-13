@@ -9,27 +9,28 @@ use illuminate\Http;
 ?>
 
 <div class="wizard outset">
-
-        @if($errors)
-            {{-- die(var_dump($errors)) --}}
-        @endif
         <div class="row">
             <div class="col header">
-                <img src=" {{ asset('images/logo.png') }} " alt="logo" class='logo'>
                 <h3>
                     نصب نرم‌افزار
                 </h3>
                 <p>
                     ما برای نصب نرم‌افزار به اطلاعات زیر نیاز داریم. این نصب فقط یک بار در هنگام شروع کار نرم‌افزار اجرا خواهد شد.
                 </p>
-            </div>
+                <p class="text-danger">
+                    <i class="fas fa-skull-crossbones"></i>
+                    توجه: این عملیات کلیه اطلاعات دیتابیس را پاک خواهد کرد و دیتابیس از نو ساخته خواهد شد.
+                </p>
+                <div id="response">
 
+                </div>
+            </div>
         </div>
         <div class="row d-flex justify-content-center align-items-center">
             <form action="/setup" method="post" class="form">
                 <div class="row">
                     <div class="col">
-                        <fieldset>
+                        <fieldset class="eng">
                             <legend>Database</legend>
                             <div class="form-group">
                                 <input type="text" name="dbname" id="dbname" placeholder="Database Name" class=" inset eng"
@@ -81,17 +82,11 @@ use illuminate\Http;
                 @csrf
                 <div class="row">
                     <div class="col">
-                        <input type="submit" value="Next" class="form-control submit outset">
+                        <input type="submit" value="Next" class="form-control submit outset" onclick="wait()">
                     </div>
                 </div>
             </form>
-            <ul>
-                @if($errors->any())
-                    @foreach($errors->all() as $error)
-                        <li> {{ var_dump($error) }} </li>
-                    @endforeach
-                @endif
-            </ul>
+
         </div>
 </div>
 
@@ -109,6 +104,14 @@ use illuminate\Http;
                 dbpass.type = 'password'
         }
 
+    }
+
+    function wait(){
+        $('#response').html(
+            '<div class="spinner-border text-success"></div><p class-"text-success" id="response-text"></p>'
+        );
+
+        $('#response-text').text('در حال ساختن دیتابیس...');
     }
 </script>
 @endsection
