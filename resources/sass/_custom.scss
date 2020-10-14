@@ -63,10 +63,13 @@ body,html{
     font-family: sans-serif;
 }
 
-form {
 
+
+form {
+    max-height: 60vh;
+    overflow-y: scroll;
     padding:2rem ;
-    input.inset {
+    input.inset,textarea.inset {
         border: none ;
         outline: none ;
         background: none ;
@@ -78,6 +81,7 @@ form {
         color: #666;
         position: relative;
 
+        scrollbar-color: $blue;
         &::placeholder {
             font-size: small;
             font-style: italic;
@@ -97,14 +101,15 @@ form {
 
 
     }
+
+}
+.form-control, .form-control:focus{
+    border-radius: 2rem;
+    border:none ;
+    outline:none ;
+    background:none ;
 }
 
-.form-control{
-    border-radius: 2rem;
-    border:none;
-    outline:none;
-    background:none;
-}
 
 .form-group{
     position: relative;
@@ -117,6 +122,11 @@ form {
         right: 10px;
         transform: translateY(-50%);
     }
+    .form-inline{
+        label{
+            display: inline-block;
+        }
+    }
 }
 
 small.error{
@@ -124,12 +134,13 @@ small.error{
 }
 
 select.form-control{
-    border:1px solid grey;
+    border:2px solid grey;
+    padding: 0 1rem ;
+
 }
 
 select.form-control:focus{
     outline: none;
-
 }
 
 div.wrapper{
@@ -149,3 +160,43 @@ i{
     margin-left: 1rem;
 }
 
+
+input[type="checkbox"]{
+    margin: 0 2rem;
+    appearance: none;
+    background-color: #eee;
+    position: relative;
+    box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+    width: 2.5rem;
+    height: 1rem;
+    border-radius: 2rem;
+    transform: 0.3s;
+    border:none;
+    outline: none;
+    &:focus{
+        border:none;
+        outline: none;
+    }
+    &::before{
+        content: '';
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: #ddd;
+        box-shadow: 0 0 5px rgba(0,0,0,.3);
+        border-radius: 50%;
+        position: absolute;
+        right: 0;
+        top:50%;
+        transform: translateY(-50%);
+        transition: 0.3s;
+    }
+
+    &:checked{
+        background-color: $blue;
+
+        &::before{
+            right: 50%;
+            background-color: skyblue;
+        }
+    }
+}

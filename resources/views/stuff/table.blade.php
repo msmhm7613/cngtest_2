@@ -9,7 +9,35 @@
 @include('stuff.header')
 
 @if (App\Models\Stuff::all()->count())
+ @php $ind = 1 @endphp
+    <table class="table table-striped table-bordered">
+        <tr class="table-primary">
+            <th>ردیف</th>
+            <th>کد کالا</th>
+            <th>نام کالا</th>
+            <th>نام لاتین</th>
+            <th>سریال منحصر بفرد</th>
+            <th>واحد اندازه‌گیری</th>
+            <th>توضیحات</th>
+        </tr>
 
+        @foreach (\App\Models\Stuff::all() as $stuff)
+            @php
+            $unit = \App\Models\Unit::where('id',$stuff->unit_id)->first();
+            $user = \App\Models\User::where('id',$stuff->creator_user_id)->first();
+            @endphp
+
+            <tr>
+                <td>{{ $ind++ }}</td>
+                <td>{{ $stuff->code }}</td>
+                <td>{{ $stuff->name }}</td>
+                <td>{{ $stuff->latin_name }}</td>
+                <td>{{ $stuff->has_unique_serial ? 'دارد' : 'ندارد' }}</td>
+                <td>{{ $unit->name }}</td>
+                <td><small class="text-secondary">ثبت شده توسط : {{ $user->username }} در {{ \App\Http\Controllers\persianDateTimeController::gregorianToPersian($stuff->created_at) }}</small></td>
+            </tr>
+        @endforeach
+    </table>
 @else
     <div class="mt-3 alert alert-info">
         هنوز هیچ کالایی ثبت نشده است.

@@ -17,6 +17,7 @@ class CreateStuffsTable extends Migration
             $table->id();
             $table->string('code')->require()->uniqid();
             $table->string('name')->require();
+            $table->string('latin_name');
             $table->boolean('has_unique_serial')->default(false);
             $table->unsignedBigInteger('unit_id')->default(1);
             $table->string('description')->nullable();

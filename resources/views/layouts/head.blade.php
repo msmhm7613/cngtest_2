@@ -24,17 +24,10 @@
     @if (App::isLocal())
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endif
-    {{-- {!! '<style>' !!}
-        {!! '@font-face{' !!}
-        {!! 'font-family: iran;' !!}
-        {!! 'src:url(\'' !!}{{ url('public/fonts/IRANSansWeb-FaNum.woff') }}{!! '\');' !!}
-        {!!  '}'!!}
-    {!! '</style>' !!} --}}
-
     <style>
         @font-face{
             font-family: iran;
-            src:url( {{ asset('fonts/IRANSansWeb-FaNum.woff') }} );
+            src:url("{{ asset('fonts/IRANSansWeb-FaNum.woff') }}");
         }
     </style>
 </head>

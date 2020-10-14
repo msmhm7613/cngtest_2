@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\DB;
 class unitController extends Controller
 {
     protected $rules = [
-        'name' => ['string', 'min:3', 'max:30', 'required', 'alpha_dash'],
-        'code' => ['string', 'min:3', 'max:30', 'nullable', 'alpha_dash'],
+        'name' => ['string', 'min:3', 'max:30', 'required', 'alpha_dash','unique:units,name'],
+        'code' => ['string', 'min:3', 'max:30', 'nullable', 'alpha_dash','unique:units,code'],
         'creator_user_id' => ['numeric', 'exists:users,id'],
-
+        'unit' => ['numeric', 'exists:units,id'],
+        'description' => ['string', 'max:255', 'alpha_dash'],
     ];
     function validate(Request $request, array $rules, array $messages = [], array $customAttributes = [])
     {

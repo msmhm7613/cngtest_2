@@ -56,11 +56,11 @@
                                     انتقال کالا بین انبارها
                                 </a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a href="#" class="nav-link" id="store-btn" data-controller="store">
-                                    تعریف انبار
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" id="unit-btn" data-controller="unit">
+                                    تعریف واحد اندازه‌گیری
                                 </a>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
                 </li>

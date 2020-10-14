@@ -48,3 +48,4 @@ Route::get('insert_new_contractor_form', 'App\Http\Controllers\Contractor\Contra
 Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
 
 
+Route::post('insert-new-stuff', 'App\Http\Controllers\stuff\stuffController@insert');
