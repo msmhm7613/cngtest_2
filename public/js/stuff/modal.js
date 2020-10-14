@@ -1,13 +1,5 @@
 var ch = $('input[name="has_unique_serial"]');
 
-ch.on('change',function(){
-    console.log(ch.is(':checked'));
-})
-
-
-
-
-
 function openModal(e, targetModal, msg) {
     e.preventDefault();
     $('#response').addClass('hidden');
@@ -20,12 +12,12 @@ function openModal(e, targetModal, msg) {
     })
 }
 
-// insert new user
+// insert new stuff
 
 $(document).on('click', '#insert-new-stuff-button', function (e) {
     console.log('new user btn is clicked');
     openModal(e, $('#insert-new-stuff-modal'), 'کالای جدید')
-    //function add user
+    //function add stuff
     $('button#add').on('click', function () {
         $('#response').html("");
         $.ajaxSetup({
@@ -53,7 +45,7 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
                     try {
 
                         if (d.errors.code == "23000") {
-                            d.errors.message = "کاربری با این نام قبلا ثبت شده است"
+                            d.errors.message = "کالا با این نام قبلا ثبت شده است"
                             $('#response').append('<li>' + d.errors.message + '</li>')
                             return
                         }

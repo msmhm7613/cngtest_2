@@ -28,15 +28,18 @@ $(menu_item).on('click', function (e) {
         },
         beforeSend: () => {
             //content_box.html($(preloader).html());
-            $(preloader).show();
+            //$('#content-box').fadeOut('300ms');
+$(preloader).show();
         },
         complete: () => {
             //console.log('completed');
-            $(preloader).hide();
+$(preloader).hide();
         },
         success: function (d) {
             //console.log('success');
             content_box.html(d);
+
+            //$('#content-box').fadeIn('300ms');
         }
 
     })

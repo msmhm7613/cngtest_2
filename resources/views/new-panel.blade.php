@@ -22,8 +22,8 @@ use App\Models\Kit as kit;
     <div class="col-md-3 p-0">
         @include ('layouts.panel.side-menu')
     </div>
-    <div class="col-md-9">
-        <div class="center" id="preloader">
+    <div class="col-md-9"  >
+        <div class="center" id="preloader" >
             <div class="spinner-grow text-success"></div>
             <p class="loading-text">
                 بارگذاری...
