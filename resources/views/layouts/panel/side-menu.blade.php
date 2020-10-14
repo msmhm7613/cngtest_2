@@ -37,7 +37,7 @@
                     <div class="collapse" id="store-submenu" data-parent="#accordion">
                         <ul class="navbar-nav flex-column w-100">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" id="define-stuff">
+                                <a href="#" class="nav-link" id="define-stuff" data-controller="stuff">
                                     معرفی کالا
                                 </a>
                             </li>
@@ -56,11 +56,11 @@
                                     انتقال کالا بین انبارها
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="#" class="nav-link" id="store-btn" data-controller="store">
                                     تعریف انبار
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>

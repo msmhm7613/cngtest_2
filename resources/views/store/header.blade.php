@@ -1,10 +1,8 @@
-<a href="#" class="btn btn-success">
+<a href="#" class="btn btn-success" id="insert-new-store-btn">
     <i class="fas fa-plus">
 
     </i>
     انبار جدید
 </a>
-<p class="mt-5">
-    لیست انبارها
-</p>
+
 

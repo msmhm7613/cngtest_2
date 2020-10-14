@@ -76,10 +76,11 @@ class SetupController extends Controller
             $this->updateDotEnv('DB_PASSWORD', $request->dbpassword);
             return response()->json(['errors' => 'successful']);
         } catch (PDOException $ex) {
-            die(var_dump($ex));
+            die(var_dump($ex->errorInfo));
             return response()->json(['errors' => $ex->errorInfo]);
         } catch (Exception $ex) {
-            die(var_dump($ex));
+            dd($ex);
+            die(var_dump($ex->getMessage()));
             return response()->json(['errors' => $ex->getMessage()]);
         }
     }

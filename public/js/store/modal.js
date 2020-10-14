@@ -12,9 +12,9 @@ function openModal(e, targetModal, msg) {
 
 // insert new user
 
-$(document).on('click', '#newUserBtn', function (e) {
+$(document).on('click', '#insert-new-store-btn', function (e) {
 
-    openModal(e, $('#create'), 'کاربر جدید')
+    openModal(e, $('#insert-new-store'), 'انبار جدید')
     //function add user
     $('button#add').on('click', function () {
         $('#response').html("");

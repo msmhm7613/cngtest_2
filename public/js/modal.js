@@ -1,5 +1,3 @@
-console.log('modal is loaded');
-
 function openModal(e, targetModal, msg) {
     e.preventDefault();
     $('#response').addClass('hidden');
