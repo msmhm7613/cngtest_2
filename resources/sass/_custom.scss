@@ -51,10 +51,14 @@ body,html{
 .inset {
     box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2),
                 inset -5px -5px 5px rgba(255,255,255,.5);
+
 }
 .outset {
     box-shadow:  5px 5px 5px $shadow,
                  -5px -5px 5px rgba(255,255,255,.5) ;
+                 &.error{
+                    background-color: rgba($red,0.2);
+                }
 }
 
 .eng{
@@ -66,9 +70,11 @@ body,html{
 
 
 form {
+
     max-height: 60vh;
     overflow-y: scroll;
     padding:2rem ;
+
     input.inset,textarea.inset {
         border: none ;
         outline: none ;
@@ -85,6 +91,7 @@ form {
         &::placeholder {
             font-size: small;
             font-style: italic;
+            padding-right: 1rem;
         }
         &.submit
         {
@@ -198,5 +205,20 @@ input[type="checkbox"]{
             right: 50%;
             background-color: skyblue;
         }
+    }
+}
+::-webkit-scrollbar{
+    width : 1rem;
+}
+::-webkit-scrollbar-track{
+    background-color: rgba($indigo,.2);
+    border-radius: 1rem;
+}
+::-webkit-scrollbar-thumb{
+    transition: all 0.3s;
+    border-radius: 1rem;
+    background-color: rgba($indigo,.5);
+    &:hover{
+        background: linear-gradient(rgba($indigo,.7),rgba($indigo,.9));
     }
 }

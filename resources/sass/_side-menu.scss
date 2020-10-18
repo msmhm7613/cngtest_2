@@ -37,8 +37,8 @@
         border-right: 2px solid $indigo;
         &::after{
             color:$indigo;
-            content: '\f053'; /* You should use \ and not /*/
-            font-family: "Font Awesome 5 Free"; /* This is the correct font-family*/
+            content: '\f053';
+            font-family: "Font Awesome 5 Free"; 
             font-style: normal;
             font-weight: normal;
             font-size: 1.0rem;

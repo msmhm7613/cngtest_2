@@ -15,8 +15,8 @@ class stuffController extends Controller
     {
         $rules = [
             'code' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
-            'name' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required'],
-            'latin_name' => ['string', 'alpha_dash', 'regex:/^[a-zA-Z1-9]+$/u', 'min:3', 'max:64', 'nullable'],
+            'name' => ['string','regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
+            'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
             'creator_user_id' => ['numeric', 'exists:users,id'],
             'description' => ['string', 'max:255', 'nullable'],

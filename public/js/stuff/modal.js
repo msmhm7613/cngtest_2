@@ -8,14 +8,14 @@ function openModal(e, targetModal, msg) {
     $('.modal-title').text(msg);
     $('#' + targetModal[0].id).on('hidden.bs.modal', function () {
         let active_item = $('.side-menu a.active');
-        $('#'+active_item[0].id)[0].click();
+        $('#' + active_item[0].id)[0].click();
     })
 }
 
 // insert new stuff
 
 $(document).on('click', '#insert-new-stuff-button', function (e) {
-    console.log('new user btn is clicked');
+
     openModal(e, $('#insert-new-stuff-modal'), 'کالای جدید')
     //function add stuff
     $('button#add').on('click', function () {
@@ -34,14 +34,14 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
                 'code': $('input[name="code"]').val(),
                 'latin_name': $('input[name="latin_name"]').val(),
                 'unit_id': $('#unit_id :selected').val(),
-                'has_unique_serial': ch.is(':checked')?1:0,
+                'has_unique_serial': ch.is(':checked') ? 1 : 0,
+                'description': $('textarea#description').val(),
             },
-
+            cache: false,
             success: function (d) {
+                $('#response').removeClass('hidden').html("");
 
-                $('#response').removeClass('hidden')
                 if (d.errors) {
-
                     try {
 
                         if (d.errors.code == "23000") {
@@ -50,18 +50,23 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
                             return
                         }
                         else {
+                            console.log(d.errors)
                             $.each(d.errors, function (keyobj, valueobj) {
                                 $('#response').append('<li>' + valueobj + '</li>')
-                                return
+                                $('#'+keyobj).addClass('error');
                             })
+                             return
                         }
                     } catch (e) {
-                        $('#response').append('<li>' + d.errors + '</li>')
+                        $('#response').append('<li>error:' + d.errors + '</li>')
+                        return
                     }
                 }
                 else {
                     $('#response').text('کالا ثبت شد')
-                    $('#insert-user-form input[type="text"]').val("")
+                    $('#insert-new-stuff-form input[type="text"]').val("")
+                    $('#insert-new-stuff-form textarea').val("")
+                    $('#insert-new-stuff-form select option:eq(0)').attr('selected','selected')
                     $('#response').removeClass('alert-danger', 'hidden').addClass('alert-success')
                 }
             }
