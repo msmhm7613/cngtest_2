@@ -42,8 +42,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="#" class="nav-link" id="define-stuff-pack" data-controller="stuff-pack">
+                                    معرفی مجموعه کالا
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    ثبت سریال
+                                     ثبت سریال و وضعیت کالا
                                 </a>
                             </li>
                             <li class="nav-item">

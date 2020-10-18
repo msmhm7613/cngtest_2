@@ -11019,6 +11019,7 @@ img.logo {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-weight: bold;
   overflow: auto;
 }
 
@@ -11044,8 +11045,23 @@ img.logo {
 
 .side-menu a.active {
   position: relative;
-  background-color: white;
+  background-color: #fff;
   display: block;
+  border-right: 2px solid #6574cd;
+}
+
+.side-menu a.active::after {
+  color: #6574cd;
+  content: "\F053";
+  /* You should use \ and not /*/
+  font-family: "Font Awesome 5 Free";
+  /* This is the correct font-family*/
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  vertical-align: middle;
+  font-weight: 900;
+  float: left;
 }
 
 @media only screen and (max-width: 768px) {
