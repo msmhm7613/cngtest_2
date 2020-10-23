@@ -1,4 +1,5 @@
 var ch = $('input[name="has_unique_serial"]');
+var ch2 = $('form#edit-stuff-form input[name="has_unique_serial"]');
 
 function openModal(e, targetModal, msg) {
     e.preventDefault();
@@ -16,7 +17,7 @@ function openModal(e, targetModal, msg) {
 
 $(document).on('click', '#insert-new-stuff-button', function (e) {
 
-    $user_id = $(e.currentTarget).attr('data-user-id');console.log($user_id);
+    var user_id = $(e.currentTarget).attr('data-user-id'); console.log($user_id);
     openModal(e, $('#insert-new-stuff-modal'), 'کالای جدید')
     //function add stuff
     $('button#add').on('click', function () {
@@ -37,8 +38,8 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
                 'unit_id': $('#unit_id :selected').val(),
                 'has_unique_serial': ch.is(':checked') ? 1 : 0,
                 'description': $('textarea#description').val(),
-                'creator_user_id': $user_id,
-                'modifier_user_id': $user_id,
+                'creator_user_id': user_id,
+                'modifier_user_id': user_id,
             },
             cache: false,
             success: function (d) {
@@ -56,9 +57,9 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
                             console.log(d.errors)
                             $.each(d.errors, function (keyobj, valueobj) {
                                 $('#response').append('<li>' + valueobj + '</li>')
-                                $('#'+keyobj).addClass('error');
+                                $('#' + keyobj).addClass('error');
                             })
-                             return
+                            return
                         }
                     } catch (e) {
                         $('#response').append('<li>error:' + d.errors + '</li>')
@@ -69,7 +70,7 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
                     $('#response').text('کالا ثبت شد')
                     $('#insert-new-stuff-form input[type="text"]').val("")
                     $('#insert-new-stuff-form textarea').val("")
-                    $('#insert-new-stuff-form select option:eq(0)').attr('selected','selected')
+                    $('#insert-new-stuff-form select option:eq(0)').attr('selected', 'selected')
                     $('#response').removeClass('alert-danger', 'hidden').addClass('alert-success')
                 }
             }
@@ -83,16 +84,18 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
 $(document).on('click', '#btnStuffEdit', function (e) {
 
     e.preventDefault();
-    console.log('btn stuff edit clicked.');
-    $('#selectResponse').addClass('hidden');
+    var user_id = $(e.currentTarget).attr('data-user-id'); console.log('user id: ' + user_id);
+    var creator_user_id = $(e.currentTarget).attr('data-creator-user-id'); console.log('creator user id: ' + creator_user_id);
+    //var id = $(e.currentTarget).attr('data-id');console.log('stuff id: ' + id);
+    $('#response').addClass('hidden');
     $('#edit-stuff-modal').modal('show');
     $('.form-horizontal').show();
     $('.modal-title').text('ویرایش کالا');
-    $('#edit').on('hidden.bs.modal', function () {
-
+    $('#edit-stuff-modal').on('hidden.bs.modal', function () {
+        $('#define-stuff')[0].click();
     })
     $('.preloader').addClass('hidden');
-    id = $(e.currentTarget).attr('data-id');
+    var id = $(e.currentTarget).attr('data-id');
 
     $.ajax({
         type: 'GET',
@@ -101,39 +104,40 @@ $(document).on('click', '#btnStuffEdit', function (e) {
             'id': id,
         },
         success: function (data) {
-            $('#selectResponse').text("")
-            $('#selectResponse').removeClass('hidden')
+            console.log(data);
+            $('#response').text("")
+            $('#response').removeClass('hidden')
             if (!data.stuff) {
                 console.log('stuff does not exist.')
                 try {
                     if (data.errors.code == "23000") {
                         data.errors.message = "کالایی با این نام کد ثبت شده است"
-                        $('#selectResponse').append('<li>' + data.errors.message + '</li>')
+                        $('#response').append('<li>' + data.errors.message + '</li>')
                         return
                     }
                     else {
                         $.each(data.errors, function (keyobj, valueobj) {
-                            $('#selectResponse').append('<li>' + valueobj + '</li>')
+                            $('#response').append('<li>' + valueobj + '</li>')
                             return
                         })
                     }
 
                 } catch (e) {
-                    $('#selectResponse').append('<li>' + data.errors + '</li>')
+                    $('#response').append('<li>' + data.errors + '</li>')
                 }
 
 
             }
             else {
                 try {
-                    console.log(data);
+
                     $('form#edit-stuff-form input#code').val(data.stuff[0]['code']).attr('placeholder', 'کد جدید کالا')
                     $('form#edit-stuff-form input#name').val(data.stuff[0]['name']).attr('placeholder', 'نام جدید کالا')
                     $('form#edit-stuff-form input#latin_name').val(data.stuff[0]['latin_name']).attr('placeholder', 'نام لاتین جدید کالا')
-                    $('form#edit-stuff-form input#has_unique_id').prop('checked',data.stuff[0]['has_unique_serial']);
+                    $('form#edit-stuff-form input#has_unique_id').prop('checked', data.stuff[0]['has_unique_serial']);
                     $('form#edit-stuff-form select#unit_id').val(data.stuff[0]['unit_id']);
                     $('form#edit-stuff-form textarea#description').text(data.stuff[0]['description']);
-
+                    return;
 
                 } catch (error) {
                     // console.log(error)
@@ -148,8 +152,7 @@ $(document).on('click', '#btnStuffEdit', function (e) {
      * UPDATE SQL
      * ********************
      */
-    $('button#edit').on('click', function (e) {
-        console.log(e);
+    $('button#edit-stuff-save-btn').on('click', function (e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -159,42 +162,35 @@ $(document).on('click', '#btnStuffEdit', function (e) {
             type: 'POST',
             url: 'editStuff',
             data: {
-                '_token': $('input[name="_token"]').val(),
-                'code': ($('#code').val()),
-                'name': ($('#name').val()),
-                'latin_name': $('#latin_name').val(),
-                'has_unique_serial': ch.is(':checked') ? 1 : 0,
+                '_token': $('form#edit-stuff-form input[name="_token"]').val(),
+                'name': $('form#edit-stuff-form input[name="name"]').val(),
+                'code': $('form#edit-stuff-form input[name="code"]').val(),
+                'latin_name': $('form#edit-stuff-form input[name="latin_name"]').val(),
+                'unit_id': $('form#edit-stuff-form #unit_id :selected').val(),
+                'has_unique_serial': ch2.is(':checked') ? 1 : 0,
+                'description': $('form#edit-stuff-form textarea#description').val(),
+                'modifier_user_id': user_id,
+                'creator_user_id': creator_user_id,
                 'id': id,
-                'description': $('#description').val(),
-                'unit_id': $('#unit_id').val(),
             },
-            success: function (data) {
+            success: function (d) {
 
-                if (data.errors) {
-                    try {
-
-                        $('#selectResponse').removeClass('hidden').text("")
-                        if (data.errors.code == "23000") {
-                            data.errors.message = "کاربری با این نام قبلا ثبت شده است"
-                            $('#selectResponse').append('<li>' + data.errors.message + '</li>')
-                            return
-                        }
-                        else {
-                            $.each(data.errors, function (keyobj, valueobj) {
-                                $('#selectResponse').append('<li>' + valueobj + '</li>')
-                                return
-                            })
-                        }
-
-                    } catch (e) {
-                        $('#selectResponse').append('<li>' + data.errors + '</li>')
-                    }
-
-
+                if (d.errors) {
+                    $.each(d.errors, function (key, error) {
+                        $.each(error, function (erkey, ermsg) {
+                            console.log(ermsg);
+                            $('#stuff-edit-response').text('error');
+                            $('#stuff-edit-response').append(`<li>${ermsg}</li>`);
+                            $('#stuff-edit-response').removeClass('hidden').addClass('alert-danger')
+                        })
+                    })
+                    return;
                 }
                 else {
-                    $('#selectResponse').text('تغییرات جدید ثبت شد')
-                    $('#selectResponse').removeClass('alert-danger', 'hidden').addClass('alert-success')
+                    console.log($('#response'));
+                    $('#stuff-edit-response').text('تغییرات جدید ثبت شد')
+                    $('#stuff-edit-response').removeClass('alert-danger', 'hidden').addClass('alert-success')
+                    return;
                 }
             }
 

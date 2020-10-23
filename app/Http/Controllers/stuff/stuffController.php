@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PDOException;
 use App\Models\Stuff;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class stuffController extends Controller
@@ -39,8 +41,8 @@ class stuffController extends Controller
             'name' => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
             'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
-            'creator_user_id' => ['numeric', 'exists:users,id','required'],
-            'modifier_user_id' => ['numeric', 'exists:users,id','required'],
+            'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
+            'modifier_user_id' => ['numeric', 'exists:users,id', 'required'],
             'description' => ['string', 'max:255', 'nullable'],
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -76,7 +78,7 @@ class stuffController extends Controller
 
         try {
 
-            $selected_stuff = DB::table('stuffs')->where('id',[$request->id])->get();//DB::select('select * from stuffs where id = ?', [$request->id]);;
+            $selected_stuff = DB::table('stuffs')->where('id', [$request->id])->get(); //DB::select('select * from stuffs where id = ?', [$request->id]);;
             return response()->json(['stuff' => $selected_stuff]);
         } catch (PDOException $ex) {
             $error_data = response()->json(['errors' => [
@@ -86,46 +88,44 @@ class stuffController extends Controller
             ]]);
             return $error_data;
         }
-       /*  if ($this->validateStuff($request) === true) {
-            $newStuff = Stuff::select('select * from stuffs where id = ?', [$request->id]);
-            $newStuff->code             = $request->code;
-            $newStuff->name             = $request->name;
-            $newStuff->latin_name       = $request->latin_name;
-            $newStuff->has_unique_serial= $request->has_unique_serial;
-            $newStuff->unit_id          = $request->unit_id;
-            $newStuff->description      = $request->description;
-            $newStuff->creator_user_id  = $request->creator_user_id;
-            $newStuff->modifier_user_id  = $request->modifier_user_id;
-
-            $newStuff->save();
-            return response()->json();
-        }*/
     }
 
     public function editStuff(Request $request)
     {
-        if( $this->validateStuff($request) === true )
-        {
-            try {
-                $updateList = [];
+        $rules = [
+            'code' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
+            'name' => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
+            'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
+            'has_unique_serial' => ['boolean'],
+            'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
+            'modifier_user_id' => ['numeric', 'exists:users,id', 'required'],
+            'description' => ['string', 'max:255', 'nullable'],
+        ];
+        $validator = Validator::make($request->all(), $rules);
 
-                $updateList['code'] = $request->code;
-                $updateList['name'] = $request->name;
-                $updateList['latin_name'] = $request->latin_name;
-                $updateList['has_unique_serial'] = $request->has_unique_serial;
-                $updateList['unit_id'] = $request->unit_id;
-                $updateList['description'] = $request->description;
-                $updateList['modifier_user_id'] = $request->user()->id;
+        if ($validator->fails()) {
 
-                DB::table('stuffs')->where('id',$request->id)->update($updateList);
-            } catch (\Throwable $ex) {
-                $error_data = response()->json(['errors' => [
-                    'code'      => $ex->errorInfo[0],
-                    'message'   => $ex->errorInfo[2],
-                    'status'    => 'failed'
-                ]]);
-                return $error_data;
-            }
+            return response()->json(['errors' => $validator->getMessageBag()->toArray()]);
+        }
+        try {
+            $updateList = [];
+
+            $updateList['code'] = $request->code;
+            $updateList['name'] = $request->name;
+            $updateList['latin_name'] = $request->latin_name;
+            $updateList['has_unique_serial'] = $request->has_unique_serial;
+            $updateList['unit_id'] = $request->unit_id;
+            $updateList['description'] = $request->description;
+            $updateList['modifier_user_id'] = $request->user()->id;
+            $updateList['updated_at'] = Carbon::now();
+            //DB::update('update stuffs set code = ?, name = ? , latin_name = ? , has_unique_serial = ? , unit_id = ? , description = ? , modifier_user_id = ? where name = ?', $updateList);
+            DB::table('stuffs')->where('id', $request->id)->update($updateList);
+
+            //User::where('id',$request->id)->update($updateList);
+            return response('Stuff Edited.');
+        } catch (PDOException $ex) {
+            $error_data = response()->json(['errors' => [$ex]]);
+            return $error_data;
         }
     }
 }

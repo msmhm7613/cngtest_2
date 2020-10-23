@@ -158,9 +158,9 @@
                     </div>
                 </form>
             </div>
-            <div class="alert alert-danger errors hidden" id="response"></div>
+            <div class="alert alert-danger errors hidden" id="stuff-edit-response"></div>
             <div class="modal-footer">
-                <button class="btn btn-success" type="submit" id="edit-stuff-save-btn">
+                <button class="btn btn-success" type="submit" id="edit-stuff-save-btn"  data-user-id="{{ $user->id }}">
                     <span class="fas fa-save"></span>
                     ثبت تغییرات
                 </button>
@@ -185,7 +185,7 @@
                     آیا شما مطمئنید میخواهید
                     <span id="stuff-name"></span>
                     را حذف کنید؟
-                    
+
                 </p>
             </div>
             <div class="alert alert-danger errors hidden" id="response"></div>

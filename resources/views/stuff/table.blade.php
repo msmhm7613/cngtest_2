@@ -55,7 +55,7 @@
                                     {{ __('هنوز ویرایش نشده.') }}
                                 @else
                                     {{ __('ویرایش شده توسط : ') }}
-                                    {{ \App\Models\User::where('id', $stuff->modifier_user_id)->get('username') }}
+                                    {{ \App\Models\User::where('id', $stuff->modifier_user_id)->get('username')->first()->username }}
                                     {{ __(' در ') }}
                                     {{ \App\Http\Controllers\persianDateTimeController::gregorianToPersian($stuff->updated_at) }}
                                 @endif
@@ -66,7 +66,7 @@
                     <td id="operation">
                         <div class="btns hidden" id="{{ $stuff->id }}">
                             <button class="btn btn-info btn-sm m-0 my-1 d-inline-block w-100 text-center "
-                                id="btnStuffEdit" data-id="{{ $stuff->id }}" title="ویرایش"><i
+                        id="btnStuffEdit" data-id="{{ $stuff->id }}" title="ویرایش" data-creator-user-id="{{ $stuff->creator_user_id }}" data-user-id="{{ $user->id }}"><i
                                     class="fas fa-pencil-alt  m-0"></i></button>
                             <button class="btn btn-danger btn-sm m-0 my-1 d-inline-block w-100 text-center "
                                 id="btnStuffDel" data-id="{{ $stuff->id }}" title="حذف"><i

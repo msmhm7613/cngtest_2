@@ -39,8 +39,6 @@ Route::post('/editUser', '\App\Http\Controllers\UserController@editUser');
 Route::post('deleteUser', '\App\Http\Controllers\UserController@deleteUser');
 Route::get('/selectUser', '\App\Http\Controllers\UserController@selectUser');
 
-Route::get('/selectStuff', '\App\Http\Controllers\stuff\StuffController@selectStuff');
-Route::get('/editStuff', '\App\Http\Controllers\stuff\StuffController@editStuff');
 
 Route::get('/new-panel','\App\Http\Controllers\NewPanelController@index');
 Route::post('/new-panel', '\App\Http\Controllers\NewPanelController@getContent');
@@ -50,5 +48,9 @@ Route::get('insert_new_contractor_form', 'App\Http\Controllers\Contractor\Contra
 
 Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
 
-
+/********
+ * Stuff URLs
+ */
 Route::post('insert-new-stuff', 'App\Http\Controllers\stuff\stuffController@insert');
+Route::get('/selectStuff', '\App\Http\Controllers\stuff\StuffController@selectStuff');
+Route::post('/editStuff', '\App\Http\Controllers\stuff\StuffController@editStuff');
