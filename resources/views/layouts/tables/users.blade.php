@@ -17,7 +17,7 @@ use App\Models\User as user;
 -->
 
     @if (App\Models\User::all()->count())
-        <table class="table table-striped tbl-users " id="tbl-users" style="z-index: 999;">
+        <table class="table table-striped tbl-users" id="tbl-users" style="z-index: 999;">
             <tr>
                 <th>ردیف</th>
                 <th>شناسه</th>
@@ -25,6 +25,7 @@ use App\Models\User as user;
                 <th style="display: none;">پسورد</th>
                 <th>عنوان</th>
                 <th style="text-align: left;" class="w-25">
+                    عملیات
                 </th>
             </tr>
             @php
@@ -62,13 +63,13 @@ use App\Models\User as user;
                                 </div>
 
                             @endif
-                            <button class="btn btn-info btn-sm" id="btnEdit" data-id={{ $user->id }}>
-                                <i class="fas fa-pencil-alt" data-id={{ $user->id }}></i>
-                                <small data-id={{ $user->id }}>ویرایش</small>
+                            <button class="btn btn-info btn-sm my-1 w-25 d-inline-block " title="ویرایش" id="btnEdit" data-id={{ $user->id }}>
+                                <i class="fas fa-pencil-alt m-0 "></i>
+
                             </button>
-                            <button class="btn btn-danger btn-sm" id="btnDelete" data-id={{ $user->id }}>
-                                <i class="fas fa-trash-alt"></i>
-                                <small>حذف</small>
+                            <button class="btn btn-danger btn-sm my-1 w-25 d-inline-block" title="حذف" id="btnDelete" data-id={{ $user->id }}>
+                                <i class="fas fa-trash-alt m-0 "></i>
+
                             </button>
                         </div>
                     </td>

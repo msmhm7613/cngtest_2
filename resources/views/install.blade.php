@@ -27,7 +27,8 @@ use illuminate\Http;
             </div>
         </div>
         <div class="row d-flex justify-content-center align-items-center">
-            <form action="/setup" method="post" class="form">
+            <!-- <form action="setup" method="post" class="form"> -->
+            {{ Form::open(['url'=>'setup']) }}
                 <div class="row">
                     <div class="col">
                         <fieldset class="eng">
@@ -78,15 +79,13 @@ use illuminate\Http;
                         </fieldset>
                     </div>
                 </div>
-
-                @csrf
                 <div class="row">
                     <div class="col">
                         <input type="submit" value="Next" class="form-control submit outset" onclick="wait()">
                     </div>
                 </div>
             </form>
-
+            
         </div>
 </div>
 

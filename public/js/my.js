@@ -14,7 +14,7 @@ $(document).on("mouseenter mouseleave", "table.table tr", function (e) {
             }
 
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     } else {
         // if not, mouseleave, do something
@@ -28,7 +28,7 @@ $(document).on("mouseenter mouseleave", "table.table tr", function (e) {
             }
 
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     }
     return;

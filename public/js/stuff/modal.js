@@ -75,18 +75,15 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
 })
 
 
-//select user
+//select stuff
 
 $(document).on('click', '#btnEdit', function (e) {
 
     e.preventDefault();
-    id = $(e.currentTarget).attr('data-id');
-    if (id == 1)
-        return;
     $('#selectResponse').addClass('hidden');
     $('#edit').modal('show');
     $('.form-horizontal').show();
-    $('.modal-title').text('ویرایش کاربر');
+    $('.modal-title').text('ویرایش کالا');
     $('#edit').on('hidden.bs.modal', function () {
 
     })
