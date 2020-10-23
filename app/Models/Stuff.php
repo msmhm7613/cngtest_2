@@ -16,6 +16,7 @@ class Stuff extends Model
         'has_unique_serial',
         'unit',
         'creator_user_id',
+        'modifier_user_id',
         'description'
     ];
 

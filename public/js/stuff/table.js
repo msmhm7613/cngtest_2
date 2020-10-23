@@ -1,3 +1,4 @@
+console.log($('#stuffs-table'));
 
 $('table#stuffs-table tr').on('mouseenter', function (e) {
 
@@ -7,7 +8,7 @@ $('table#stuffs-table tr').on('mouseenter', function (e) {
 
     btnEdit.on('click', function (e) {
         let id = $(btnEdit).attr('data-id');
-        
+
     })
 
 })

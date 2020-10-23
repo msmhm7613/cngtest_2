@@ -77,11 +77,12 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
 
 //select stuff
 
-$(document).on('click', '#btnEdit', function (e) {
+$(document).on('click', '#btnStuffEdit', function (e) {
 
     e.preventDefault();
+    console.log('btn stuff edit clicked.');
     $('#selectResponse').addClass('hidden');
-    $('#edit').modal('show');
+    $('#edit-stuff-modal').modal('show');
     $('.form-horizontal').show();
     $('.modal-title').text('ویرایش کالا');
     $('#edit').on('hidden.bs.modal', function () {
@@ -92,18 +93,18 @@ $(document).on('click', '#btnEdit', function (e) {
 
     $.ajax({
         type: 'GET',
-        url: 'selectUser',
+        url: 'selectStuff',
         data: {
             'id': id,
         },
         success: function (data) {
             $('#selectResponse').text("")
             $('#selectResponse').removeClass('hidden')
-            if (!data.user) {
-                console.log('user does not exist.')
+            if (!data.stuff) {
+                console.log('stuff does not exist.')
                 try {
                     if (data.errors.code == "23000") {
-                        data.errors.message = "کاربری با این نام قبلا ثبت شده است"
+                        data.errors.message = "کالایی با این نام کد ثبت شده است"
                         $('#selectResponse').append('<li>' + data.errors.message + '</li>')
                         return
                     }
@@ -122,9 +123,14 @@ $(document).on('click', '#btnEdit', function (e) {
             }
             else {
                 try {
-                    $('input#editUsername').val(data.user[0]['username']).attr('placeholder', 'نام کاربری جدید')
-                    $('input#editPassword').val("").attr('placeholder', 'رمزعبور جدید')
-                    $('select#editRole').val(data.user[0]['role'])
+                    console.log(data);
+                    $('form#edit-stuff-form input#code').val(data.stuff[0]['code']).attr('placeholder', 'کد جدید کالا')
+                    $('form#edit-stuff-form input#name').val(data.stuff[0]['name']).attr('placeholder', 'نام جدید کالا')
+                    $('form#edit-stuff-form input#latin_name').val(data.stuff[0]['latin_name']).attr('placeholder', 'نام لاتین جدید کالا')
+                    $('form#edit-stuff-form input#has_unique_id').prop('checked',data.stuff[0]['has_unique_serial']);
+                    $('form#edit-stuff-form select#unit_id').val(data.stuff[0]['unit_id']);
+                    $('form#edit-stuff-form textarea#description').text(data.stuff[0]['description']);
+
 
                 } catch (error) {
                     // console.log(error)
@@ -136,7 +142,7 @@ $(document).on('click', '#btnEdit', function (e) {
 
     /**
      * ********************
-     * UPDATE SQL USER
+     * UPDATE SQL
      * ********************
      */
     $('button#edit').on('click', function (e) {
@@ -148,14 +154,16 @@ $(document).on('click', '#btnEdit', function (e) {
         });
         $.ajax({
             type: 'POST',
-            url: 'editUser',
+            url: 'editStuff',
             data: {
                 '_token': $('input[name="_token"]').val(),
-                'username': ($('#editUsername').val()),
-                'password': ($('#editPassword').val()),
-                'role': $('#editRole').val(),
-                'title': $('#editRole :selected').text(),
+                'code': ($('#code').val()),
+                'name': ($('#name').val()),
+                'latin_name': $('#latin_name').val(),
+                'has_unique_serial': ch.is(':checked') ? 1 : 0,
                 'id': id,
+                'description': $('#description').val(),
+                'unit_id': $('#unit_id').val(),
             },
             success: function (data) {
 

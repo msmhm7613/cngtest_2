@@ -78,8 +78,9 @@ $(document).on('click', '#btnEdit', function (e) {
     $('.form-horizontal').show();
     $('.modal-title').text('ویرایش کاربر');
     $('#edit').on('hidden.bs.modal', function () {
-
+        $('#side-menu-users-btn')[0].click();
     })
+
     $('.preloader').addClass('hidden');
     id = $(e.currentTarget).attr('data-id');
 
@@ -210,7 +211,7 @@ $(document).on('click', '#btnDelete', function (e) {
     $('.form-horizontal').show();
     $('.modal-title').text('حذف کاربر');
     $('#deleteModal').on('hidden.bs.modal', function () {
-
+        $('#side-menu-users-btn')[0].click();
     })
 
     del_id = $(e.currentTarget).attr('data-id');
@@ -247,7 +248,7 @@ $(document).on('click', '#btnDelete', function (e) {
         $.ajax(
             {
                 type: 'POST',
-                url: '/deleteUser',
+                url: 'deleteUser',
                 data: { 'id': del_id, 'role': del_role },
                 success: function (d) {
                     if (d.errors) {

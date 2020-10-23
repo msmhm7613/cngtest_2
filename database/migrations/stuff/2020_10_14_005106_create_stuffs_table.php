@@ -22,6 +22,7 @@ class CreateStuffsTable extends Migration
             $table->unsignedBigInteger('unit_id')->default(1);
             $table->string('description')->nullable();
             $table->unsignedBigInteger('creator_user_id')->require();
+            $table->unsignedBigInteger('modifier_user_id')->require();
             $table->timestamps();
         });
     }

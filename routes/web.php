@@ -36,8 +36,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/addUser', '\App\Http\Controllers\UserController@newUser');
 Route::post('/editUser', '\App\Http\Controllers\UserController@editUser');
-Route::post('/deleteUser', '\App\Http\Controllers\UserController@deleteUser');
+Route::post('deleteUser', '\App\Http\Controllers\UserController@deleteUser');
 Route::get('/selectUser', '\App\Http\Controllers\UserController@selectUser');
+
+Route::get('/selectStuff', '\App\Http\Controllers\stuff\StuffController@selectStuff');
+Route::get('/editStuff', '\App\Http\Controllers\stuff\StuffController@editStuff');
 
 Route::get('/new-panel','\App\Http\Controllers\NewPanelController@index');
 Route::post('/new-panel', '\App\Http\Controllers\NewPanelController@getContent');
