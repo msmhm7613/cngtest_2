@@ -16,6 +16,7 @@ function openModal(e, targetModal, msg) {
 
 $(document).on('click', '#insert-new-stuff-button', function (e) {
 
+    $user_id = $(e.currentTarget).attr('data-user-id');console.log($user_id);
     openModal(e, $('#insert-new-stuff-modal'), 'کالای جدید')
     //function add stuff
     $('button#add').on('click', function () {
@@ -36,6 +37,8 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
                 'unit_id': $('#unit_id :selected').val(),
                 'has_unique_serial': ch.is(':checked') ? 1 : 0,
                 'description': $('textarea#description').val(),
+                'creator_user_id': $user_id,
+                'modifier_user_id': $user_id,
             },
             cache: false,
             success: function (d) {
