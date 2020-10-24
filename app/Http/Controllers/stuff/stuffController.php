@@ -37,6 +37,7 @@ class stuffController extends Controller
 
     public function insert(Request $request)
     {
+        
         $rules = [
             'code' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
             'name' => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],

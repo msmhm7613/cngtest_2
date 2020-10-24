@@ -10,21 +10,7 @@ class StuffpackController extends Controller
 {
     public function validator(Request $request)
     {
-        $rules = [
-            'code' => ['string', 'alpha-dash', 'min:3', 'max:30', 'required',],
-            'name' => ['string', 'min:3', 'max:30', 'required',],
-            'description' => ['string', 'alpha-dash', 'max:255', 'nullable',],
-            'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
-            'modifier_user_id' => ['numeric', 'exists:users,id', 'required'],
-            'serial' => ['string', 'min:1', 'max:64', 'required',]
-        ];
-
-        $validator = Validator::make($request, $rules);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->getMessageBag()->toArray()]);
-        } else {
-            return response()->json('success');
-        }
+        
     }
 
     public function insert(Request $request)

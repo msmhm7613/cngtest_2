@@ -16,10 +16,10 @@ function openModal(e, msg, targetResponse) {
 
 function closeModal() {
     let ind = 1;
-    $(document).on('hidden.bs.modal#' + targetModal.first().attr('id'), function () {
+    $(document).on('hidden.bs.modal',function(e) {
         console.log(ind++);
         refreshTable(targetModal);
-        return false;
+
     })
 }
 
@@ -35,14 +35,15 @@ function refreshTable(targetModal) {
         timeout: 30000,
         success: function (s) {
             $('#content-box').first().html('');
-
+            $('#content-box').first().html(s);
+            return false;
             if (s.errors) {
                 console.log(s);
             }
             else {
                 $('#content-box').first().html(s);
             }
-            return false;
+
         },
         complete: function (c) {
             return c;
@@ -71,7 +72,7 @@ $('body').on('click', '#add-to-stuffs-list-btn',
         var stuff_id = $('select#stuff-select-input').val();
         var stuff_count = $('input#stuff-number-input').val();
         var stuff_list = $('ol#stuff-array-list');
-        stuff_array_list.push([`${stuff_id}` , stuff_count]);
+        stuff_array_list.push([`${stuff_id}`, stuff_count]);
         console.log(stuff_array_list);
         console.log(stuff_list);
         stuff_list.append(`
@@ -101,7 +102,7 @@ $('body').on('click', 'button#insert-new-stuff-pack-save', function (e) {
     });
     $.ajax({
         type: 'POST',
-        url: 'insert-new-stuff-pack',
+        url: 'insert-new-stuffpack',
         async: false,
         cache: false,
         timeout: 30000,
@@ -128,7 +129,7 @@ $('body').on('click', 'button#insert-new-stuff-pack-save', function (e) {
                 return false;
             }
             else {
-                $('#insert-new-stuff-pack-response').text('کالا ثبت شد');
+                $('#insert-new-stuff-pack-response').text('مجموعه کالا ثبت شد');
                 $('#insert-new-stuff-pack-form input[type="text"]').val("")
                 $('#insert-new-stuff-pack-form textarea').val("")
                 $('#insert-new-stuff-pack-form select option:eq(0)').attr('selected', 'selected')

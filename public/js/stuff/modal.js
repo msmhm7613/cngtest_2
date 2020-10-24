@@ -16,7 +16,7 @@ function openModal(e, msg,targetResponse ) {
 
 function closeModal() {
     let ind = 1;
-    $(document).on('hidden.bs.modal#'+targetModal.first().attr('id'), function () {
+    $(document).on('hidden.bs.modal', function () {
         console.log(ind++);
         refreshTable(targetModal);
         return false;
@@ -24,11 +24,13 @@ function closeModal() {
 }
 
 function refreshTable(targetModal) {
+    let ind = 0;
     $.ajax({
         type: 'GET',
         url: 'new-panel-get-content',
         data: {
             target: 'stuff',
+            ind : ind++,
         },
         cache: false,
         async: false,

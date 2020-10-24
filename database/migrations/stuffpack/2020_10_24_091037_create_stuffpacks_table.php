@@ -18,7 +18,7 @@ class CreateStuffpacksTable extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('serial');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->unsignedBigInteger('creator_user_id');
             $table->unsignedBigInteger('modifier_user_id');
             $table->timestamps();

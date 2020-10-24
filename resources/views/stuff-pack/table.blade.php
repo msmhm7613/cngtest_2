@@ -38,7 +38,6 @@
                     <td> <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>مشاهده ریز اقلام</a></td>
                     <td>100</td>
                     <td>{{ $stuff_pack->serial  }}</td>
-                    <td>{{ $stuff_pack->description }}</td>
                     <td>
                         <p>
                             {{ $stuff_pack->description ?? 'ندارد' }}
@@ -91,9 +90,18 @@
             </tr>
         </tfoot>
     </table>
-@else
+@elseif( \App\Models\Stuff::all()->count() )
     <div class="mt-3 alert alert-info">
         هنوز هیچ مجموعه کالایی ثبت نشده است.
     </div>
+@else
+    <div class="mt-3 alert alert-info">
+        ابتدا باید کالا ثبت کنید.
+    </div>
+    <script>
+        var btn = document.getElementById('insert-new-stuff-pack-button');
+        console.log(btn);
+        btn.disabled = true;
+    </script>
 @endif
 @include('stuff-pack.footer')

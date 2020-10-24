@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\PanelController;
+use App\Http\Controllers\stuff\stuffController;
+use App\Http\Controllers\stuffpacks\spController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
@@ -53,6 +55,7 @@ Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
  * Stuff URLs
  */
 Route::post('insert-new-stuff', 'App\Http\Controllers\stuff\stuffController@insert');
+Route::get('insert-new-stuff', 'App\Http\Controllers\stuff\stuffController@insert');
 Route::get('/selectStuff', '\App\Http\Controllers\stuff\StuffController@selectStuff');
 Route::post('/editStuff', '\App\Http\Controllers\stuff\StuffController@editStuff');
 Route::post('deleteStuff', '\App\Http\Controllers\stuff\StuffController@deleteStuff');
@@ -63,9 +66,8 @@ Route::post('deleteStuff', '\App\Http\Controllers\stuff\StuffController@deleteSt
  * Stuff-pack URLs
  */
 
-Route::post('insert-new-stuff-pack', '\App\Http\Controllers\stuffpacks\StuffpackController@insert');
-Route::post('insert-new-stuff-pack', [\App\Http\Controllers\stuffpacks\StuffpackController::class , 'insert']);
-Route::get('select-stuff-pack', '\App\Http\Controllers\stuffpack\StuffpackController@select');
-Route::post('edit-stuff-pack', '\App\Http\Controllers\stuffpack\StuffpackController@edit');
-Route::post('delete-stuff-pack', '\App\Http\Controllers\stuffpack\StuffpackController@delete');
+Route::group(['namespace' => 'stuffpacks'], function () {
+    Route::post('insert-new-stuffpack', [spController::class , 'insert']);
+});
+
 
