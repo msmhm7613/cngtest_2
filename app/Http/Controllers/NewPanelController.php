@@ -17,6 +17,7 @@ class NewPanelController extends Controller
 
     public function getContent(Request $request)
     {
+        
         $target = $request->target;
         switch ($target) {
             case 'dashboard':
@@ -32,6 +33,7 @@ class NewPanelController extends Controller
                 return view('stuff.table');
                 break;
             default:
+                return 'sorry I couldn\'t find that.';
                 break;
         }
     }

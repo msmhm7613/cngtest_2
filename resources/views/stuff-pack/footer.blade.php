@@ -206,7 +206,7 @@
 
 
 
-<script src="{{ asset('js/stuff/modal.js') }}"></script>
-<script src="{{ asset('js/stuff/table.js') }}"></script>
+<script src="{{ asset('js/stuff-pack/modal.js') }}"></script>
+<script src="{{ asset('js/stuff-pack/table.js') }}"></script>
 
 

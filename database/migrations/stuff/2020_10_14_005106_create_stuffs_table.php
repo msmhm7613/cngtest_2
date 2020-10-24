@@ -15,9 +15,9 @@ class CreateStuffsTable extends Migration
     {
         Schema::create('stuffs', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->require()->uniqid();
+            $table->string('code')->require()->unique();
             $table->string('name')->require();
-            $table->string('latin_name');
+            $table->string('latin_name')->default('UNKNOWN')->nullable();
             $table->boolean('has_unique_serial')->default(false);
             $table->unsignedBigInteger('unit_id')->default(1);
             $table->string('description')->nullable();

@@ -20,5 +20,7 @@ class Stuff extends Model
         'description'
     ];
 
+    
+
     public $timestamps = true;
 }

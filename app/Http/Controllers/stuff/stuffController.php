@@ -10,6 +10,7 @@ use PDOException;
 use App\Models\Stuff;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class stuffController extends Controller
@@ -63,6 +64,8 @@ class stuffController extends Controller
             $stuff->unit_id = $request->unit_id;
             $stuff->description = $request->description;
             $stuff->save();
+            //DB::table('stuffs')->insert($request->except('_token'));
+            //DB::table('stuffs')->where('id','=',$request->id)->update(['created_at'=> Carbon::now(), 'updated_at' => Carbon::now()]);
             return response('کالا ثبت شد');
         } catch (Exception $ex) {
             return response()->json(['errors' => $ex->getMessage()]);
@@ -78,8 +81,8 @@ class stuffController extends Controller
 
         try {
 
-            $selected_stuff = DB::table('stuffs')->where('id', [$request->id])->get(); //DB::select('select * from stuffs where id = ?', [$request->id]);;
-            return response()->json(['stuff' => $selected_stuff]);
+            $selected_stuff = DB::table('stuffs')->where('id','=', [$request->id])->get(); //DB::select('select * from stuffs where id = ?', [$request->id]);;
+            return response()->json(['stuff' => $selected_stuff->first()]);
         } catch (PDOException $ex) {
             $error_data = response()->json(['errors' => [
                 'code'      => $ex->errorInfo[0],
@@ -92,7 +95,7 @@ class stuffController extends Controller
 
     public function editStuff(Request $request)
     {
-        $rules = [
+        /* $rules = [
             'code' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
             'name' => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
             'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
@@ -106,7 +109,7 @@ class stuffController extends Controller
         if ($validator->fails()) {
 
             return response()->json(['errors' => $validator->getMessageBag()->toArray()]);
-        }
+        } */
         try {
             $updateList = [];
 
@@ -127,5 +130,19 @@ class stuffController extends Controller
             $error_data = response()->json(['errors' => [$ex]]);
             return $error_data;
         }
+    }
+
+    public function deleteStuff(Request $request)
+    {
+        try {
+            Artisan::call('cache:clear');
+            Artisan::call('view:clear');
+            Artisan::call('cache:clear');
+            DB::table('stuffs')->delete($request->id);
+            return response()->json(['request' => $request]);
+        } catch (PDOException $ex) {
+            return response()->json(['errors' => $ex]);
+        }
+
     }
 }
