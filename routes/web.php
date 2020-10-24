@@ -56,3 +56,16 @@ Route::post('insert-new-stuff', 'App\Http\Controllers\stuff\stuffController@inse
 Route::get('/selectStuff', '\App\Http\Controllers\stuff\StuffController@selectStuff');
 Route::post('/editStuff', '\App\Http\Controllers\stuff\StuffController@editStuff');
 Route::post('deleteStuff', '\App\Http\Controllers\stuff\StuffController@deleteStuff');
+
+
+/**
+ *
+ * Stuff-pack URLs
+ */
+
+Route::post('insert-new-stuff-pack', '\App\Http\Controllers\stuffpacks\StuffpackController@insert');
+Route::post('insert-new-stuff-pack', [\App\Http\Controllers\stuffpacks\StuffpackController::class , 'insert']);
+Route::get('select-stuff-pack', '\App\Http\Controllers\stuffpack\StuffpackController@select');
+Route::post('edit-stuff-pack', '\App\Http\Controllers\stuffpack\StuffpackController@edit');
+Route::post('delete-stuff-pack', '\App\Http\Controllers\stuffpack\StuffpackController@delete');
+

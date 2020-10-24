@@ -17,7 +17,7 @@ class NewPanelController extends Controller
 
     public function getContent(Request $request)
     {
-        
+
         $target = $request->target;
         switch ($target) {
             case 'dashboard':
@@ -31,6 +31,9 @@ class NewPanelController extends Controller
                 break;
             case 'stuff':
                 return view('stuff.table');
+                break;
+            case 'stuff-pack':
+                return view('stuff-pack.table');
                 break;
             default:
                 return 'sorry I couldn\'t find that.';

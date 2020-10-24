@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeignKeys extends Migration
+class CreateStuffPackStuffsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateForeignKeys extends Migration
      */
     public function up()
     {
-        Schema::create('foreign_keys', function (Blueprint $table) {
+        Schema::create('stuff_pack_stuffs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('stuff_pack_id');
+            $table->unsignedBigInteger('stuff_id');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateForeignKeys extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foreign_keys');
+        Schema::dropIfExists('stuff_pack_stuffs');
     }
 }

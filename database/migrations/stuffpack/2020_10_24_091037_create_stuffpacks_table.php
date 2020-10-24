@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateStuffpacksTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -16,10 +15,10 @@ class CreateStuffpacksTable extends Migration
     {
         Schema::create('stuffpacks', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('name')->unique();
-            $table->string('serial')->unique();
-            $table->string('description')->nullable()->default('-');
+            $table->string('name');
+            $table->string('code');
+            $table->string('serial');
+            $table->string('description');
             $table->unsignedBigInteger('creator_user_id');
             $table->unsignedBigInteger('modifier_user_id');
             $table->timestamps();
@@ -35,6 +34,4 @@ class CreateStuffpacksTable extends Migration
     {
         Schema::dropIfExists('stuffpacks');
     }
-
-    public $timestamp = true;
 }
