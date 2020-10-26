@@ -8,6 +8,7 @@
             <div class="modal-body">
                 <form action="" method="POST" class="form-horizontal" id="insert-new-stuff-form">
                     @csrf
+                    
                     <div class="form-group row add">
                         <div class="col-sm-12">
                             <div class="form-group">

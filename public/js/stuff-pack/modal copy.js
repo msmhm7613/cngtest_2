@@ -32,9 +32,7 @@ function refreshTable(targetModal) {
         data: {
             target: 'stuff-pack',
         },
-        cache: false,
-        async: false,
-        timeout: 30000,
+
         success: function (s) {
             $('#content-box').first().html('');
 
@@ -111,9 +109,7 @@ $('body').on('click', 'button#insert-new-stuff-pack-save', function (e) {
     $.ajax({
         type: 'POST',
         url: 'insert-new-stuffpack',
-        async: false,
-        cache: false,
-        timeout: 30000,
+        dataType: 'json',
         data: {
             '_token': $('input[name="_token"]').val(),
             'name': $('input[name="name"]').val(),
