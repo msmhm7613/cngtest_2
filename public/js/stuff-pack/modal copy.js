@@ -6,7 +6,7 @@ var targetModal;
 var stuff_array_list = [];
 
 
-function openModal(e, msg, targetResponse) {
+function openModal(e, msg, targetModal) {
     e.preventDefault();
     targetModal.first().modal('show');
     $('.modal-title').first().text(msg);
@@ -61,7 +61,7 @@ function refreshTable(targetModal) {
 // insert new stuff-pack
 $(document).on('click', '#insert-new-stuff-pack-button', function (e) {
     e.preventDefault();
-    $(document).off().find("*").off();// remove all click events from document. this prevents jQuery to repeat a click event automatically .
+    //$(document).off().find("*").off();// remove all click events from document. this prevents jQuery to repeat a click event automatically .
     user_id = $(e.currentTarget).attr('data-user-id');
     targetModal = $('#insert-new-stuff-pack-modal');
     openModal(e, 'مجموعه کالای جدید', $('#insert-new-stuff-pack-response'));

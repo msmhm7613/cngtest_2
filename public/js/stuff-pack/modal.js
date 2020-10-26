@@ -5,7 +5,7 @@ var stuff_list_array = [];
 $(document).on('click', '#insert-new-stuff-pack-button', function (e) {
     e.preventDefault();
     $('#content-box').html('بارگذاری...').load('open-insert-form',function(xhr){
-        
+
     });
    /*  $.ajax({
         url: 'open-insert-form',
@@ -32,11 +32,17 @@ $(document).on('click', '#add-to-stuffs-list-btn', function (e) {
 
     checkForExists(stuff_id, stuff_name, stuff_num);
 
-    if (!stuff_list_array.length) {
+    if (stuff_list_array.length == 0 ) {
+        console.log('disabled');
         $('p#stuff-pack-list').show();
-
+        $('#stuff-pack-code-input').attr('disabled',false);
+        $('#stuff-pack-name-input').attr('disabled',false);
+        $('#stuff-pack-serial-input').attr('disabled',false);
     } else {
         $('p#stuff-pack-list').hide();
+        $('#stuff-pack-code-input').attr('disabled',true);
+        $('#stuff-pack-name-input').attr('disabled',true);
+        $('#stuff-pack-serial-input').attr('disabled',true);
         $('#stuff-list-table').fadeIn(300);
         refreshTable();
     }
@@ -119,4 +125,6 @@ function refreshTable() {
     $('#stuff-number-input').val(1);
 
     console.log(stuff_list_array);
+
+    //$('#content-box').off().find('*').off();
 }

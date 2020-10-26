@@ -11166,7 +11166,7 @@ html {
 }
 
 form {
-  max-height: 60vh;
+  /* max-height: 60vh; */
   overflow-y: auto;
   padding: 2rem;
 }
@@ -11223,7 +11223,7 @@ form textarea.inset:focus {
   border-radius: 2rem;
   border: none;
   outline: none;
-  background: none;
+  /* background:none ; */
 }
 
 .form-group {

@@ -1,6 +1,3 @@
-
-
-
 function openModal(e, targetModal, msg) {
     e.preventDefault();
     $('#response').addClass('hidden');
@@ -9,12 +6,48 @@ function openModal(e, targetModal, msg) {
     $('.modal-title').text(msg);
     $('#' + targetModal[0].id).on('hidden.bs.modal', function () {
         let active_item = $('.side-menu a.active');
-        $('#'+active_item[0].id)[0].click();
+        $('#' + active_item[0].id)[0].click();
 
     })
 }
 
 // insert new user
+
+$(document).on('click', '#insert-new-user-save-btn', function (e) {
+    e.preventDefault();
+    console.log('save user clicked.');
+    /* $.ajax({
+        url:'addUser',
+        type: 'post',
+        data: $('#insert-new-user-form').serialize();
+        success: function(data){
+            $('#content-box').html(data);
+        }
+    }) */
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('#content-box').load('addUser', {
+            data: $('#insert-new-user-form').serialize(),
+        },
+        function (statusTxt) {
+            console.log(statusTxt);
+            if (statusTxt.errors) {
+                let response = JSON.parse(statusTxt.errors)
+                $.each(response, function (ind, vl) {
+                    $('#response ul').append(
+                        `<li>
+                            ${vl}
+                        </li>`
+                    ).removeClass('alert-success').addClass('alert-danger');
+                })
+            }
+        }
+    )
+
+})
 
 $(document).on('click', '#newUserBtn', function (e) {
     console.log('new user btn is clicked');
@@ -105,8 +138,7 @@ $(document).on('click', '#btnEdit', function (e) {
                         data.errors.message = "کاربری با این نام قبلا ثبت شده است"
                         $('#selectResponse').append('<li>' + data.errors.message + '</li>')
                         return
-                    }
-                    else {
+                    } else {
                         $.each(data.errors, function (keyobj, valueobj) {
                             $('#selectResponse').append('<li>' + valueobj + '</li>')
                             return
@@ -118,8 +150,7 @@ $(document).on('click', '#btnEdit', function (e) {
                 }
 
 
-            }
-            else {
+            } else {
                 try {
                     $('input#editUsername').val(data.user[0]['username']).attr('placeholder', 'نام کاربری جدید')
                     $('input#editPassword').val("").attr('placeholder', 'رمزعبور جدید')
@@ -166,8 +197,7 @@ $(document).on('click', '#btnEdit', function (e) {
                             data.errors.message = "کاربری با این نام قبلا ثبت شده است"
                             $('#selectResponse').append('<li>' + data.errors.message + '</li>')
                             return
-                        }
-                        else {
+                        } else {
                             $.each(data.errors, function (keyobj, valueobj) {
                                 $('#selectResponse').append('<li>' + valueobj + '</li>')
                                 return
@@ -179,8 +209,7 @@ $(document).on('click', '#btnEdit', function (e) {
                     }
 
 
-                }
-                else {
+                } else {
                     $('#selectResponse').text('تغییرات جدید ثبت شد')
                     $('#selectResponse').removeClass('alert-danger', 'hidden').addClass('alert-success')
                 }
@@ -199,9 +228,9 @@ $(document).on('click', '#btnEdit', function (e) {
 
 
 /**
-     * START OF DELETE USER
-     *
-     */
+ * START OF DELETE USER
+ *
+ */
 
 $(document).on('click', '#btnDelete', function (e) {
 
@@ -239,8 +268,7 @@ $(document).on('click', '#btnDelete', function (e) {
                 $('#sureDeleteUsername').text(" " + data.user[0]['username'] + " ")
                 $('#sureDeleteRole').text(" " + data.user[0]['title'] + " ")
                 del_role = data.user[0]['role'];
-            }
-            else {
+            } else {
                 $('#deleteResponse').removeClass('hidden');
                 $('#selectResponse').val(data.errors['message'])
             }
@@ -250,24 +278,24 @@ $(document).on('click', '#btnDelete', function (e) {
     $('#modalBtnDelete').on('click', function (e) {
 
         console.log(del_id);
-        $.ajax(
-            {
-                type: 'POST',
-                url: 'deleteUser',
-                data: { 'id': del_id, 'role': del_role },
-                success: function (d) {
-                    if (d.errors) {
-                        console.log(d);
+        $.ajax({
+            type: 'POST',
+            url: 'deleteUser',
+            data: {
+                'id': del_id,
+                'role': del_role
+            },
+            success: function (d) {
+                if (d.errors) {
+                    console.log(d);
 
-                    }
-                    else {
-                        $('#deleteResponse').text('کاربر حذف شد.');
-                        $('#modalBtnDelete').fadeOut(300);
-                        $('#deleteCancel').text('بستن');
-                    }
+                } else {
+                    $('#deleteResponse').text('کاربر حذف شد.');
+                    $('#modalBtnDelete').fadeOut(300);
+                    $('#deleteCancel').text('بستن');
                 }
             }
-        )
+        })
     })
 
 })
@@ -279,7 +307,9 @@ $(document).on('click', '#insert-new-workshop-modal-btn', function (e) {
     $.ajax({
         type: "GET",
         url: 'insertNewWorkshopForm',
-        data: { r: Math.random() },
+        data: {
+            r: Math.random()
+        },
         success: function (d) {
             $('.ajax-content').css('opacity', '0');
             $('#preloader').show();
@@ -297,7 +327,9 @@ $(document).on('click', '#new-temp-modal-opener-btn', function (e) {
     $.ajax({
         type: "GET",
         url: 'insert_new_contractor_form',
-        data: { r: Math.random() },
+        data: {
+            r: Math.random()
+        },
         success: function (d) {
             $('.ajax-content').css('opacity', '0');
             $('#preloader').show();

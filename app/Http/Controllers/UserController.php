@@ -34,7 +34,9 @@ class UserController extends Controller
                 $newUser->role      = $request->role;
                 $newUser->title     = $request->title;
                 $newUser->save();
-                return response('کاربر با موفقیت ثبت شد');
+                /* return response('کاربر با موفقیت ثبت شد');*/
+
+                return view ( 'layouts.tables.users' );
             } catch (\Illuminate\Database\QueryException $ex) {
                 //if($ex->errorInfo[0] == 23000)
                 $error_data = response()->json(['errors' => [

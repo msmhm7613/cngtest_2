@@ -5,14 +5,20 @@ var creator_user_id;
 var id;
 var targetModal;
 
+function openModal(e, msg, targetModal) {
+    try {
+        e.preventDefault();
+        targetModal.first().modal('show');
+        $('.modal-title').first().text(msg);
+    }
+    catch(ex)
+    {
+        console.log(ex);
+    }
 
 
-function openModal(e, msg,targetResponse ) {
-    e.preventDefault();
-    targetModal.first().modal('show');
-    $('.modal-title').first().text(msg);
 
-    targetResponse.first().html('').fadeOut(300);
+    //targetResponse.first().html('').fadeOut(300);
 }
 
 
@@ -21,33 +27,37 @@ function closeModal() {
     let ind = 1;
     $(document).on('hidden.bs.modal', function () {
         console.log(ind++);
-        refreshTable(targetModal);
+        refreshTable();
         return false;
     })
+
+
 }
 
-function refreshTable(targetModal) {
+$(document).on('hide.bs.modal', function () {
+
+})
+
+function refreshTable() {
     let ind = 0;
     $.ajax({
         type: 'GET',
         url: 'new-panel-get-content',
         data: {
             target: 'stuff',
-            ind : ind++,
+            ind: ind++,
         },
         cache: false,
         async: false,
         timeout: 30000,
-        success: function(s)
-        {
-            $('#content-box').first().html('');
+        success: function (s) {
 
-            if ( s.errors )
-            {
+            $('#content-box').first().html('');
+            //$(document).off().find('*').off();
+
+            if (s.errors) {
                 console.log(s);
-            }
-            else
-            {
+            } else {
                 $('#content-box').first().html(s);
             }
             return false;
@@ -66,9 +76,13 @@ function refreshTable(targetModal) {
 // insert new stuff
 $(document).on('click', '#insert-new-stuff-button', function (e) {
     user_id = $(e.currentTarget).attr('data-user-id');
-    targetModal = $('#insert-new-stuff-modal');
-    openModal(e, 'کالای جدید', $('#insert-new-stuff-response'));
-    closeModal();
+    //targetModal = $('#insert-new-stuff-modal');
+    /* openModal(e, 'کالای جدید', $('#insert-new-stuff-response'));
+    closeModal(); */
+
+    $('#insert-new-stuff-response').modal('show');
+    $('#insert-new-stuff-response .form-horizontal').show();
+
 
 })
 
@@ -105,6 +119,7 @@ $('body').on('click', 'button#insert-new-stuff-save', function (e) {
         },
         success: function (s) {
             $('#insert-new-stuff-response').fadeIn(300);
+
             if (s.errors) {
                 $('#insert-new-stuff-response').removeClass('hidden').html("");
                 $('#insert-new-stuff-response').addClass('alert-danger').removeClass('alert-success');
@@ -112,8 +127,7 @@ $('body').on('click', 'button#insert-new-stuff-save', function (e) {
                     $('#insert-new-stuff-response').append(`<li>${insert_error_value}</li>`);
                 })
                 return false;
-            }
-            else{
+            } else {
                 $('#insert-new-stuff-response').text('کالا ثبت شد');
                 $('#insert-new-stuff-form input[type="text"]').val("")
                 $('#insert-new-stuff-form textarea').val("")
@@ -132,8 +146,7 @@ $('body').on('click', 'button#insert-new-stuff-save', function (e) {
                 $.each(c.errors, function (insert_error_key, insert_error_value) {
                     $('#insert-new-stuff-response').append(`<li>${insert_error_value}</li>`);
                 })
-            }
-            else {
+            } else {
                 $('#insert-new-stuff-response').text('کالا ثبت شد');
                 $('#insert-new-stuff-form input[type="text"]').val("")
                 $('#insert-new-stuff-form textarea').val("")
@@ -151,7 +164,8 @@ $(document).on('click', '#btnStuffEdit', function (e) {
 
     e.preventDefault();
     /* var user_id = $(e.currentTarget).attr('data-user-id'); console.log('user id: ' + user_id); */
-    creator_user_id = $(e.currentTarget).attr('data-creator-user-id'); console.log('creator user id: ' + creator_user_id);
+    creator_user_id = $(e.currentTarget).attr('data-creator-user-id');
+    console.log('creator user id: ' + creator_user_id);
     //var id = $(e.currentTarget).attr('data-id');console.log('stuff id: ' + id);
     /*$('#stuff-edit-response').addClass('hidden');
     $('#edit-stuff-modal').modal('show');
@@ -160,10 +174,10 @@ $(document).on('click', '#btnStuffEdit', function (e) {
      $('#edit-stuff-modal').on('hidden.bs.modal', function () {
         $('#define-stuff')[0].click();
     }) */
-    openModal(e, $('#edit-stuff-modal'), 'کالای جدید')
+    openModal(e, 'کالای جدید', $('#edit-stuff-modal'))
     $('.preloader').addClass('hidden');
     id = $(e.currentTarget).attr('data-id');
-
+    targetModal = $('#edit-stuff-modal');
     $.ajax({
         type: 'GET',
         url: 'selectStuff',
@@ -181,8 +195,7 @@ $(document).on('click', '#btnStuffEdit', function (e) {
                         data.errors.message = "کالایی با این نام کد ثبت شده است"
                         $('#stuff-edit-response').append('<li>' + data.errors.message + '</li>')
 
-                    }
-                    else {
+                    } else {
                         $.each(data.errors, function (keyobj, valueobj) {
                             $('#stuff-edit-response').append('<li>' + valueobj + '</li>')
 
@@ -194,8 +207,7 @@ $(document).on('click', '#btnStuffEdit', function (e) {
                 }
 
 
-            }
-            else {
+            } else {
                 try {
 
                     $('form#edit-stuff-form input#code').val(data.stuff['code']).attr('placeholder', 'کد جدید کالا')
@@ -215,10 +227,10 @@ $(document).on('click', '#btnStuffEdit', function (e) {
     })
 })
 /**
-     * ********************
-     * UPDATE SQL
-     * ********************
-     */
+ * ********************
+ * UPDATE SQL
+ * ********************
+ */
 $('body').on('click', 'button#edit-stuff-save-btn', function (e) {
     e.preventDefault();
     $('#stuff-edit-response').text('').fadeOut(300);
@@ -255,8 +267,7 @@ $('body').on('click', 'button#edit-stuff-save-btn', function (e) {
                     })
                 })
 
-            }
-            else {
+            } else {
                 $('#stuff-edit-response').text('تغییرات جدید ثبت شد')
                 $('#stuff-edit-response').fadeIn(300);
                 $('#stuff-edit-response').removeClass('alert-danger', 'hidden').addClass('alert-success')
@@ -269,9 +280,9 @@ $('body').on('click', 'button#edit-stuff-save-btn', function (e) {
 })
 
 /**
-     * START OF DELETE STUFF
-     *
-     */
+ * START OF DELETE STUFF
+ *
+ */
 
 $(document).on('click', '#btn-stuff-delete-modal-show', function (e) {
     //select stuff
@@ -308,28 +319,27 @@ $('body').on('click', '#delete-stuff-btn', function (e) {
     e.preventDefault();
     console.log('btn delete clicked.');
     $('#delete-stuff-response').fadeOut(300);
-    $.ajax(
-        {
-            type: 'POST',
-            url: 'deleteStuff',
-            data: { 'id': del_stuff_id },
-            success: function (d) {
-                $('#delete-stuff-response').fadeIn(300);
+    $.ajax({
+        type: 'POST',
+        url: 'deleteStuff',
+        data: {
+            'id': del_stuff_id
+        },
+        success: function (d) {
+            $('#delete-stuff-response').fadeIn(300);
+            console.log(d);
+            if (d.errors) {
                 console.log(d);
-                if (d.errors) {
-                    console.log(d);
-                    $.each(d.errors, function (key, vlaue) {
-                        $('#delete-stuff-response').append(`<li>${value}</li>`);
-                    })
+                $.each(d.errors, function (key, vlaue) {
+                    $('#delete-stuff-response').append(`<li>${value}</li>`);
+                })
 
-                }
-                else {
-                    $('#delete-stuff-response').text('کالا حذف شد.');
-                    $('#delete-stuff-btn').fadeOut(300);
-                    $('#delete-cancel-btn').text('بستن');
+            } else {
+                $('#delete-stuff-response').text('کالا حذف شد.');
+                $('#delete-stuff-btn').fadeOut(300);
+                $('#delete-cancel-btn').text('بستن');
 
-                }
             }
         }
-    )
+    })
 })

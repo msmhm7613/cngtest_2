@@ -37,6 +37,9 @@
         <div class="form-group  add">
             <div class="col-sm-12">
                 <div class="form-group">
+                    <label for="stuff-pack-code-input" class="form-label">
+                        کد مجموعه کالا:
+                    </label>
                     <input type="text" autofocus class=" inset" placeholder="یک کد برای این مجموعه انتخاب نمایید" id="stuff-pack-code-input"
                         name="code">
                     @error('code')
@@ -48,6 +51,9 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
+                    <label for="stuff-pack-name-input" class="form-label">
+                        نــام مجموعه کالا:
+                    </label>
                     <input type="text" class=" inset" placeholder="یک نام برای این مجموعه انتخاب نمایید" id="stuff-pack-name-input" name="name">
                     @error('name')
                     <small id="small-1">
@@ -58,6 +64,9 @@
             </div>
             <div class="col-sm-12 bb-1">
                 <div class="form-group">
+                    <label for="stuff-pack-serial-input" class="form-label">
+                        سریال مجموعه کالا:
+                    </label>
                     <input type="text" class=" inset" placeholder="شماره سریال" id="stuff-pack-serial-input"
                         name="serial">
                 </div>
@@ -100,17 +109,18 @@
                     placeholder="توضیحات"></textarea>
             </div>
         </div>
+        <div class="col-sm-12">
+            <button class="btn btn-success">
+                <i class="fas fa-save"></i>
+                ثبت
+            </button>
+            <button class="btn btn-primary">
+                <i class="fas fa-backward"></i>
+                بازگشت
+            </button>
+
+        </div>
     </form>
 </div>
 
-<div class="footer m-3 p-3">
-    <button class="btn btn-success">
-        <i class="fas fa-save"></i>
-        ثبت
-    </button>
-    <button class="btn btn-primary">
-        <i class="fas fa-backward"></i>
-        بازگشت
-    </button>
 
-</div>
