@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form action="" method="POST" class="form-horizontal" id="insert-new-stuff-form">
                     @csrf
-                    
+
                     <div class="form-group row add">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -100,7 +100,7 @@
                     <div class="form-group row add">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" autofocus class=" inset" placeholder="کد کالا" id="code" name="code">
+                                <input type="text" autofocus class=" inset" placeholder="کد کالا" id="edit-stuff-code-input" name="edit-stuff-code-input">
                                 @error('code')
                                 <small id="small-1">
                                     {{ $message }}
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" class=" inset" placeholder="نام کالا" id="name" name="name">
+                                <input type="text" class=" inset" placeholder="نام کالا" id="edit-stuff-name-input" name="edit-stuff-name-input">
                                 @error('name')
                                 <small id="small-1">
                                     {{ $message }}
@@ -121,15 +121,15 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" class=" inset" placeholder="نام لاتین" id="latin_name"
+                                <input type="text" class=" inset" placeholder="نام لاتین" id="edit-stuff-latin_name-input"
                                     name="latin_name">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group form-inline">
-                                <div class="col-sm-6 p-0"><label for="unit_id" class="form-select-label text-right">واحد
+                                <div class="col-sm-6 p-0"><label for="edit_unit_id_select" class="form-select-label text-right">واحد
                                         اندازه‌گیری:</label></div>
-                                <div class="col-sm-6 p-0"><select name="unit_id" id="unit_id" class="form-control w-100">
+                                <div class="col-sm-6 p-0"><select name="edit_unit_id_select" id="edit_unit_id_select" class="form-control w-100">
                                         @foreach (App\Models\Unit::all() as $unit)
                                             <option value="{{ $unit->id }}">
                                                 {{ $unit->name }}
@@ -153,7 +153,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <textarea name="description" id="description" cols="30" rows="3" class=" inset" placeholder="توضیحات"></textarea>
+                                <textarea name="edit-stuff-description" id="edit-stuff-description" cols="30" rows="3" class=" inset" placeholder="توضیحات"></textarea>
                             </div>
                         </div>
                     </div>

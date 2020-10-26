@@ -46,6 +46,13 @@
                                     معرفی مجموعه کالا
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    رسید موقت
+                                </a>
+                            </li>
+
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                      ثبت سریال و وضعیت کالا
@@ -53,19 +60,14 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    رسید موقت
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
                                     انتقال کالا بین انبارها
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="#" class="nav-link" id="unit-btn" data-controller="unit">
                                     تعریف واحد اندازه‌گیری
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>
@@ -79,10 +81,10 @@
                                 <a href="#" class="nav-link">
                                     خودروهای در صف </a>
                             </li>
-                            <li class="nav-item">
+                           <!--  <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     ورود از طریق فایل </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>
@@ -94,7 +96,7 @@
                         <ul class="navbar-nav flex-column w-100">
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    ثبت اطلاعات نصب </a>
+                                    مرور اطلاعات نصب </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
@@ -111,7 +113,7 @@
                         <ul class="navbar-nav flex-column w-100">
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    گزارش عملکرد کارگاه </a>
+                                    گزارش موجودی کارگاه ها </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
@@ -132,11 +134,36 @@
                         <ul class="navbar-nav flex-column w-100">
                             <li class="nav-item" id="#nav-users-btn">
                                 <a href="#" class="nav-link" data-controller="users" id="side-menu-users-btn">
-                                    کاربران </a>
+                                    معرفی کاربران</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                 معرفی پیمانکاران</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    سطوح دسترسی</a>
+                                 معرفی کارگاه ها</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                سطوح دسترسی</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                مرکز دانلود</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    پشتیبانی اطلاعات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    پشتیبانی نرم‌‍افزار</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    ورود اطلاعات از سامانه مرکز پخش</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">

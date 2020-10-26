@@ -74,33 +74,32 @@ class stuffController extends Controller
     /*
         SELECT STUFF FOR EDIT
     */
-    public function selectStuff(Request $request)
+    public function selectStuff($stuff_id)
     {
-
         try {
-
-            $selected_stuff = DB::table('stuffs')->where('id', '=', [$request->id])->get()->first(); //DB::select('select * from stuffs where id = ?', [$request->id]);;
-            return response()->json(['stuff' => $selected_stuff]);
+            return DB::table('stuffs')->where('id', '=', $stuff_id)->first(); //DB::select('select * from stuffs where id = ?', [$request->id]);;
+            // response()->json(['stuff' => $selected_stuff]);
         } catch (PDOException $ex) {
-            $error_data = response()->json(['errors' => [
+            /* $error_data = response()->json(['errors' => [
                 'code'      => $ex->errorInfo[0],
                 'message'   => $ex->errorInfo[2],
                 'status'    => 'failed'
-            ]]);
-            return $error_data;
+            ]]); */
+            return false;
         }
     }
 
     public function editStuff(Request $request)
     {
+        $selected_stuff = $this->selectStuff($request->stuff_id);
+
         $rules = [
-            'code' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
-            'name' => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
-            'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
+            'code'              => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
+            'name'              => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
+            'latin_name'        => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
-            'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
-            'modifier_user_id' => ['numeric', 'exists:users,id', 'required'],
-            'description' => ['string', 'max:255', 'nullable'],
+            'description'       => ['string', 'max:255', 'nullable'],
+            'stuff_id'          => ['numeric', 'exists:stuffs,id', 'required'],
         ];
         $validator = Validator::make($request->all(), $rules);
 
@@ -108,9 +107,12 @@ class stuffController extends Controller
 
             return response()->json(['errors' => $validator->getMessageBag()->toArray()]);
         }
+        if (!$selected_stuff) {
+            return response()->json(['errors' => 'کالا پیدا نشد.']);
+        }
         try {
             $updateList = [];
-
+            $selected_stuff = $this->selectStuff($request->stuff_id);
             $updateList['code'] = $request->code;
             $updateList['name'] = $request->name;
             $updateList['latin_name'] = $request->latin_name;
@@ -118,6 +120,7 @@ class stuffController extends Controller
             $updateList['unit_id'] = $request->unit_id;
             $updateList['description'] = $request->description;
             $updateList['modifier_user_id'] = $request->user()->id;
+            //$updateList['creator_user_id'] = $selected_stuff->creator_user_id;
             $updateList['updated_at'] = Carbon::now();
             //DB::update('update stuffs set code = ?, name = ? , latin_name = ? , has_unique_serial = ? , unit_id = ? , description = ? , modifier_user_id = ? where name = ?', $updateList);
             DB::table('stuffs')->where('id', $request->id)->update($updateList);
@@ -125,7 +128,7 @@ class stuffController extends Controller
             //User::where('id',$request->id)->update($updateList);
             return view('stuff.table');
         } catch (PDOException $ex) {
-            $error_data = response()->json(['errors' => [$ex]]);
+            $error_data = response()->json(['errors' => $ex]);
             return $error_data;
         }
     }

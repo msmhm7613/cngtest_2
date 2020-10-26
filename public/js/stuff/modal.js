@@ -1,7 +1,13 @@
-var user_id;
+
+
+var user_id, stuff_id,doc ;
+
+doc = $('#content-box').html();
 
 /**
+ *
  * Click event for open insert new stuff modal.
+ *
  */
 $(document).on('click', '#insert-new-stuff-button', function (e) {
     disableAll();
@@ -22,67 +28,184 @@ function enableAll() {
     console.log('enabled', Date.now());
 }
 
-$('#insert-new-stuff-save').on('click', (e) => {
+$(document).on('click', '#insert-new-stuff-save', (e) => {
     disableAll();
-    console.log($('input[name="unit_id"]').find('option :selected'))
     let code = $('#insert-new-stuff-form input#code').val();
     code = code.split(' ').join('-');
     $('#insert-new-stuff-form input#code').val(code);
-
-
     var bre = false;
-
     $.ajax({
-        url: 'insert-new-stuff',
-        type: 'post',
-        dataType: 'json',
-        headers: {
+        url             : 'insert-new-stuff',
+        type            : 'post',
+        dataType        : 'json',
+        responseType    : 'document',
+        headers         : {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         data: {
-            _token              : $('input[name="_token"]').val(),
-            code                : $('input[name="code"]').val(),
-            name                : $('input[name="name"]').val(),
-            creator_user_id     : user_id,
-            modifier_user_id    : user_id,
-            unit_id             : $('input[name="unit_id"]').find('option :selected').val(),
-            has_unique_serial   : $('#has_unique_serial').is(':checked')?1:0,
-         },
+            _token                  : $('input[name="_token"]')                     .val(),
+            code                    : $('input[name="code"]')                       .val(),
+            name                    : $('input[name="name"]')                       .val(),
+            latin_name              : $('input[name="latin_name"]')                 .val(),
+            creator_user_id         : user_id,
+            modifier_user_id        : user_id,
+            unit_id                 : $('form#insert-new-stuff-form select#unit_id option:selected').val(),
+            has_unique_serial       : $('#has_unique_serial').is(':checked')        ? 1 : 0,
+            description             : $('textarea#edit-stuff-description')          .val(),
+        },
         cache: false,
-        complete: (c) => {
-            console.log('c', c);
-
-            if ( typeof (c.responseJSON) !== 'undefined' && c.responseJSON) {
-                try {
-                    console.log(c.responseJSON);
-                    $('#insert-new-stuff-response')
-                        .html("").show().addClass('alert-danger')
-                    console.log(c.responseJSON.errors);
-                    $.each(c.responseJSON.errors, function (i, er) {
-                        $.each(er, function (ier, mer) {
-                            $('#insert-new-stuff-response')
-                                .append(
-                                    `<li>
-                                ${mer}
-                            </li>
-                            `
-                                )
-                        })
-                    })
-                    bre = true;
-                    return false;
-                }
-                catch(ex)
-                {
-                    console.log('ex',ex);
-                }
-            } else if (!bre) {
-                console.log('c.responseTEXT', c.responseText);
-
+        complete: c => {
+            if ( checkForResponse(c.responseJSON, $('#insert-new-stuff-response')) )
+            {
+                $('#insert-new-stuff-response')
+                    .html("")
+                    .show()
+                    .addClass('alert-success', 'text-center')
+                    .removeClass('alert-danger')
+                    .html('کالا ثبت شد.')
+                doc = c.responseText;
+                $('#insert-new-stuff-form input[type="text"]').val("");
+                $('#insert-new-stuff-form textarea').val("");
+                $('form#insert-new-stuff-form select#unit_id option').eq(0).attr('selected', true);
+                $('form#insert-new-stuff-form input[type="checkbox"]').attr('checked', true);
+                //location.reload();
+                enableAll();
 
             }
+            else if ( bre )
+            {
+                $('#insert-new-stuff-response')
+                .html("").show().addClass('alert-danger')
+            }
+               //$("[data-dismiss=modal]").trigger({ type: "click" });
         }
     })
+})
 
+
+function checkForResponse($response,$responseDiv)
+{
+    if (typeof ($response) !== 'undefined' && $response) {
+        try {
+            $.each($response.errors, function (i, er) {
+                $.each(er, function (ier, mer) {
+                    $responseDiv
+                        .append(
+                            `<li>
+                        ${mer}
+                    </li>
+                    `
+                        )
+                })
+            })
+            return false;
+        } catch (ex) {
+            console.log('ex', ex);
+        }
+    }
+    else{
+        return true;
+    }
+}
+
+
+$('#insert-new-stuff-modal').on('hidden.bs.modal', function (e) {
+    //code...
+})
+
+$('#insert-new-stuff-modal  button[data-dismiss="modal"]').on('click', function (e) {
+    console.log('modal close button clicked.', e);
+    $('.fade.modal-backdrop.show').removeClass('show').removeClass('modal-backdrop');
+    $('#insert-new-stuff-modal').modal('show');
+    $('#content-box').html('...').html(doc);
+
+})
+
+
+/**
+ *
+ * SELECT STUFF
+ *
+ */
+
+$(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
+    //user_id = $(e.currentTarget).attr('data-user-id');
+    //stuff_id= $(e.currentTarget).attr('data-stuff-id');
+})
+
+
+/**
+ *
+ *
+ * EDIT STUFF
+ *
+ */
+
+$(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
+    disableAll();
+    $(e.currentTarget).attr('data-stuff-id');
+    $('#edit-stuff-modal').modal('show');
+    $('.horizontal-form').show();
     enableAll();
 })
+
+/**
+ *
+ * UPDATE EDITED STUFF IN DB
+ *
+ */
+
+ $(document).on('click',function(e){
+     disableAll();
+
+     $.ajax({
+        url                     :'edit-stuff',
+        type                    :'post',
+        responseType            :'json',
+        data: {
+            _token              : $('input[name="_token"]'),
+            stuff_id ,
+            code                : $('input#edit-stuff-code-input')       .val(),
+            name                : $('input#edit-stuff-code-name')        .val(),
+            latin_name          : $('input#edit-stuff-latin_name-input') .val(),
+            has_unique_serial   : $('#has_unique_serial').is(':checked') ? 1 : 0,
+            unit_id             : $('select#unit_id option:selected').val(),
+            description         : $('textarea#edit-stuff-description')   .val(),
+        },
+        headers                 : {
+                'X-CSRF-TOKEN'  : $('meta[name="csrf-token"]').attr('content')
+        },
+        complete                : c => {
+            if ( checkForResponse(c.responseJSON, $('#stuff-edit-response')) )
+            {
+                $('#stuff-edit-response')
+                    .html("")
+                    .show()
+                    .addClass('alert-success', 'text-center')
+                    .removeClass('alert-danger')
+                    .html('کالا ثبت شد.')
+                doc = c.responseText;
+                $('#edit-stuff-form input[type="text"]').val("");
+                $('#edit-stuff-form textarea').val("");
+                $('form#edit-stuff-form select#edit_unit_id_select option').eq(0).attr('selected', true);
+                $('form#edit-stuff-form input[type="checkbox"]').attr('checked', true);
+                //location.reload();
+                enableAll();
+                bre = true;
+            }
+            else if ( bre )
+            {
+                $('#edit-stuff-form')
+                .html("").show().addClass('alert-danger')
+            }
+        }
+     });
+ })
+
+
+/**
+ *
+ *
+ * DELETE STUFF
+ *
+ */

@@ -54,11 +54,11 @@ Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
 /********
  * Stuff URLs
  */
-Route::post('insert-new-stuff', 'App\Http\Controllers\stuff\stuffController@insert');
-Route::get('insert-new-stuff', 'App\Http\Controllers\stuff\stuffController@insert');
-Route::get('/selectStuff', '\App\Http\Controllers\stuff\StuffController@selectStuff');
-Route::post('/editStuff', '\App\Http\Controllers\stuff\StuffController@editStuff');
-Route::post('deleteStuff', '\App\Http\Controllers\stuff\StuffController@deleteStuff');
+Route::post ('insert-new-stuff' , 'App\Http\Controllers\stuff\stuffController@insert');
+Route::get  ('insert-new-stuff' , 'App\Http\Controllers\stuff\stuffController@insert');
+Route::get  ('select-stuff'     , 'App\Http\Controllers\stuff\StuffController@selectStuff');
+Route::post ('edit-stuff'       , 'App\Http\Controllers\stuff\StuffController@editStuff');
+Route::post ('delete-stuff'     , 'App\Http\Controllers\stuff\StuffController@deleteStuff');
 
 
 /**

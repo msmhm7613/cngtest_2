@@ -1,5 +1,14 @@
 .table {
     margin-top: 2rem;
+
+    thead > tr > th {
+        position: -webkit-sticky;
+        position: -moz-sticky;
+        position: -ms-sticky;
+        position: -o-sticky;
+        position: sticky;
+        top: -2rem;
+    }
 }
 
 .tbl-users {

@@ -10957,6 +10957,15 @@ img.logo {
   margin-top: 2rem;
 }
 
+.table thead > tr > th {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: -2rem;
+}
+
 .tbl-users {
   -webkit-user-select: none;
      -moz-user-select: none;
