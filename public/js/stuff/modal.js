@@ -5,6 +5,8 @@ var creator_user_id;
 var id;
 var targetModal;
 
+
+
 function openModal(e, msg,targetResponse ) {
     e.preventDefault();
     targetModal.first().modal('show');
@@ -15,6 +17,7 @@ function openModal(e, msg,targetResponse ) {
 
 
 function closeModal() {
+
     let ind = 1;
     $(document).on('hidden.bs.modal', function () {
         console.log(ind++);
@@ -66,6 +69,7 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
     targetModal = $('#insert-new-stuff-modal');
     openModal(e, 'کالای جدید', $('#insert-new-stuff-response'));
     closeModal();
+
 })
 
 //function insert new stuff

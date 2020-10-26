@@ -67,6 +67,9 @@ Route::post('deleteStuff', '\App\Http\Controllers\stuff\StuffController@deleteSt
  */
 
 Route::group(['namespace' => 'stuffpacks'], function () {
+    Route::get('open-insert-form', function(){
+        return view('stuff-pack.insert-form');
+    });
     Route::post('insert-new-stuffpack', [spController::class , 'insert']);
 });
 

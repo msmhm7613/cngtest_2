@@ -1,3 +1,6 @@
+
+
+
 function openModal(e, targetModal, msg) {
     e.preventDefault();
     $('#response').addClass('hidden');
@@ -7,6 +10,7 @@ function openModal(e, targetModal, msg) {
     $('#' + targetModal[0].id).on('hidden.bs.modal', function () {
         let active_item = $('.side-menu a.active');
         $('#'+active_item[0].id)[0].click();
+
     })
 }
 
@@ -15,6 +19,7 @@ function openModal(e, targetModal, msg) {
 $(document).on('click', '#newUserBtn', function (e) {
     console.log('new user btn is clicked');
     openModal(e, $('#create'), 'کاربر جدید')
+
     //function add user
     $('button#add').on('click', function () {
         $('#response').html("");

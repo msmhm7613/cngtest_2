@@ -12,7 +12,7 @@ $(menu_item).on('click', function (e) {
 
     let targetController = ($(e.target).attr('data-controller'))
 
-    $.ajaxSetup({
+    /* $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -29,20 +29,37 @@ $(menu_item).on('click', function (e) {
         beforeSend: () => {
             //content_box.html($(preloader).html());
             //$('#content-box').fadeOut('300ms');
-$(preloader).show();
+            $(preloader).show();
+
         },
         complete: () => {
             //console.log('completed');
-$(preloader).hide();
+            $(preloader).hide();
+
+            console.log($('table#stuffs-table'));
+            $('#stuffs-table').DataTable;
         },
         success: function (d) {
             //console.log('success');
             content_box.html(d);
-
+            $(document).off().find('*').off();
             //$('#content-box').fadeIn('300ms');
         }
 
-    })
+    }) */
+
+    $('div#content-box').first().load(
+        'new-panel', {
+            '_token': $('input[name="_token"]').val(),
+            'target': targetController
+        },
+        function(responseTxt, statusTxt, xhr){
+            if(statusTxt == "success")
+              console.log("External content loaded successfully!");
+            if(statusTxt == "error")
+              console.log("Error: " + xhr.status + ": " + xhr.statusText);
+        }
+    )
 })
 
 if ($('#dashboard-btn'))

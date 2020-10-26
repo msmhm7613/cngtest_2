@@ -10,19 +10,7 @@
 
 @if (App\Models\Stuff::all()->count())
     @php $ind = 1 @endphp
-    <table class="table table-striped table-bordered " id="stuffs-table">
-        <thead>
-            <tr class="table-primary">
-                <th>ردیف</th>
-                <th>کد کالا</th>
-                <th>نام کالا</th>
-                <th>نام لاتین</th>
-                <th>سریال منحصر بفرد</th>
-                <th>واحد اندازه‌گیری</th>
-                <th>توضیحات</th>
-                <th>عملیات</th>
-            </tr>
-        </thead>
+
         <tbody>
 
             @foreach (\App\Models\Stuff::all() as $stuff)

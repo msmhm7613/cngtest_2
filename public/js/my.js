@@ -1,7 +1,5 @@
 var mydiv, mya;
 
-console.log('my is loaded')
-
 $(document).on("mouseenter mouseleave", "table.table tr", function (e) {
     if (e.type == "mouseenter") {
         // check if it is mouseenter, do something

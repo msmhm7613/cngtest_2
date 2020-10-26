@@ -1,3 +1,5 @@
+
+
 $('body').on('mouseenter', 'table#stuffs-table tr',function (e) {
     $(e.currentTarget).find('div.btns').first().removeClass('hidden').fadeIn(300);
 })

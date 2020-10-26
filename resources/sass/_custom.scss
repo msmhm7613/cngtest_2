@@ -33,7 +33,7 @@
 @import 'side-menu';
 @import 'content-box';
 @import 'content-box/dashboard-workshop.scss';
-
+@import './insert-new-stuffpack-form';
 
 
 body,html{
@@ -50,15 +50,16 @@ body,html{
 
 .inset {
     box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2),
-                inset -5px -5px 5px rgba(255,255,255,.5);
-
+                inset -5px -5px 5px rgba(255,255,255,1.0);
+    border-radius: 2rem;
 }
 .outset {
     box-shadow:  5px 5px 5px $shadow,
-                 -5px -5px 5px rgba(255,255,255,.5) ;
-                 &.error{
-                    background-color: rgba($red,0.2);
-                }
+                 -5px -5px 5px rgba(255,255,255,1.0) ;
+    border-radius: 2rem;
+    &.error{
+                background-color: rgba($red,0.2);
+    }
 }
 
 .eng{
@@ -221,4 +222,14 @@ input[type="checkbox"]{
     &:hover{
         background: linear-gradient(rgba($indigo,.7),rgba($indigo,.9));
     }
+}
+
+
+.bg-lightgreen
+{
+    background-color: rgba($lightGreen, $alpha: 0.3);
+}
+
+.fixed{
+    position: fixed;
 }

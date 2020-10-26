@@ -10954,7 +10954,7 @@ img.logo {
 }
 
 .table {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .tbl-users {
@@ -11018,7 +11018,7 @@ img.logo {
 .side-menu {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 85vh;
   font-weight: bold;
   overflow: auto;
 }
@@ -11069,12 +11069,16 @@ img.logo {
 }
 
 #content-box {
-  min-height: 100%;
+  max-height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: -1;
   overflow: auto;
+}
+
+#main-content {
+  max-height: 85vh;
 }
 
 #content-box {
@@ -11094,6 +11098,43 @@ img.logo {
   border-radius: 5px;
 }
 
+.form-group button#add-to-stuffs-list-btn {
+  background-color: #38c172 !important;
+}
+
+.form-group button#add-to-stuffs-list-btn i.fa-forward {
+  -webkit-animation-name: pushit;
+          animation-name: pushit;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: cubic-bezier();
+          animation-timing-function: cubic-bezier();
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes pushit {
+  from {
+    transform: translateX(-0.5rem);
+  }
+
+  to {
+    transform: translateX(1rem);
+  }
+}
+
+@keyframes pushit {
+  from {
+    transform: translateX(-0.5rem);
+  }
+
+  to {
+    transform: translateX(1rem);
+  }
+}
+
 body,
 html {
   direction: rtl;
@@ -11105,11 +11146,13 @@ html {
 }
 
 .inset {
-  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -5px -5px 5px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -5px -5px 5px white;
+  border-radius: 2rem;
 }
 
 .outset {
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 5px rgba(255, 255, 255, 0.5);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 5px white;
+  border-radius: 2rem;
 }
 
 .outset.error {
@@ -11292,5 +11335,13 @@ input[type=checkbox]:checked::before {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(rgba(101, 116, 205, 0.7), rgba(101, 116, 205, 0.9));
+}
+
+.bg-lightgreen {
+  background-color: rgba(56, 193, 114, 0.3);
+}
+
+.fixed {
+  position: fixed;
 }
 

@@ -1,5 +1,5 @@
 .table {
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 .tbl-users {
@@ -16,6 +16,7 @@
     td {
         padding: 0.3rem;
         transition: background-color 0.5s ease;
+
         &[contenteditable="true"] {
             border: none;
             outline: none;
@@ -25,7 +26,7 @@
             position: relative;
         }
 
-        
+
         .btn-save {
             display: none;
             cursor: pointer;
@@ -37,6 +38,7 @@
 
             transition: display 750ms ease;
             z-index: 999;
+
             i.fa-save {
                 font-size: 1.6rem;
             }
