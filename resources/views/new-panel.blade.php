@@ -8,6 +8,7 @@ use App\Models\Kit as kit;
 @endguest
 @extends('layouts.head')
 
+
 @if (!Auth::user())
 <script>
     window.location = "/login";

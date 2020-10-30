@@ -37,8 +37,9 @@
 
     <div class="wrapper">
         <div class="container" id="header">
-            @yield( 'header' )
-            @include('layouts.panel.header')
+            {{--@yield( 'header' )
+            @include('layouts.panel.header')--}}
+            @include('layouts.panel.slider2')
         </div>
         <div class="container" id="main-content">
             @yield ( 'content' )

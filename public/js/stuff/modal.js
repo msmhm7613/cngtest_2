@@ -143,9 +143,24 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
 
 $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
     disableAll();
-    $(e.currentTarget).attr('data-stuff-id');
+    stuff_id = $(e.currentTarget).attr('data-stuff-id');
     $('#edit-stuff-modal').modal('show');
     $('.horizontal-form').show();
+    // get stuff info
+    $.ajax({
+        url                    : 'select-stuff',
+        data                   : { stuff_id, },
+        type                   : 'GET',
+        responseType           : 'json',
+        complete               : c => {
+               console.log('c',c);
+               if ( c )
+               {
+                   $('form#edit-stuff-form input#edit-stuff-name-input').val(c.name);
+               }
+        }
+    })
+
     enableAll();
 })
 
@@ -155,9 +170,8 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
  *
  */
 
- $(document).on('click',function(e){
+ $(document).on('click','#edit-stuff-save-btn',function(e){
      disableAll();
-
      $.ajax({
         url                     :'edit-stuff',
         type                    :'post',

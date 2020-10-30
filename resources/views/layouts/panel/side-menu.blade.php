@@ -159,10 +159,6 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    پشتیبانی نرم‌‍افزار</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
                                     ورود اطلاعات از سامانه مرکز پخش</a>
                             </li>
                             <li class="nav-item">
