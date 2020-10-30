@@ -1,5 +1,6 @@
 
 
+
 var user_id, stuff_id,doc ;
 
 doc = $('#content-box').html();
@@ -14,7 +15,7 @@ $(document).on('click', '#insert-new-stuff-button', function (e) {
     user_id = $(e.currentTarget).attr('data-user-id')
 
     $('#insert-new-stuff-modal').modal('show');
-    $('.horizontal-form').show();
+    //$('.horizontal-form').show();
     enableAll();
 })
 
@@ -29,7 +30,13 @@ function enableAll() {
 }
 
 $(document).on('click', '#insert-new-stuff-save', (e) => {
-    disableAll();
+    //disableAll();
+    $('#insert-new-stuff-response')
+                    .html("")
+                    .show()
+                    .removeClass('alert-success', 'text-center')
+                    .addClass('alert-danger')
+                    .html('')
     let code = $('#insert-new-stuff-form input#code').val();
     code = code.split(' ').join('-');
     $('#insert-new-stuff-form input#code').val(code);
@@ -145,18 +152,25 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
     disableAll();
     stuff_id = $(e.currentTarget).attr('data-stuff-id');
     $('#edit-stuff-modal').modal('show');
-    $('.horizontal-form').show();
+    //$('.horizontal-form').show();
     // get stuff info
     $.ajax({
         url                    : 'select-stuff',
-        data                   : { stuff_id, },
+        data                   :  {'id' : stuff_id, },
         type                   : 'GET',
-        responseType           : 'json',
+
         complete               : c => {
                console.log('c',c);
                if ( c )
                {
-                   $('form#edit-stuff-form input#edit-stuff-name-input').val(c.name);
+                   console.log(c.responseJSON.name);
+                   $('form#edit-stuff-form input#edit-stuff-code-input').val(c.responseJSON.code);
+                   $('form#edit-stuff-form input#edit-stuff-name-input').val(c.responseJSON.name);
+                   $('form#edit-stuff-form input#edit-stuff-latin_name-input').val(c.responseJSON.latin_name);
+                   //$(`form#edit-stuff-form select#edit-unit-id-select option[value="${c.responseJSON.unit_id}]"`).prop('selected',true);
+                   $(`form#edit-stuff-form select#edit_unit_id_select option[value="${c.responseJSON.unit_id}"]`).attr('selected',true);
+                   $(`form#edit-stuff-form input#has_unique_id`).attr('checked',c.responseJSON.has_unique_serial?true:false);
+                   $(`form#edit-stuff-form textarea#edit-stuff-description`).val(c.responseJSON.description);
                }
         }
     })

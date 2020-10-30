@@ -74,18 +74,20 @@ class stuffController extends Controller
     /*
         SELECT STUFF FOR EDIT
     */
-    public function selectStuff($stuff_id)
+    public function selectStuff(Request $request)
     {
+
         try {
-            return DB::table('stuffs')->where('id', '=', $stuff_id)->first(); //DB::select('select * from stuffs where id = ?', [$request->id]);;
+            $stuff = Stuff::find($request->id);//DB::table('stuffs')->where('id',"=",$stuff_id)->first();
+            return response($stuff);
             // response()->json(['stuff' => $selected_stuff]);
         } catch (PDOException $ex) {
-            /* $error_data = response()->json(['errors' => [
+            return response()->json(['errors' => [
                 'code'      => $ex->errorInfo[0],
                 'message'   => $ex->errorInfo[2],
                 'status'    => 'failed'
-            ]]); */
-            return false;
+            ]]);
+
         }
     }
 
