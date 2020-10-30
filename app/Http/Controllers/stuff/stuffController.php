@@ -77,6 +77,7 @@ class stuffController extends Controller
     public function selectStuff(Request $request)
     {
 
+
         try {
             $stuff = Stuff::find($request->id);//DB::table('stuffs')->where('id',"=",$stuff_id)->first();
             return response($stuff);
@@ -93,15 +94,15 @@ class stuffController extends Controller
 
     public function editStuff(Request $request)
     {
-        $selected_stuff = $this->selectStuff($request->stuff_id);
+        //$selected_stuff = $this->selectStuff($request->stuff_id);
 
         $rules = [
-            'code'              => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
+            'code'              => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', ],
             'name'              => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
             'latin_name'        => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
             'description'       => ['string', 'max:255', 'nullable'],
-            'stuff_id'          => ['numeric', 'exists:stuffs,id', 'required'],
+            'id'                => ['numeric', 'exists:stuffs,id', 'required'],
         ];
         $validator = Validator::make($request->all(), $rules);
 
@@ -109,12 +110,10 @@ class stuffController extends Controller
 
             return response()->json(['errors' => $validator->getMessageBag()->toArray()]);
         }
-        if (!$selected_stuff) {
-            return response()->json(['errors' => 'کالا پیدا نشد.']);
-        }
+
         try {
             $updateList = [];
-            $selected_stuff = $this->selectStuff($request->stuff_id);
+            //$selected_stuff = $this->selectStuff($request->stuff_id);
             $updateList['code'] = $request->code;
             $updateList['name'] = $request->name;
             $updateList['latin_name'] = $request->latin_name;

@@ -1,7 +1,7 @@
 
 
 
-var user_id, stuff_id,doc ;
+var user_id, stuff_id, doc;
 
 doc = $('#content-box').html();
 
@@ -29,41 +29,49 @@ function enableAll() {
     console.log('enabled', Date.now());
 }
 
+$('#insert-new-stuff-modal').on('hidden.bs.modal', function (e) {
+    disableAll();
+    enableAll();
+    if ($('#define-stuff')) {
+        $('#define-stuff')[0].click();
+        console.log('refreshed');
+    }
+})
+
 $(document).on('click', '#insert-new-stuff-save', (e) => {
     //disableAll();
     $('#insert-new-stuff-response')
-                    .html("")
-                    .show()
-                    .removeClass('alert-success', 'text-center')
-                    .addClass('alert-danger')
-                    .html('')
+        .html("")
+        .show()
+        .removeClass('alert-success', 'text-center')
+        .addClass('alert-danger')
+        .html('')
     let code = $('#insert-new-stuff-form input#code').val();
     code = code.split(' ').join('-');
     $('#insert-new-stuff-form input#code').val(code);
     var bre = false;
     $.ajax({
-        url             : 'insert-new-stuff',
-        type            : 'post',
-        dataType        : 'json',
-        responseType    : 'document',
-        headers         : {
+        url: 'insert-new-stuff',
+        type: 'post',
+        dataType: 'json',
+        responseType: 'document',
+        headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         data: {
-            _token                  : $('input[name="_token"]')                     .val(),
-            code                    : $('input[name="code"]')                       .val(),
-            name                    : $('input[name="name"]')                       .val(),
-            latin_name              : $('input[name="latin_name"]')                 .val(),
-            creator_user_id         : user_id,
-            modifier_user_id        : user_id,
-            unit_id                 : $('form#insert-new-stuff-form select#unit_id option:selected').val(),
-            has_unique_serial       : $('#has_unique_serial').is(':checked')        ? 1 : 0,
-            description             : $('textarea#edit-stuff-description')          .val(),
+            _token: $('input[name="_token"]').val(),
+            code: $('input[name="code"]').val(),
+            name: $('input[name="name"]').val(),
+            latin_name: $('input[name="latin_name"]').val(),
+            creator_user_id: user_id,
+            modifier_user_id: user_id,
+            unit_id: $('form#insert-new-stuff-form select#unit_id option:selected').val(),
+            has_unique_serial: $('#has_unique_serial').is(':checked') ? 1 : 0,
+            description: $('textarea#edit-stuff-description').val(),
         },
         cache: false,
         complete: c => {
-            if ( checkForResponse(c.responseJSON, $('#insert-new-stuff-response')) )
-            {
+            if (checkForResponse(c.responseJSON, $('#insert-new-stuff-response'))) {
                 $('#insert-new-stuff-response')
                     .html("")
                     .show()
@@ -79,38 +87,37 @@ $(document).on('click', '#insert-new-stuff-save', (e) => {
                 enableAll();
 
             }
-            else if ( bre )
-            {
+            else if (bre) {
                 $('#insert-new-stuff-response')
-                .html("").show().addClass('alert-danger')
+                    .html("").show().addClass('alert-danger')
             }
-               //$("[data-dismiss=modal]").trigger({ type: "click" });
+            //$("[data-dismiss=modal]").trigger({ type: "click" });
         }
     })
 })
 
 
-function checkForResponse($response,$responseDiv)
-{
+function checkForResponse($response, $responseDiv) {
     if (typeof ($response) !== 'undefined' && $response) {
         try {
-            $.each($response.errors, function (i, er) {
-                $.each(er, function (ier, mer) {
-                    $responseDiv
-                        .append(
-                            `<li>
+            if ($response.errors)
+                $.each($response.errors, function (i, er) {
+                    $.each(er, function (ier, mer) {
+                        $responseDiv
+                            .append(
+                                `<li>
                         ${mer}
                     </li>
                     `
-                        )
+                            )
+                    })
                 })
-            })
             return false;
         } catch (ex) {
             console.log('ex', ex);
         }
     }
-    else{
+    else {
         return true;
     }
 }
@@ -147,7 +154,14 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
  * EDIT STUFF
  *
  */
-
+$('#edit-stuff-modal').on('hidden.bs.modal', function (e) {
+    disableAll();
+    enableAll();
+    if ($('#define-stuff')) {
+        $('#define-stuff')[0].click();
+        console.log('refreshed');
+    }
+})
 $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
     disableAll();
     stuff_id = $(e.currentTarget).attr('data-stuff-id');
@@ -155,23 +169,23 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
     //$('.horizontal-form').show();
     // get stuff info
     $.ajax({
-        url                    : 'select-stuff',
-        data                   :  {'id' : stuff_id, },
-        type                   : 'GET',
+        url: 'select-stuff',
+        data: { 'id': stuff_id, },
+        type: 'GET',
 
-        complete               : c => {
-               console.log('c',c);
-               if ( c )
-               {
-                   console.log(c.responseJSON.name);
-                   $('form#edit-stuff-form input#edit-stuff-code-input').val(c.responseJSON.code);
-                   $('form#edit-stuff-form input#edit-stuff-name-input').val(c.responseJSON.name);
-                   $('form#edit-stuff-form input#edit-stuff-latin_name-input').val(c.responseJSON.latin_name);
-                   //$(`form#edit-stuff-form select#edit-unit-id-select option[value="${c.responseJSON.unit_id}]"`).prop('selected',true);
-                   $(`form#edit-stuff-form select#edit_unit_id_select option[value="${c.responseJSON.unit_id}"]`).attr('selected',true);
-                   $(`form#edit-stuff-form input#has_unique_id`).attr('checked',c.responseJSON.has_unique_serial?true:false);
-                   $(`form#edit-stuff-form textarea#edit-stuff-description`).val(c.responseJSON.description);
-               }
+        complete: c => {
+            console.log('c', c);
+            if (c) {
+                console.log(c.responseJSON.name);
+                $('form#edit-stuff-form input#edit-stuff-code-input').val(c.responseJSON.code);
+                $('form#edit-stuff-form input#edit-stuff-name-input').val(c.responseJSON.name);
+                $('form#edit-stuff-form input#edit-stuff-latin_name-input').val(c.responseJSON.latin_name);
+                //$(`form#edit-stuff-form select#edit-unit-id-select option[value="${c.responseJSON.unit_id}]"`).prop('selected',true);
+                $(`form#edit-stuff-form select#edit_unit_id_select option[value="${c.responseJSON.unit_id}"]`).attr('selected', true);
+                $(`form#edit-stuff-form input#has_unique_id`).attr('checked', c.responseJSON.has_unique_serial ? true : false);
+                $(`form#edit-stuff-form textarea#edit-stuff-description`).val(c.responseJSON.description);
+
+            }
         }
     })
 
@@ -184,51 +198,69 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
  *
  */
 
- $(document).on('click','#edit-stuff-save-btn',function(e){
-     disableAll();
-     $.ajax({
-        url                     :'edit-stuff',
-        type                    :'post',
-        responseType            :'json',
+$(document).on('click', '#edit-stuff-save-btn', function (e) {
+    $('#stuff-edit-response')
+        .html("")
+        .show()
+        .removeClass('alert-success', 'text-center')
+        .addClass('alert-danger')
+    disableAll();
+    $.ajax({
+        url: 'edit-stuff',
+        type: 'POST',
+
         data: {
-            _token              : $('input[name="_token"]'),
-            stuff_id ,
-            code                : $('input#edit-stuff-code-input')       .val(),
-            name                : $('input#edit-stuff-code-name')        .val(),
-            latin_name          : $('input#edit-stuff-latin_name-input') .val(),
-            has_unique_serial   : $('#has_unique_serial').is(':checked') ? 1 : 0,
-            unit_id             : $('select#unit_id option:selected').val(),
-            description         : $('textarea#edit-stuff-description')   .val(),
+            _token: $('input[name="_token"]').val(),
+            id: stuff_id,
+            code: $('input#edit-stuff-code-input').val(),
+            name: $('input#edit-stuff-name-input').val(),
+            latin_name: $('input#edit-stuff-latin_name-input').val(),
+            has_unique_serial: $('input#has_unique_serial').is(':checked') ? 1 : 0,
+            unit_id: $('select#edit_unit_id_select option:selected').val(),
+            description: $('textarea#edit-stuff-description').val(),
         },
-        headers                 : {
-                'X-CSRF-TOKEN'  : $('meta[name="csrf-token"]').attr('content')
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        complete                : c => {
-            if ( checkForResponse(c.responseJSON, $('#stuff-edit-response')) )
+        complete: c => {
+            console.log(c.responseJSON);
+
+            if (typeof (c.responseJSON) != 'undefined' && c.responseJSON.errors)//(typeof (c.responseJSON.errors) !== 'undefined' && c.responseJSON.errors)
             {
+                $('#stuff-edit-response')
+                    .html("")
+                    .removeClass('alert-success')
+                    .addClass('alert-danger')
+                $.each(c.responseJSON.errors, function (errKey, errVal) {
+                    $('#stuff-edit-response').append(
+                        `<li> ${errVal} </li>`
+                    )
+                })
+            }
+            else if (c.responseText) {
                 $('#stuff-edit-response')
                     .html("")
                     .show()
                     .addClass('alert-success', 'text-center')
                     .removeClass('alert-danger')
-                    .html('کالا ثبت شد.')
+                    .html('تغییرات کالا ثبت شد.')
                 doc = c.responseText;
-                $('#edit-stuff-form input[type="text"]').val("");
+                /* $('#edit-stuff-form input[type="text"]').val("");
                 $('#edit-stuff-form textarea').val("");
                 $('form#edit-stuff-form select#edit_unit_id_select option').eq(0).attr('selected', true);
-                $('form#edit-stuff-form input[type="checkbox"]').attr('checked', true);
+                $('form#edit-stuff-form input[type="checkbox"]').attr('checked', true); */
                 //location.reload();
                 enableAll();
                 bre = true;
             }
-            else if ( bre )
-            {
+            else if (bre) {
+                var err = c.responseText;
                 $('#edit-stuff-form')
-                .html("").show().addClass('alert-danger')
+                    .html("<br/>:خطا" + err).show().addClass('alert-danger')
             }
         }
-     });
- })
+    });
+})
 
 
 /**
@@ -237,3 +269,67 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
  * DELETE STUFF
  *
  */
+
+ $('#delete-stuff-modal-open-btn').on('click',function(e){
+
+    $('#delete-stuff-modal').modal('show');
+    stuff_id = $(e.currentTarget).attr('data-stuff-id');
+    console.log(stuff_id);
+    disableAll();
+    $.ajax({
+        url: 'select-stuff',
+        type: 'get',
+        responseType: 'json',
+        data: {id:stuff_id},
+        complete: c => {
+            console.log(c);
+            if(c.responseJSON)
+            {
+
+                $('#delete-stuff-name').html('').html(c.responseJSON.code);
+            }
+        }
+    })
+    enableAll();
+
+ })
+
+
+ $('#delete-stuff-btn').on('click', function(e){
+
+     $('#delete-stuff-response').html("")
+     disableAll();
+
+     $.ajax({
+         url: 'delete-stuff',
+         type: 'post',
+         data: { id : stuff_id, _token : $('input[name=_token]').val() },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+         complete: c => {
+             enableAll();
+             if ( c.responseText )
+             {
+                 del_msg = c.responseText
+                 $('#delete-stuff-response').html('کالا حذف شد.').show();
+                 $('#delete-stuff-btn').fadeOut(300).hide();
+                 $('#delete-cancel-btn').html('بستن');
+             }
+             else
+             {
+                 console.log(c.responseText);
+             }
+         }
+     })
+ })
+
+
+ $('#delete-stuff-modal').on('hidden.bs.modal',function(e){
+    disableAll();
+    enableAll();
+    if ($('#define-stuff')) {
+        $('#define-stuff')[0].click();
+        console.log('refreshed');
+    }
+ })

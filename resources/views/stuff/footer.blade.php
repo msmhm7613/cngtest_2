@@ -146,7 +146,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-3 p-0 align-left text-left">
-                                    <input type="checkbox" name="has_unique_serial" id="has_unique_id"
+                                    <input type="checkbox" name="has_unique_serial" id="has_unique_serial"
                                         class=" form-check-input p-0">
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
             </div>
             <div class="alert alert-danger errors hidden" id="stuff-edit-response"></div>
             <div class="modal-footer">
-                <button class="btn btn-success" type="submit" id="edit-stuff-save-btn"  data-user-id="{{ $user->id??'' }}">
+                <button class="btn btn-success" type="submit" id="edit-stuff-save-btn">
                     <span class="fas fa-save"></span>
                     ثبت تغییرات
                 </button>
