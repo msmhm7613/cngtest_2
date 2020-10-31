@@ -42,3 +42,4 @@ use App\Models\Kit as kit;
 <script src="{{asset('/js/my.js')}}"></script>
 <script src="{{asset('/js/modal.js')}}"></script>
 @endsection
+

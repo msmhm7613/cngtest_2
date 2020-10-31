@@ -30,7 +30,7 @@
                     </div>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" data-target="#store-submenu" href="#" id="store-btn">
+                    <a class="nav-link" data-toggle="collapse" data-target="#store-submenu" href="" id="store-btn">
                         <i class="fas fa-store "></i>
                         انبار و کالا
                     </a>

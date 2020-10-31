@@ -224,3 +224,5 @@
 
 <script src="{{ asset('js/stuff-pack/modal.js') }}"></script>
 <script src="{{ asset('js/stuff-pack/table.js') }}"></script>
+
+

@@ -21,6 +21,7 @@ class CreateStuffpacksTable extends Migration
             $table->string('description')->nullable();
             $table->unsignedBigInteger('creator_user_id');
             $table->unsignedBigInteger('modifier_user_id');
+            
             $table->timestamps();
         });
     }

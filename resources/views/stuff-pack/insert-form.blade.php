@@ -16,8 +16,8 @@
 {{--         <ol class="form-group inset" id="stuff-array-list">
         </ol> --}}
         <table class="table table-sm table-striped table-bordered " id="stuff-list-table">
-            <thead>
-                <tr>
+            <thead >
+                <tr class="table-info">
                     <th>ردیف</th>
                     <th>نــام</th>
                     <th>تعداد</th>
@@ -105,16 +105,16 @@
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <textarea name="description" id="description" cols="30" rows="3" class=" inset"
+                <textarea name="insert-new-stuffpack-description" id="insert-new-stuffpack-description" cols="30" rows="3" class=" inset"
                     placeholder="توضیحات"></textarea>
             </div>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-success">
+            <button class="btn btn-success" id="insert-new-stuffpack-save-btn">
                 <i class="fas fa-save"></i>
                 ثبت
             </button>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" id="insert-new-stuffpack-back-btn">
                 <i class="fas fa-backward"></i>
                 بازگشت
             </button>

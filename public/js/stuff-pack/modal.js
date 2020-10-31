@@ -1,5 +1,14 @@
 var stuff_list_array = [];
 
+function disableAll() {
+    $(document).find('.btn').prop('disabled', true).attr('disabled', true);
+    console.log('disabled', Date.now());
+}
+
+function enableAll() {
+    $(document).find('.btn').prop('disabled', false).attr('disabled', false);
+    console.log('enabled', Date.now());
+}
 
 // open insert form
 $(document).on('click', '#insert-new-stuff-pack-button', function (e) {
@@ -25,11 +34,11 @@ $(document).on('click', '#insert-new-stuff-pack-button', function (e) {
 //add to list
 $(document).on('click', '#add-to-stuffs-list-btn', function (e) {
     e.preventDefault();
-
+    disableAll()
     let stuff_name = $('#stuff-select-input :selected').text();
     let stuff_id = $('#stuff-select-input :selected').val();
     let stuff_num = $('#stuff-number-input').val();
-
+    disableAll();
     checkForExists(stuff_id, stuff_name, stuff_num);
 
     if (stuff_list_array.length == 0 ) {
@@ -40,12 +49,13 @@ $(document).on('click', '#add-to-stuffs-list-btn', function (e) {
         $('#stuff-pack-serial-input').attr('disabled',false);
     } else {
         $('p#stuff-pack-list').hide();
-        $('#stuff-pack-code-input').attr('disabled',true);
+        /* $('#stuff-pack-code-input').attr('disabled',true);
         $('#stuff-pack-name-input').attr('disabled',true);
-        $('#stuff-pack-serial-input').attr('disabled',true);
+        $('#stuff-pack-serial-input').attr('disabled',true); */
         $('#stuff-list-table').fadeIn(300);
         refreshTable();
     }
+    enableAll();
 })
 
 
@@ -127,4 +137,36 @@ function refreshTable() {
     console.log(stuff_list_array);
 
     //$('#content-box').off().find('*').off();
+
+    $('#insert-new-stuffpack-save-btn').on('click',function(e){
+        e.preventDefault();
+        disableAll();
+
+        $.ajax({
+            url: 'insert-new-stuffpack',
+            type: 'POST',
+            responseType: 'json',
+            data: {
+                code : $('input#stuff-pack-code-input').val(),
+                name : $('input#stuff-pack-name-input').val(),
+                serial : $('input#stuff-pack-serial-input').val(),
+                description : $('textarea#insert-new-stuffpack-description').val(),
+                list : stuff_list_array,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            complete: c => {
+
+                if ( c.responseJSON )
+                {
+                    console.log(c.responseJSON);
+                }
+                else{
+                    console.log(c);
+                }
+            }
+        })
+        enableAll();
+    })
 }

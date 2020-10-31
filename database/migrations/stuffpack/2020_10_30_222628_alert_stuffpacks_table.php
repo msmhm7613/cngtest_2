@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStuffPackStuffsTable extends Migration
+class AlertStuffpacksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateStuffPackStuffsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stuff_pack_stuffs', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('stuff_pack_id');
-            $table->unsignedBigInteger('stuff_id');
-            $table->timestamps();
+        Schema::table('stuffpacks', function (Blueprint $table) {
+            $table->string('serial')->nullable()->default('-')->change();
         });
     }
 
@@ -28,6 +25,6 @@ class CreateStuffPackStuffsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stuff_pack_stuffs');
+        //
     }
 }
