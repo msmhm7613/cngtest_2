@@ -14,7 +14,7 @@ class spController extends Controller
     public function insert(Request $request)
     {
         $rules = [
-            'code' => ['string', 'min:3', 'max:30', 'required','unique:stuffpacks,code'],
+            'code' => ['string', 'min:3', 'max:30', 'required', 'unique:stuffpacks,code'],
             'name' => ['string', 'min:3', 'max:30', 'required',],
             'description' => ['string', 'max:255', 'nullable',],
             'serial' => ['string', 'min:1', 'max:64', 'nullable',]
@@ -34,7 +34,7 @@ class spController extends Controller
                 $sp->creator_user_id = $request->user()->id;
                 $sp->modifier_user_id = $request->user()->id;
                 $sp->serial = $request->serial;
-                $sp->list_of_stuffs = json_encode(['list'=>$request->list]);
+                $sp->list_of_stuffs = json_encode(['list' => $request->list]);
 
                 $sp->save();
                 $sp_id = $sp->id;
@@ -42,16 +42,11 @@ class spController extends Controller
 
                 foreach ($spList as $key => $value) {
                     try {
-
                         $stuffpack_item = new StuffpackList();
                         $stuffpack_item->stuffpack_id = $sp_id;
                         $stuffpack_item->stuff_id = $value['id'];
                         $stuffpack_item->stuff_count = $value['num'];
-
                         $stuffpack_item->save();
-
-
-
                     } catch (PDOException $ex) {
                         return response()->json(['errors' => $ex->errorInfo]);
                     }
