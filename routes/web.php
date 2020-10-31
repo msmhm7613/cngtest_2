@@ -60,6 +60,8 @@ Route::get  ('insert-new-stuff' , 'App\Http\Controllers\stuff\stuffController@in
 Route::get  ('select-stuff'     , 'App\Http\Controllers\stuff\StuffController@selectStuff');
 Route::post ('edit-stuff'       , 'App\Http\Controllers\stuff\StuffController@editStuff');
 Route::post ('delete-stuff'     , 'App\Http\Controllers\stuff\StuffController@deleteStuff');
+Route::post ('upload-stuff-file', 'App\Http\Controllers\stuff\StuffController@uploadStuffFile');
+
 
 
 /**

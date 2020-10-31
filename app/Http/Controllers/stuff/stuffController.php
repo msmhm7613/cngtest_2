@@ -79,7 +79,7 @@ class stuffController extends Controller
 
 
         try {
-            $stuff = Stuff::find($request->id);//DB::table('stuffs')->where('id',"=",$stuff_id)->first();
+            $stuff = Stuff::find($request->id); //DB::table('stuffs')->where('id',"=",$stuff_id)->first();
             return response($stuff);
             // response()->json(['stuff' => $selected_stuff]);
         } catch (PDOException $ex) {
@@ -88,7 +88,6 @@ class stuffController extends Controller
                 'message'   => $ex->errorInfo[2],
                 'status'    => 'failed'
             ]]);
-
         }
     }
 
@@ -97,7 +96,7 @@ class stuffController extends Controller
         //$selected_stuff = $this->selectStuff($request->stuff_id);
 
         $rules = [
-            'code'              => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', ],
+            'code'              => ['string', 'alpha_dash', 'min:3', 'max:64', 'required',],
             'name'              => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
             'latin_name'        => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
@@ -142,5 +141,25 @@ class stuffController extends Controller
         } catch (PDOException $ex) {
             return response()->json(['errors' => $ex]);
         }
+    }
+    public function uploadStuffFile(Request $request)
+    {
+        $file = $request->file('stuff_file');
+        //Move Uploaded File
+        $destinationPath = 'uploads';
+        $file->move($destinationPath, $file->getClientOriginalName());
+
+        $json = file_get_contents('uploads\stuffs3.csv');
+        $json = json_encode(explode('\\n',$json));
+        $json = json_encode(explode(',',$json));
+        exit ( dd($json) );
+        $file_data = json_encode([
+            'file_name' => $file->getClientOriginalName(),
+            'file_ext' => $file->getClientOriginalExtension(),
+            'file_real_path' => $file->getRealPath(),
+            'file_size' => $file->getSize(),
+
+
+        ]);
     }
 }

@@ -35,6 +35,9 @@ class NewPanelController extends Controller
             case 'stuff-pack':
                 return view('stuff-pack.table');
                 break;
+            case 'stuff-file':
+                return view('stuff.file-upload');
+                break;
             default:
                 return 'sorry I couldn\'t find that.';
                 break;

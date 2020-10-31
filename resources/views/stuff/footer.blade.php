@@ -209,5 +209,5 @@
 
 <script src="{{ asset('js/stuff/modal.js') }}"></script>
 <script src="{{ asset('js/stuff/table.js') }}"></script>
-
+<script src="{{ asset('/js/stuff/file-upload.js') }}"></script>
 
