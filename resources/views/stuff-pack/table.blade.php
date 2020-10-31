@@ -16,8 +16,8 @@
                 <th>ردیف</th>
                 <th>کد مجموعه کالا</th>
                 <th>نام مجموعه کالا</th>
-                <th>لیست اقلام</th>
-                <th>تعداد</th>
+                <th>تعداد اقلام</th>
+                <th>تعداد کل</th>
                 <th>شماره سریال</th>
                 <th>توضیحات</th>
                 <th>عملیات</th>
@@ -29,14 +29,15 @@
                 @php
                 $unit = \App\Models\Unit::where('id',$stuff_pack->unit_id)->first();
                 $user = \App\Models\User::where('id',$stuff_pack->creator_user_id)->first();
+                $stuffpack_list = \App\Models\StuffpackList::where('stuffpack_id',$stuff_pack->id);
                 @endphp
 
                 <tr id="{{ $stuff_pack->id }}">
                     <td>{{ $ind++ }}</td>
                     <td>{{ $stuff_pack->code }}</td>
                     <td>{{ $stuff_pack->name }}</td>
-                    <td> <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>مشاهده ریز اقلام</a></td>
-                    <td>100</td>
+                    <td>{{ $stuffpack_list->count() }}</td>
+                    <td>{{ $stuffpack_list->sum('stuff_count') }}</td>
                     <td>{{ $stuff_pack->serial  }}</td>
                     <td>
                         <p>

@@ -1,12 +1,13 @@
 var stuff_list_array = [];
 
+
 function disableAll() {
-    $(document).find('.btn').prop('disabled', true).attr('disabled', true);
+    $(document).find('.btn').prop('disabled', true).attr('disabled', true).off();
     console.log('disabled', Date.now());
 }
 
 function enableAll() {
-    $(document).find('.btn').prop('disabled', false).attr('disabled', false);
+    $(document).find('.btn').prop('disabled', false).attr('disabled', false).on();
     console.log('enabled', Date.now());
 }
 
@@ -16,6 +17,7 @@ $(document).on('click', '#insert-new-stuff-pack-button', function (e) {
     $('#content-box').html('بارگذاری...').load('open-insert-form',function(xhr){
 
     });
+    $('#insert-new-stuffpack-save-btn').hide();
    /*  $.ajax({
         url: 'open-insert-form',
         type: 'GET',
@@ -34,6 +36,7 @@ $(document).on('click', '#insert-new-stuff-pack-button', function (e) {
 //add to list
 $(document).on('click', '#add-to-stuffs-list-btn', function (e) {
     e.preventDefault();
+    $('#insert-new-stuffpack-save-btn').off().on()
     disableAll()
     let stuff_name = $('#stuff-select-input :selected').text();
     let stuff_id = $('#stuff-select-input :selected').val();
@@ -44,15 +47,17 @@ $(document).on('click', '#add-to-stuffs-list-btn', function (e) {
     if (stuff_list_array.length == 0 ) {
         console.log('disabled');
         $('p#stuff-pack-list').show();
-        $('#stuff-pack-code-input').attr('disabled',false);
+        /* $('#stuff-pack-code-input').attr('disabled',false);
         $('#stuff-pack-name-input').attr('disabled',false);
-        $('#stuff-pack-serial-input').attr('disabled',false);
+        $('#stuff-pack-serial-input').attr('disabled',false); */
+        $('#insert-new-stuffpack-save-btn').hide();
     } else {
         $('p#stuff-pack-list').hide();
         /* $('#stuff-pack-code-input').attr('disabled',true);
         $('#stuff-pack-name-input').attr('disabled',true);
         $('#stuff-pack-serial-input').attr('disabled',true); */
         $('#stuff-list-table').fadeIn(300);
+        $('#insert-new-stuffpack-save-btn').show();
         refreshTable();
     }
     enableAll();
@@ -102,6 +107,7 @@ function refreshTable() {
     {
         $('#stuff-list-table').hide();
         $('p#stuff-pack-list').show();
+        $('#insert-new-stuffpack-save-btn').hide();
     }
     $.each(stuff_list_array, function (ind, item) {
         stuff_list_table.append(
@@ -124,7 +130,7 @@ function refreshTable() {
                         onclick='removeFromList(this);'
                         >
                         <i class='fas fa-trash '></i>
-                        <span>${ind}</span>
+                        <span class="hidden">${ind}</span>
                         </button>
                     </td>
                 </tr>
@@ -141,7 +147,19 @@ function refreshTable() {
     $('#insert-new-stuffpack-save-btn').on('click',function(e){
         e.preventDefault();
         disableAll();
-
+        if ( !stuff_list_array.length )
+        {
+            $('#insert-new-stuffpack-response')
+            .addClass('alert-danger')
+            .removeClass('hidden')
+            .html("")
+            .html('لیست نباید خالی باشد.')
+            return false;
+        }
+        $('#insert-new-stuffpack-response')
+        .html('<span class="spinner-border text-success"></span>' +'ذخیره اطلاعات ...')
+        .addClass(['alert', 'alert-success'])
+        .removeClass(['alert','alert-danger'])
         $.ajax({
             url: 'insert-new-stuffpack',
             type: 'POST',
@@ -158,9 +176,10 @@ function refreshTable() {
             },
             complete: c => {
 
-                if ( c.responseJSON )
+                if ( c.responseJSON && c.responseJSON.status )
                 {
                     console.log(c.responseJSON);
+                    $('#insert-new-stuffpack-response').html('').html('مجموعه کالا ذخیره شد.')
                 }
                 else{
                     console.log(c);
@@ -170,3 +189,18 @@ function refreshTable() {
         enableAll();
     })
 }
+
+/*
+$('#insert-new-stuffpack-back-btn').on('click',function(e){
+    $('#insert-new-stuffpack-back-btn').off();
+    e.preventDefault();
+    disableAll();
+
+    $.ajax({
+        url: '/new-panel',
+        type: 'GET',
+        data : {target : 'stuff-pack'}
+    })
+
+    enableAll();
+}) */
