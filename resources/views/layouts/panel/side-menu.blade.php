@@ -30,7 +30,7 @@
                     </div>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" data-target="#store-submenu" href="" id="store-btn">
+                    <a class="nav-link" data-toggle="collapse" data-target="#store-submenu" href="" id="store-btn" data-controller="store">
                         <i class="fas fa-store "></i>
                         انبار و کالا
                     </a>
@@ -48,7 +48,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" id="temp-reciept-side-menu-btn" data-controller="temp-reciept">
                                     رسید موقت
                                 </a>
                             </li>

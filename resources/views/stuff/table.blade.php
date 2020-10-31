@@ -10,7 +10,7 @@
 
 @if (App\Models\Stuff::all()->count())
     @php $ind = 1 @endphp
-
+        {{-- TODO: Create pagination --}}
         <tbody>
 
             @foreach (\App\Models\Stuff::all() as $stuff)

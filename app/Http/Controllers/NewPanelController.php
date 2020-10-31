@@ -27,7 +27,7 @@ class NewPanelController extends Controller
                 return view('layouts.tables.users');
                 break;
             case 'store':
-                return view('store.table');
+                return view('new-store.store');
                 break;
             case 'stuff':
                 return view('stuff.table');
@@ -38,6 +38,11 @@ class NewPanelController extends Controller
             case 'stuff-file':
                 return view('stuff.file-upload');
                 break;
+
+            case 'temp-reciept':
+                return view('temp-reciept.temp-reciept-table');
+                break;
+
             default:
                 return 'sorry I couldn\'t find that.';
                 break;

@@ -15,6 +15,7 @@
             ارسال از طریق فایل
         </a>
     </div>
+
     <table class="table table-striped table-bordered " id="stuffs-table">
         <thead>
             <tr class="table-primary">
