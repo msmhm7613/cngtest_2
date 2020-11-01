@@ -13,6 +13,7 @@ doc = $('#content-box').html();
 $('#insert-new-stuff-button').on('click',  function (e) {
     disableAll();
     user_id = $(e.currentTarget).attr('data-user-id')
+    $('#insert-new-stuff-modal').modal('show');
     enableAll();
 })
 function disableAll() {
