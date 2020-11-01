@@ -1,17 +1,3 @@
 {
-    "sqltools.connections": [
-        {
-            "mysqlOptions": {
-                "authProtocol": "default"
-            },
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 8889,
-            "driver": "MySQL",
-            "name": "ts_con_string",
-            "database": "ts3_DB",
-            "username": "admin",
-            "password": ""
-        }
-    ]
+    
 }
