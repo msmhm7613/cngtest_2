@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title">ثبت کالای جدید</h4>
             </div>
             <div class="modal-body">
                 <form action="" method="POST" class="form-horizontal" id="insert-new-stuff-form">
@@ -13,22 +13,14 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <input type="text" autofocus class=" inset" placeholder="کد کالا" id="code" name="code">
-                                @error('code')
-                                <small id="small-1">
-                                    {{ $message }}
-                                </small>
-                                @enderror
+
                             </div>
 
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <input type="text" class=" inset" placeholder="نام کالا" id="name" name="name">
-                                @error('name')
-                                <small id="small-1">
-                                    {{ $message }}
-                                </small>
-                                @enderror
+
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -101,22 +93,14 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <input type="text" autofocus class=" inset" placeholder="کد کالا" id="edit-stuff-code-input" name="edit-stuff-code-input">
-                                @error('code')
-                                <small id="small-1">
-                                    {{ $message }}
-                                </small>
-                                @enderror
+
                             </div>
 
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <input type="text" class=" inset" placeholder="نام کالا" id="edit-stuff-name-input" name="edit-stuff-name-input">
-                                @error('name')
-                                <small id="small-1">
-                                    {{ $message }}
-                                </small>
-                                @enderror
+
                             </div>
                         </div>
                         <div class="col-sm-12">

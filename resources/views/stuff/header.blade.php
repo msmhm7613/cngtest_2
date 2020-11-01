@@ -16,7 +16,7 @@
         </a>
     </div>
 
-    <table class="table table-striped table-bordered " id="stuffs-table">
+    {{-- <table class="table table-striped table-bordered " id="stuffs-table">
         <thead>
             <tr class="table-primary">
                 <th>ردیف</th>
@@ -28,5 +28,5 @@
                 <th>توضیحات</th>
                 <th>عملیات</th>
             </tr>
-        </thead>
+        </thead> --}}
 </div>

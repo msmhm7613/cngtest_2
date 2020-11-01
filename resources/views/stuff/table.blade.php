@@ -8,9 +8,38 @@
 
 @include('stuff.header')
 
-@if (App\Models\Stuff::all()->count())
-    @php $ind = 1 @endphp
+<?php
+    $stuff = \App\Models\Stuff::all();
+
+    if ( $stuff->isEmpty() )
+        {
+            ?>
+            <div class="row">
+                <div class="alert alert-info">
+                    هنوز هیچ کالایی ثبت نشده است.
+                </div>
+            </div>
+
+            <?php
+
+        }else{
+?>
+    @php
+    $ind = 1 @endphp
         {{-- TODO: Create pagination --}}
+        <table class="table table-striped table-bordered " id="stuffs-table">
+            <thead>
+                <tr class="table-primary">
+                    <th>ردیف</th>
+                    <th>کد کالا</th>
+                    <th>نام کالا</th>
+                    <th>نام لاتین</th>
+                    <th>سریال منحصر بفرد</th>
+                    <th>واحد اندازه‌گیری</th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
         <tbody>
 
             @foreach (\App\Models\Stuff::all() as $stuff)
@@ -34,7 +63,11 @@
                             <i class="fas fa-calendar-check text-success"></i>
                             <small class="text-secondary font-weight-lighter font-italic">
                                 ثبت شده توسط : {{ $user->username }} در
-                                {{ \App\Http\Controllers\persianDateTimeController::gregorianToPersian($stuff->created_at) }}</small>
+                                @php
+                                    if ( $stuff->created_at )
+                                    \App\Http\Controllers\persianDateTimeController::gregorianToPersian($stuff->created_at)
+                                @endphp
+                            </small>
                         </div>
                         <div>
                             <i class="fas fa-edit text-info"></i>
@@ -77,9 +110,5 @@
             </tr>
         </tfoot>
     </table>
-@else
-    <div class="mt-3 alert alert-info">
-        هنوز هیچ کالایی ثبت نشده است.
-    </div>
-@endif
+<?php } ?>
 @include('stuff.footer')

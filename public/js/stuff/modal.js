@@ -10,15 +10,11 @@ doc = $('#content-box').html();
  * Click event for open insert new stuff modal.
  *
  */
-$(document).on('click', '#insert-new-stuff-button', function (e) {
+$('#insert-new-stuff-button').on('click',  function (e) {
     disableAll();
     user_id = $(e.currentTarget).attr('data-user-id')
-
-    $('#insert-new-stuff-modal').modal('show');
-    //$('.horizontal-form').show();
     enableAll();
 })
-
 function disableAll() {
     $(document).find('.btn').prop('disabled', true).attr('disabled', true);
     console.log('disabled', Date.now());
@@ -39,7 +35,7 @@ $('#insert-new-stuff-modal').on('hidden.bs.modal', function (e) {
 })
 
 $(document).on('click', '#insert-new-stuff-save', (e) => {
-    //disableAll();
+    disableAll();
     $('#insert-new-stuff-response')
         .html("")
         .show()
@@ -60,7 +56,7 @@ $(document).on('click', '#insert-new-stuff-save', (e) => {
         },
         data: {
             _token: $('input[name="_token"]').val(),
-            code: $('input[name="code"]').val(),
+            code: $('input#code').val(),
             name: $('input[name="name"]').val(),
             latin_name: $('input[name="latin_name"]').val(),
             creator_user_id: user_id,
@@ -69,7 +65,7 @@ $(document).on('click', '#insert-new-stuff-save', (e) => {
             has_unique_serial: $('#has_unique_serial').is(':checked') ? 1 : 0,
             description: $('textarea#edit-stuff-description').val(),
         },
-        cache: false,
+
         complete: c => {
             if (checkForResponse(c.responseJSON, $('#insert-new-stuff-response'))) {
                 $('#insert-new-stuff-response')
@@ -296,10 +292,8 @@ $(document).on('click', '#edit-stuff-save-btn', function (e) {
 
 
  $('#delete-stuff-btn').on('click', function(e){
-
-     $('#delete-stuff-response').html("")
-     disableAll();
-
+    console.log(e);
+     $('#delete-stuff-response').html("clicked").show()
      $.ajax({
          url: 'delete-stuff',
          type: 'post',
