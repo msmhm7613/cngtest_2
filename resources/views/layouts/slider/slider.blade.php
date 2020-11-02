@@ -34,9 +34,11 @@
 </div>
  --}}
 
- <div class="thing">
+ <div class="lazy slider " data-size="50vw">
     <div><img src=" {{ asset('storage/images/slides/01.jpg') }}"></div>
     <div><img src=" {{ asset('storage/images/slides/02.jpg') }}"></div>
     <div><img src=" {{ asset('storage/images/slides/03.jpg') }}"></div>
   </div>
+
+  <script src="{{ asset('js/header-slider/kia-slider') }}"></script>
 

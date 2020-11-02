@@ -16,12 +16,12 @@ $('#insert-new-stuff-button').on('click',  function (e) {
     $('#insert-new-stuff-modal').modal('show');
     enableAll();
 })
-function disableAll() {
+function disableAll1() {
     $(document).find('.btn').prop('disabled', true).attr('disabled', true);
     console.log('disabled', Date.now());
 }
 
-function enableAll() {
+function enableAll1() {
     $(document).find('.btn').prop('disabled', false).attr('disabled', false);
     console.log('enabled', Date.now());
 }
