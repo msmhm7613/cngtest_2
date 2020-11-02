@@ -1,4 +1,4 @@
-var mydiv, mya;
+/* var mydiv, mya;
 
 $(document).on("mouseenter mouseleave", "table.table tr", function (e) {
     if (e.type == "mouseenter") {
@@ -33,3 +33,4 @@ $(document).on("mouseenter mouseleave", "table.table tr", function (e) {
 });
 
 
+ */

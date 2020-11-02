@@ -41,7 +41,7 @@ error_reporting(E_ALL);
 
 @section('js')
 <script src="{{asset('/js/side-menu.js')}}"></script>
-<script src="{{asset('/js/my.js')}}"></script>
+{{-- <script src="{{asset('/js/my.js')}}"></script> --}}
 <script src="{{asset('/js/modal.js')}}"></script>
 @endsection
 

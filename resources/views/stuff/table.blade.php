@@ -59,7 +59,7 @@
                         <p>
                             {{ $stuff->description ?? 'ندارد' }}
                         </p>
-                        <div>
+                        {{--<div>
                             <i class="fas fa-calendar-check text-success"></i>
                             <small class="text-secondary font-weight-lighter font-italic">
                                 ثبت شده توسط : {{ $user->username }} در
@@ -70,7 +70,7 @@
                             </small>
                         </div>
                         <div>
-                            <i class="fas fa-edit text-info"></i>
+                             <i class="fas fa-edit text-info"></i>
                             <small class="text-secondary font-weight-lighter font-italic">
                                 @if ($stuff->created_at == $stuff->updated_at)
                                     {{ __('هنوز ویرایش نشده.') }}
@@ -81,10 +81,10 @@
                                     {{ \App\Http\Controllers\persianDateTimeController::gregorianToPersian($stuff->updated_at) }}
                                 @endif
                             </small>
-                        </div>
+                        </div> --}}
                     </td>
-                    <td id="operation">
-                        <div class="btns hidden" id="{{ $stuff->id }}">
+                    <td id="" style="width: 4rem;">
+                        <div class="" id="{{ $stuff->id }}">
                             <button class="btn btn-info btn-sm m-0 my-1 d-inline-block w-100 text-center "
                         id="edit-stuff-modal-open-btn" data-stuff-id="{{ $stuff->id }}" title="ویرایش" data-creator-user-id="{{ $stuff->creator_user_id }}" data-user-id="{{ $user->id }}"><i
                                     class="fas fa-pencil-alt  m-0"></i></button>
