@@ -1,10 +1,13 @@
-<!-- <div class="bg-dark new-header text-light p-4">
+<div class="bg-dark header text-light p-2 container">
+    @include('layouts.slider.slider')
+    <div class="">
         <div class="d-flex">
-            <h3>
+            <h5>
                 {{ env('APP_NAME') }}
-            </h3>
+            </h5>
             <small title=" {{ $Version[1] }} " class="eng text-warning">
-               ({{  $Version[0]  }})
+                ({{ $Version[0] }})
             </small>
         </div>
-</div> -->
+    </div>
+</div>

@@ -6,7 +6,7 @@ $('#preloader').hide();
 let menu_item = $('.side-menu #collapsibleNavbar ul li.nav-item a');
 
 $(menu_item).on('click', function (e) {
-
+    $('#preloader').show();
     $(menu_item).removeClass('active');
     $(e.target).addClass('active');
 
@@ -55,9 +55,9 @@ $(menu_item).on('click', function (e) {
         },
         function(responseTxt, statusTxt, xhr){
             if(statusTxt == "success")
-              console.log("External content loaded successfully!");
+              $('#preloader').hide();
             if(statusTxt == "error")
-              console.log("Error: " + xhr.status + ": " + xhr.statusText);
+                $('#preloader').html('خطا در ایجاد صفحه');
         }
     )
 })
