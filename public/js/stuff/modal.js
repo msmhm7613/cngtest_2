@@ -4,26 +4,28 @@
 var user_id, stuff_id, doc;
 
 doc = $('#content-box').html();
+console.log('I am ready . Stuff Modal js.');
+
 
 /**
  *
  * Click event for open insert new stuff modal.
  *
  */
-$('#insert-new-stuff-button').on('click',  function (e) {
+$('#insert-new-stuff-button').on('click', function (e) {
     disableAll();
     user_id = $(e.currentTarget).attr('data-user-id')
     $('#insert-new-stuff-modal').modal('show');
     enableAll();
 })
-function disableAll1() {
-    $(document).find('.btn').prop('disabled', true).attr('disabled', true);
-    console.log('disabled', Date.now());
+function disableAll() {
+    /* $(document).find('.btn').prop('disabled', true).attr('disabled', true);
+    console.log('disabled', Date.now()); */
 }
 
-function enableAll1() {
-    $(document).find('.btn').prop('disabled', false).attr('disabled', false);
-    console.log('enabled', Date.now());
+function enableAll() {
+    /* $(document).find('.btn').prop('disabled', false).attr('disabled', false);
+    console.log('enabled', Date.now()); */
 }
 
 $('#insert-new-stuff-modal').on('hidden.bs.modal', function (e) {
@@ -35,14 +37,14 @@ $('#insert-new-stuff-modal').on('hidden.bs.modal', function (e) {
     }
 })
 
-$(document).on('click', '#insert-new-stuff-save', (e) => {
+$('#insert-new-stuff-save').on('click', (e) => {
+    console.log(e);
     disableAll();
     $('#insert-new-stuff-response')
-        .html("")
-        .show()
         .removeClass('alert-success', 'text-center')
         .addClass('alert-danger')
-        .html('')
+        .html("")
+        .fadeOut();
     let code = $('#insert-new-stuff-form input#code').val();
     code = code.split(' ').join('-');
     $('#insert-new-stuff-form input#code').val(code);
@@ -68,29 +70,54 @@ $(document).on('click', '#insert-new-stuff-save', (e) => {
         },
 
         complete: c => {
-            if (checkForResponse(c.responseJSON, $('#insert-new-stuff-response'))) {
+            
+            if ( typeof c.responseJSON != 'undefined' && c.responseJSON.errors ) {
+                $('#insert-new-stuff-response')
+                    .removeClass('alert-success')
+                    .addClass('alert-danger')
+                    .html(c.responseJSON.errors)
+                    .fadeIn()
+                $.each(c.responseJSON.errors, function (key, value) {
+                     /* $.each ( value , function ( k , v ){
+                        console.log(v);
+
+                    })*/
+
+                    $('#insert-new-stuff-response')
+                        .append(
+                            `
+                            <li>
+                                ${value[0]}
+                            </li>
+                            `
+                        ).fadeIn();
+                    console.log(value[0]);
+
+                })
+            }
+            else {
                 $('#insert-new-stuff-response')
                     .html("")
-                    .show()
                     .addClass('alert-success', 'text-center')
                     .removeClass('alert-danger')
                     .html('کالا ثبت شد.')
+                    .fadeIn()
                 doc = c.responseText;
                 $('#insert-new-stuff-form input[type="text"]').val("");
                 $('#insert-new-stuff-form textarea').val("");
                 $('form#insert-new-stuff-form select#unit_id option').eq(0).attr('selected', true);
                 $('form#insert-new-stuff-form input[type="checkbox"]').attr('checked', true);
-                //location.reload();
-                enableAll();
+            }
+            //location.reload();
+            enableAll();
 
-            }
-            else if (bre) {
-                $('#insert-new-stuff-response')
-                    .html("").show().addClass('alert-danger')
-            }
+
+
             //$("[data-dismiss=modal]").trigger({ type: "click" });
         }
     })
+
+    enableAll();
 })
 
 
@@ -121,27 +148,18 @@ function checkForResponse($response, $responseDiv) {
 
 
 $('#insert-new-stuff-modal').on('hidden.bs.modal', function (e) {
+    disableAll();
+    enableAll();
     //code...
 })
 
 $('#insert-new-stuff-modal  button[data-dismiss="modal"]').on('click', function (e) {
+    disableAll();
     console.log('modal close button clicked.', e);
     $('.fade.modal-backdrop.show').removeClass('show').removeClass('modal-backdrop');
     $('#insert-new-stuff-modal').modal('show');
     $('#content-box').html('...').html(doc);
-
-})
-
-
-/**
- *
- * SELECT STUFF
- *
- */
-
-$(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
-    //user_id = $(e.currentTarget).attr('data-user-id');
-    //stuff_id= $(e.currentTarget).attr('data-stuff-id');
+    enableAll();
 })
 
 
@@ -153,24 +171,30 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
  */
 $('#edit-stuff-modal').on('hidden.bs.modal', function (e) {
     disableAll();
-    enableAll();
+
     if ($('#define-stuff')) {
         $('#define-stuff')[0].click();
         console.log('refreshed');
     }
+
+    enableAll();
 })
-$(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
+$('#edit-stuff-modal-open-btn').on('click', function (e) {
     disableAll();
     stuff_id = $(e.currentTarget).attr('data-stuff-id');
     $('#edit-stuff-modal').modal('show');
-    //$('.horizontal-form').show();
+    $('.horizontal-form').show();
+
+    disableAll();
     // get stuff info
+
     $.ajax({
         url: 'select-stuff',
         data: { 'id': stuff_id, },
         type: 'GET',
 
         complete: c => {
+            disableAll();
             console.log('c', c);
             if (c) {
                 console.log(c.responseJSON.name);
@@ -181,7 +205,7 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
                 $(`form#edit-stuff-form select#edit_unit_id_select option[value="${c.responseJSON.unit_id}"]`).attr('selected', true);
                 $(`form#edit-stuff-form input#has_unique_id`).attr('checked', c.responseJSON.has_unique_serial ? true : false);
                 $(`form#edit-stuff-form textarea#edit-stuff-description`).val(c.responseJSON.description);
-
+                enableAll();
             }
         }
     })
@@ -195,7 +219,8 @@ $(document).on('click', '#edit-stuff-modal-open-btn', function (e) {
  *
  */
 
-$(document).on('click', '#edit-stuff-save-btn', function (e) {
+$('#edit-stuff-save-btn').on('click', function (e) {
+    disableAll();
     $('#stuff-edit-response')
         .html("")
         .show()
@@ -247,7 +272,7 @@ $(document).on('click', '#edit-stuff-save-btn', function (e) {
                 $('form#edit-stuff-form select#edit_unit_id_select option').eq(0).attr('selected', true);
                 $('form#edit-stuff-form input[type="checkbox"]').attr('checked', true); */
                 //location.reload();
-                enableAll();
+
                 bre = true;
             }
             else if (bre) {
@@ -257,6 +282,8 @@ $(document).on('click', '#edit-stuff-save-btn', function (e) {
             }
         }
     });
+
+    enableAll();
 })
 
 
@@ -267,21 +294,19 @@ $(document).on('click', '#edit-stuff-save-btn', function (e) {
  *
  */
 
- $('#delete-stuff-modal-open-btn').on('click',function(e){
-
+$('#delete-stuff-modal-open-btn').on('click', function (e) {
+    disableAll();
     $('#delete-stuff-modal').modal('show');
     stuff_id = $(e.currentTarget).attr('data-stuff-id');
     console.log(stuff_id);
-    disableAll();
     $.ajax({
         url: 'select-stuff',
         type: 'get',
         responseType: 'json',
-        data: {id:stuff_id},
+        data: { id: stuff_id },
         complete: c => {
             console.log(c);
-            if(c.responseJSON)
-            {
+            if (c.responseJSON) {
 
                 $('#delete-stuff-name').html('').html(c.responseJSON.code);
             }
@@ -289,42 +314,40 @@ $(document).on('click', '#edit-stuff-save-btn', function (e) {
     })
     enableAll();
 
- })
+})
 
 
- $('#delete-stuff-btn').on('click', function(e){
-    console.log(e);
-     $('#delete-stuff-response').html("clicked").show()
-     $.ajax({
-         url: 'delete-stuff',
-         type: 'post',
-         data: { id : stuff_id, _token : $('input[name=_token]').val() },
-         headers: {
+$('#delete-stuff-btn').on('click', function (e) {
+    disableAll();
+    $('#delete-stuff-response').html("clicked").show()
+    $.ajax({
+        url: 'delete-stuff',
+        type: 'post',
+        data: { id: stuff_id, _token: $('input[name=_token]').val() },
+        headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-         complete: c => {
-             enableAll();
-             if ( c.responseText )
-             {
-                 del_msg = c.responseText
-                 $('#delete-stuff-response').html('کالا حذف شد.').show();
-                 $('#delete-stuff-btn').fadeOut(300).hide();
-                 $('#delete-cancel-btn').html('بستن');
-             }
-             else
-             {
-                 console.log(c.responseText);
-             }
-         }
-     })
- })
+        complete: c => {
+            enableAll();
+            if (c.responseText) {
+                del_msg = c.responseText
+                $('#delete-stuff-response').html('کالا حذف شد.').show();
+                $('#delete-stuff-btn').fadeOut(300).hide();
+                $('#delete-cancel-btn').html('بستن');
+            }
+            else {
+                console.log(c.responseText);
+            }
+        }
+    })
+})
 
 
- $('#delete-stuff-modal').on('hidden.bs.modal',function(e){
+$('#delete-stuff-modal').on('hidden.bs.modal', function (e) {
     disableAll();
     enableAll();
     if ($('#define-stuff')) {
         $('#define-stuff')[0].click();
         console.log('refreshed');
     }
- })
+})

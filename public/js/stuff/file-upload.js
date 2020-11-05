@@ -1,4 +1,4 @@
-function disableAll() {
+/* function disableAll() {
     $(document).find('.btn').prop('disabled', true).attr('disabled', true).off();
     console.log('disabled', Date.now());
 }
@@ -23,3 +23,4 @@ $('#insert-new-stuff-file-button').on('click',function(e){
 
     })
 })
+ */

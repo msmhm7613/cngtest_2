@@ -19,8 +19,8 @@ class stuffController extends Controller
     public function validateStuff(Request $request)
     {
         $rules = [
-            'code' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
-            'name' => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
+            'code' => ['required','string', 'alpha_dash', 'min:3', 'max:64', 'unique:stuffs,code',],
+            'name' => ['required','string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', ],
             'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
             'creator_user_id' => ['numeric', 'exists:users,id'],
@@ -39,15 +39,28 @@ class stuffController extends Controller
     {
 
         $rules = [
-            'code' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required', 'unique:stuffs,code',],
-            'name' => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
+            'code' => ['required', 'string', 'min:3', 'max:64', 'unique:stuffs,code',],
+            'name' => ['required', 'string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', ],
             'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
             'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
             'modifier_user_id' => ['numeric', 'exists:users,id', 'required'],
             'description' => ['string', 'max:255', 'nullable'],
         ];
-        $validator = Validator::make($request->all(), $rules);
+
+        $msg = [
+
+            //code
+            'code.required'=> 'کد کالا الزامی است',
+            'code.string'  => 'کد کالا باید رشته باشد',
+            'code.min'     => 'کد کالا حداقل باید 3 کاراکتر باشد',
+            'code.max'     => 'کد کالا حداکثر میتواند 64 کاراکتر باشد',
+            'code.unique'  => 'کد کالا قبلا ثبت شده است.',
+
+            //name
+            'name.required' => 'نام کالا الزامی است',
+        ];
+        $validator = Validator::make($request->all(), $rules,$msg);
 
         if ($validator->fails()) {
 
