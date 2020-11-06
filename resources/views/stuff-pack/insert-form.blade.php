@@ -114,11 +114,11 @@
                 <i class="fas fa-save"></i>
                 ثبت
             </button>
-            {{-- <button class="btn btn-primary" id="insert-new-stuffpack-back-btn">
+            <button class="btn btn-primary" id="insert-new-stuffpack-back-btn">
                 <i class="fas fa-backward"></i>
                 بازگشت
-            </button> --}}
-            <div class="alert" id="insert-new-stuffpack-response">
+            </button>
+            <div class="mt-2 alert" id="insert-new-stuffpack-response">
 
             </div>
         </div>

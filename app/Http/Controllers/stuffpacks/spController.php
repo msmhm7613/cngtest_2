@@ -22,7 +22,7 @@ class spController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return response()->json(['errors' => ['validator' => $validator->getMessageBag()]]);
+            return response()->json(['errors' => $validator->getMessageBag()]);
         } else {
 
             try {

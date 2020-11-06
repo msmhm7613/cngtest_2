@@ -43,13 +43,13 @@
                         <p>
                             {{ $stuff_pack->description ?? 'ندارد' }}
                         </p>
-                        <div>
+                        {{--<div>
                             <i class="fas fa-calendar-check text-success"></i>
                             <small class="text-secondary font-weight-lighter font-italic">
                                 ثبت شده توسط : {{ $user->username }} در
                                 {{ \App\Http\Controllers\persianDateTimeController::gregorianToPersian($stuff_pack->created_at) }}</small>
                         </div>
-                        <div>
+                         <div>
                             <i class="fas fa-edit text-info"></i>
                             <small class="text-secondary font-weight-lighter font-italic">
                                 @if ($stuff_pack->created_at == $stuff_pack->updated_at)
@@ -61,11 +61,11 @@
                                     {{ \App\Http\Controllers\persianDateTimeController::gregorianToPersian($stuff_pack->updated_at) }}
                                 @endif
                             </small>
-                        </div>
+                        </div> --}}
 
                     </td>
                     <td id="operation">
-                        <div class="btns hidden" id="{{ $stuff_pack->id }}">
+                        <div class="btns" id="{{ $stuff_pack->id }}">
                             <button class="btn btn-info btn-sm m-0 my-1 d-inline-block w-100 text-center "
                         id="btnStuff_packEdit" data-id="{{ $stuff_pack->id }}" title="ویرایش" data-creator-user-id="{{ $stuff_pack->creator_user_id }}" data-user-id="{{ $user->id }}"><i
                                     class="fas fa-pencil-alt  m-0"></i></button>
