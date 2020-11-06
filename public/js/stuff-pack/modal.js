@@ -1,18 +1,33 @@
 var stuff_list_array = [];
 
+
+function disableAll(){
+    $(document).find('.btn','button','a').attr('disabled',true).prop('disabled',true).off()
+
+}
+function enableAll(){
+    $(document).find('.btn','button','a').attr('disabled',false).prop('disabled',false).on()
+
+}
+
 // open insert form
 $(document).on('click', '#insert-new-stuff-pack-button', function (e) {
+    e.stopImmediatePropagation();
     e.preventDefault();
+    disableAll();
     $('#content-box').html('بارگذاری...').load('open-insert-form', function (xhr) {
 
     });
-    $('#insert-new-stuffpack-save-btn').hide();
 
+    $('#insert-new-stuffpack-save-btn').hide();
+    enableAll();
 })
 
 //add to list
 $(document).on('click','#add-to-stuffs-list-btn',  function (e) {
+    e.stopImmediatePropagation();
     e.preventDefault();
+
     console.log($(this));
     let stuff_name = $('#stuff-select-input :selected').text();
     let stuff_id = $('#stuff-select-input :selected').val();
@@ -70,6 +85,7 @@ function removeFromList(e) {
 
 
 function refreshTable() {
+    disableAll();
     let stuff_list_table_body = $('#stuff-list-table tbody');
     stuff_list_table_body.html('');
     if (!stuff_list_array.length) {
@@ -123,19 +139,23 @@ function refreshTable() {
     );
     $('#stuff-number-input').val(1);
     $('#stuff-select-input option:eq(0)').attr('selected', true);
-
+    enableAll();
 }
 
 
 $(document).on('click','#insert-new-stuffpack-back-btn',function(e){
+    e.stopImmediatePropagation();
     e.preventDefault();
+    disableAll();
     if ( $('#define-stuff-pack') )
         $('#define-stuff-pack').get(0).click();
+    enableAll();
 })
 
 
 $(document).on('click', '#insert-new-stuffpack-save-btn',
 function (e) {
+    e.stopImmediatePropagation();
     e.preventDefault();
     if (!stuff_list_array.length) {
         $('#insert-new-stuffpack-response')
@@ -199,11 +219,8 @@ function (e) {
                 $('#stuff-number-input').val('1');
                 $('#insert-new-stuffpack-description').val('');
 
-                //clear table
-                stuff_list_array = [];
+                stuff_list_array = []
                 refreshTable();
-                //
-                $(document).find('.btn').off().on();
             }
             else {
                 console.log(c);
