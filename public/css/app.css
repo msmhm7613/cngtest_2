@@ -11158,6 +11158,28 @@ img.logo {
   display: block;
 }
 
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#preloader p.loading-text {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-weight: bold;
+  color: white;
+  font-size: large;
+}
+
 body,
 html {
   direction: rtl;

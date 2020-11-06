@@ -168,7 +168,9 @@
             <div class="modal-body">
                 <p class="alert alert-danger">
                     آیا شما مطمئنید میخواهید
-                    <span id="delete-stuff-name"></span>
+                    <b>
+                        <span id="delete-stuff-name"></span>
+                    </b>
                     را حذف کنید؟
 
                 </p>

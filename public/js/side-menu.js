@@ -56,8 +56,7 @@ $(menu_item).on('click', function (e) {
         function(responseTxt, statusTxt, xhr){
             if(statusTxt == "success")
               $('#preloader').hide();
-            if(statusTxt == "error")
-                $('#preloader').html('خطا در ایجاد صفحه');
+            
         }
     )
 })

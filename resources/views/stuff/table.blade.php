@@ -85,11 +85,11 @@
                     </td>
                     <td id="" style="width: 4rem;">
                         <div class="" id="{{ $stuff->id }}">
-                            <button class="btn btn-info btn-sm m-0 my-1 d-inline-block w-100 text-center "
-                        id="edit-stuff-modal-open-btn" data-stuff-id="{{ $stuff->id }}" title="ویرایش" data-creator-user-id="{{ $stuff->creator_user_id }}" data-user-id="{{ $user->id }}"><i
+                            <button class="btn btn-info btn-sm m-0 my-1 d-inline-block w-100 text-center edit-stuff-modal-open-btn"
+                        id="" data-stuff-id="{{ $stuff->id }}" title="ویرایش" data-creator-user-id="{{ $stuff->creator_user_id }}" data-user-id="{{ $user->id }}"><i
                                     class="fas fa-pencil-alt  m-0"></i></button>
-                            <button class="btn btn-danger btn-sm m-0 my-1 d-inline-block w-100 text-center "
-                                id="delete-stuff-modal-open-btn" data-stuff-id="{{ $stuff->id }}" title="حذف"><i
+                            <button class="btn btn-danger btn-sm m-0 my-1 d-inline-block w-100 text-center delete-stuff-modal-open-btn"
+                                id="" data-stuff-id="{{ $stuff->id }}" title="حذف"><i
                                     class="fas fa-trash-alt m-0"></i></button>
                         </div>
 

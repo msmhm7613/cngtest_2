@@ -152,7 +152,17 @@ class stuffController extends Controller
             DB::table('stuffs')->delete($request->id);
             return view('stuff.table');
         } catch (PDOException $ex) {
-            return response()->json(['errors' => $ex]);
+            $err = $ex->errorInfo;
+            if ( $err[0] == "23000" && $err[1] == 1451 )
+            {
+                $stuffpack_id   = \App\Models\StuffpackList::select('stuffpack_id')->where('stuff_id',$request->id)->first()->get();
+                $stuffpack      = \App\Models\Stuffpack::find($stuffpack_id)->first()->name;
+                $errorMsg       = 'این کالا عضوی از مجموعه کالای ' . "<b>" . $stuffpack . "</b>" . ' میباشد.';
+                $errorMsg       .= "<br/>";
+                $errorMsg       .= "ابتدا باید آن مجموعه کالا را حذف کنید.";
+                return response()->json(['errors' => $errorMsg]);
+            }
+            return response()->json(['errors' => $ex->errorInfo]);
         }
     }
     public function uploadStuffFile(Request $request)
