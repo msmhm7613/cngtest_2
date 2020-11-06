@@ -1,12 +1,13 @@
+
+
 var stuff_list_array = [];
 
-
-function disableAll(){
-    $(document).find('.btn','button','a').attr('disabled',true).prop('disabled',true).off()
+function disableAll() {
+    $(document).find('.btn', 'button', 'a').attr('disabled', true).prop('disabled', true).off()
 
 }
-function enableAll(){
-    $(document).find('.btn','button','a').attr('disabled',false).prop('disabled',false).on()
+function enableAll() {
+    $(document).find('.btn', 'button', 'a').attr('disabled', false).prop('disabled', false).on()
 
 }
 
@@ -24,7 +25,7 @@ $(document).on('click', '#insert-new-stuff-pack-button', function (e) {
 })
 
 //add to list
-$(document).on('click','#add-to-stuffs-list-btn',  function (e) {
+$(document).on('click', '#add-to-stuffs-list-btn', function (e) {
     e.stopImmediatePropagation();
     e.preventDefault();
 
@@ -143,88 +144,143 @@ function refreshTable() {
 }
 
 
-$(document).on('click','#insert-new-stuffpack-back-btn',function(e){
+$(document).on('click', '#insert-new-stuffpack-back-btn', function (e) {
     e.stopImmediatePropagation();
     e.preventDefault();
     disableAll();
-    if ( $('#define-stuff-pack') )
+    if ($('#define-stuff-pack'))
         $('#define-stuff-pack').get(0).click();
     enableAll();
 })
 
 
 $(document).on('click', '#insert-new-stuffpack-save-btn',
-function (e) {
+    function (e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        if (!stuff_list_array.length) {
+            $('#insert-new-stuffpack-response')
+                .addClass('alert-danger')
+                .removeClass('hidden')
+                .html("")
+                .html('لیست نباید خالی باشد.')
+            return false;
+        }
+        $('#insert-new-stuffpack-response')
+            .html('<span class="spinner-border text-info"></span>' + 'ذخیره اطلاعات ...')
+            .addClass('alert-info')
+            .removeClass('alert-danger', 'alert-success')
+        $.ajax({
+            url: 'insert-new-stuffpack',
+            type: 'POST',
+            responseType: 'json',
+            data: {
+                code: $('input#stuff-pack-code-input').val(),
+                name: $('input#stuff-pack-name-input').val(),
+                serial: $('input#stuff-pack-serial-input').val(),
+                description: $('textarea#insert-new-stuffpack-description').val(),
+                list: stuff_list_array,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            complete: c => {
+
+                if (typeof c.responseJSON != 'undefined' && c.responseJSON.errors) {
+                    $('#insert-new-stuffpack-response').html('')
+                        .removeClass('alert-success', 'alert-info')
+                        .addClass('alert-danger')
+
+                    $.each(c.responseJSON.errors, function (key, value) {
+                        $.each(value, function (k, v) {
+                            $('#insert-new-stuffpack-response').html('')
+                                .append(
+                                    `
+                                <li>
+                                    ${v}
+                                </li>
+                                `
+                                );
+                        })
+
+                    })
+
+                }
+                else if (c.responseJSON && c.responseJSON.status) {
+                    console.log(c.responseJSON);
+                    $('#insert-new-stuffpack-response')
+                        .removeClass('alert-danger', 'alert-info')
+                        .addClass('alert-success')
+                        .html('مجموعه کالا ذخیره شد.')
+
+                    $('#stuff-pack-code-input').val('');
+                    $('#stuff-pack-name-input').val('');
+                    $('#stuff-pack-serial-input').val('');
+                    $('select#stuff-select-input option:eq(0)').attr('selected', true).prop('selected', true);
+                    $('#stuff-number-input').val('1');
+                    $('#insert-new-stuffpack-description').val('');
+
+                    stuff_list_array = []
+                    refreshTable();
+                }
+                else {
+                    console.log(c);
+                }
+            }
+        })
+    })
+
+
+/**
+ *
+ * EDTI STUFFPACK OPEN FORM
+ */
+
+$(document).on('click', '.stuffpack-edit-modal-open', function (e) {
     e.stopImmediatePropagation();
     e.preventDefault();
-    if (!stuff_list_array.length) {
-        $('#insert-new-stuffpack-response')
-            .addClass('alert-danger')
-            .removeClass('hidden')
-            .html("")
-            .html('لیست نباید خالی باشد.')
-        return false;
-    }
-    $('#insert-new-stuffpack-response')
-        .html('<span class="spinner-border text-info"></span>' + 'ذخیره اطلاعات ...')
-        .addClass('alert-info')
-        .removeClass('alert-danger','alert-success')
+    clickedButton = $(this).first().get();
+    stuffpack_id = $(clickedButton).attr('data-id');
+    console.log('stuff id: ' + stuffpack_id);
+    disableAll()
     $.ajax({
-        url: 'insert-new-stuffpack',
-        type: 'POST',
+        type: 'post',
+        url: 'open-edit-form',
         responseType: 'json',
         data: {
-            code: $('input#stuff-pack-code-input').val(),
-            name: $('input#stuff-pack-name-input').val(),
-            serial: $('input#stuff-pack-serial-input').val(),
-            description: $('textarea#insert-new-stuffpack-description').val(),
-            list: stuff_list_array,
+            id: stuffpack_id,
         },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         complete: c => {
-
             if (typeof c.responseJSON != 'undefined' && c.responseJSON.errors) {
-                $('#insert-new-stuffpack-response').html('')
-                    .removeClass('alert-success', 'alert-info')
-                    .addClass('alert-danger')
-
-                $.each(c.responseJSON.errors, function (key, value) {
-                    $.each(value, function (k, v) {
-                        $('#insert-new-stuffpack-response').html('')
-                            .append(
-                                `
-                                <li>
-                                    ${v}
-                                </li>
-                                `
-                            );
-                    })
-
-                })
-
-            }
-            else if (c.responseJSON && c.responseJSON.status) {
-                console.log(c.responseJSON);
-                $('#insert-new-stuffpack-response')
-                .removeClass( 'alert-danger' , 'alert-info')
-                .addClass ( 'alert-success')
-                .html('مجموعه کالا ذخیره شد.')
-
-                $('#stuff-pack-code-input').val('');
-                $('#stuff-pack-name-input').val('');
-                $('#stuff-pack-serial-input').val('');
-                $('select#stuff-select-input option:eq(0)').attr('selected',true).prop('selected',true);
-                $('#stuff-number-input').val('1');
-                $('#insert-new-stuffpack-description').val('');
-
-                stuff_list_array = []
-                refreshTable();
+                console.log(c.responseJSON.errors);
             }
             else {
-                console.log(c);
+                doc = c.responseText;
+                $('#content-box').html(doc);
+                /*
+                                var old_stuffpack_list = JSON.parse( $('#stuffpack-list').val() );
+
+                                console.log(old_stuffpack_list);
+
+
+                 */
+                if ($('#stuffpack-list')) {
+                    my_stuff_list_array = $('#stuffpack-list').val() ?? {};
+                    my_stuff_list_array = JSON.parse(my_stuff_list_array)
+
+                    $.each(my_stuff_list_array,function(key,value){
+                        checkForExists(value[0],value[1],value[2])
+                        refreshTable();
+                    })
+
+                }
+                 console.log([stuff_list_array]);
+
             }
         }
     })
-})
+    enableAll();
+});

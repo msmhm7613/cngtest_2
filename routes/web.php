@@ -74,6 +74,9 @@ Route::group(['namespace' => 'stuffpacks'], function () {
         return view('stuff-pack.insert-form');
     });
     Route::post('insert-new-stuffpack', [spController::class , 'insert']);
+   // Route::get('select-stuffpack', [spController::class,'select']);
+
+    Route::post('open-edit-form',  [spController::class , 'edit']);
 });
 
 

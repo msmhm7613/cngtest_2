@@ -57,4 +57,29 @@ class spController extends Controller
             }
         }
     }
+
+
+    // select stuffpack and return its data to ajax
+    public function select(Request $request)
+    {
+        $stuffpack_id = $request->id;
+        try
+        {
+            $stuffpack = \App\Models\Stuffpack::select()->where('id',$request->id)->first();
+            return response()->json($stuffpack);
+
+        }
+        catch(PDOException $ex)
+        {
+            return response()->json(['errors'=>$ex->errorInfo]);
+        }
+    }
+
+    //edit
+    public function edit(Request $request)
+    {
+        $stuffpack = $this->select($request);
+        //return response()-> json([$stuffpack]);
+        return view ( 'stuff-pack.edit-form')->with('stuffpack',json_encode($stuffpack->original));
+    }
 }

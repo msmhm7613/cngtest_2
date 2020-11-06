@@ -66,8 +66,8 @@
                     </td>
                     <td id="operation">
                         <div class="btns" id="{{ $stuff_pack->id }}">
-                            <button class="btn btn-info btn-sm m-0 my-1 d-inline-block w-100 text-center "
-                        id="btnStuff_packEdit" data-id="{{ $stuff_pack->id }}" title="ویرایش" data-creator-user-id="{{ $stuff_pack->creator_user_id }}" data-user-id="{{ $user->id }}"><i
+                            <button class="btn btn-info btn-sm m-0 my-1 d-inline-block w-100 text-center stuffpack-edit-modal-open"
+                        id="btnStuff_packEdit-{{ $stuff_pack->id }}" data-id="{{ $stuff_pack->id }}" title="ویرایش" data-creator-user-id="{{ $stuff_pack->creator_user_id }}" data-user-id="{{ $user->id }}"><i
                                     class="fas fa-pencil-alt  m-0"></i></button>
                             <button class="btn btn-danger btn-sm m-0 my-1 d-inline-block w-100 text-center "
                                 id="btn-stuff_pack-delete-modal-show" data-id="{{ $stuff_pack->id }}" title="حذف"><i
