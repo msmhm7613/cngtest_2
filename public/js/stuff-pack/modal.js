@@ -1,6 +1,5 @@
-
-
 var stuff_list_array = [];
+var my_stuff_list_array ;
 
 function disableAll() {
     $(document).find('.btn', 'button', 'a').attr('disabled', true).prop('disabled', true).off()
@@ -53,7 +52,7 @@ function checkForExists(stuff_id, stuff_name, stuff_num) {
     breakOut = false;
     $.each(stuff_list_array, function (ind, item) {
 
-        if (item.id === stuff_id) {
+        if (item.id == stuff_id) {
             console.log('stuff: ' + stuff_list_array[ind]);
             stuff_list_array[ind] = {
                 id: stuff_id,
@@ -140,6 +139,7 @@ function refreshTable() {
     );
     $('#stuff-number-input').val(1);
     $('#stuff-select-input option:eq(0)').attr('selected', true);
+    $('#stuffpack-list').val(JSON.stringify(stuff_list_array));
     enableAll();
 }
 
@@ -238,11 +238,12 @@ $(document).on('click', '#insert-new-stuffpack-save-btn',
 
 $(document).on('click', '.stuffpack-edit-modal-open', function (e) {
     e.stopImmediatePropagation();
-    e.preventDefault();
+    e.preventDefault();disableAll()
+    $('#stuffpack-list').val('');
     clickedButton = $(this).first().get();
     stuffpack_id = $(clickedButton).attr('data-id');
     console.log('stuff id: ' + stuffpack_id);
-    disableAll()
+
     $.ajax({
         type: 'post',
         url: 'open-edit-form',
@@ -272,8 +273,10 @@ $(document).on('click', '.stuffpack-edit-modal-open', function (e) {
                     my_stuff_list_array = JSON.parse(my_stuff_list_array)
 
                     $.each(my_stuff_list_array,function(key,value){
-                        checkForExists(value[0],value[1],value[2])
-                        refreshTable();
+                        $.each(value , function ( k , v ){
+                            checkForExists(v[0],v[1],v[2])
+                            refreshTable();
+                        })
                     })
 
                 }
@@ -284,3 +287,36 @@ $(document).on('click', '.stuffpack-edit-modal-open', function (e) {
     })
     enableAll();
 });
+
+/**
+ *
+ * SAVE UPDATES
+ */
+
+ $(document).on('click','#edit-new-stuffpack-save-btn',function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+     disableAll();
+     console.log(stuff_list_array);
+     $.ajax({
+         url: 'update-stuffpack',
+         type: 'post',
+         responseType: 'json',
+         data: {
+             stuffpack_id : stuffpack_id,
+             code: $('#stuff-pack-code-input').val(),
+             name: $('#stuff-pack-name-input').val(),
+             serial: $('#stuff-pack-serial-input').val(),
+             description: $('#edit-new-stuffpack-description').val(),
+             list : stuff_list_array,
+
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+         complete: c => {
+             console.log('c', c);
+             enableAll();
+         }
+     })
+ })

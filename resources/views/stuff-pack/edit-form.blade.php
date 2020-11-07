@@ -10,7 +10,11 @@
             $stuffpack_list = \App\Models\StuffpackList::all()->where('stuffpack_id',$stuffpack->id);
             foreach ($stuffpack_list as $key => $value) {
                 $stuffname = \App\Models\Stuff::select()->where('id',$value->stuff_id)->first();
-                array_push($stuffpack_list_array,[$value->stuff_id,$stuffname->name,$value->stuff_count]);
+                array_push($stuffpack_list_array,
+                [ $value->id =>
+                         [$value->stuff_id,$stuffname->name,$value->stuff_count]
+                ]
+            );
             }
         @endphp
         <span class="bg-warning px-2 border-radius-1 pill">
@@ -132,7 +136,7 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-success hidden" id="edit-new-stuffpack-save-btn">
+            <button class="btn btn-success" id="edit-new-stuffpack-save-btn">
                 <i class="fas fa-save"></i>
                 ثبت
             </button>

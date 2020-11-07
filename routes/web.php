@@ -77,6 +77,7 @@ Route::group(['namespace' => 'stuffpacks'], function () {
    // Route::get('select-stuffpack', [spController::class,'select']);
 
     Route::post('open-edit-form',  [spController::class , 'edit']);
+    Route::post('update-stuffpack',[spController::class , 'update']);
 });
 
 
