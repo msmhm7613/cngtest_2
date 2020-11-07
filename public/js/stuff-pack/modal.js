@@ -329,7 +329,7 @@ $(document).on('click', '#edit-new-stuffpack-save-btn', function (e) {
             }
             else if (typeof c.responseJSON != 'undefined' && c.responseJSON.status) {
                 $('#edit-new-stuffpack-response')
-                    .removeClass(['alert-info','alert-danger'])
+                    .removeClass(['alert-info', 'alert-danger'])
                     .addClass('alert-success')
                     .html('تغییرات ثبت شد.')
                     .fadeIn();
@@ -339,5 +339,92 @@ $(document).on('click', '#edit-new-stuffpack-save-btn', function (e) {
     })
 })
 
+/**
+ *
+ * DELETE MODAL SHOW
+ */
 
+$(document).on('click', '#btn-stuff_pack-delete-modal-show', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    disableAll();
+
+    clickedButton = $(this).first().get();
+    stuffpack_id = $(clickedButton).attr('data-id');
+    $('#delete-stuff-pack-modal').modal('show');
+
+    console.log(stuffpack_id);
+    $('#delete-stuff-pack-response')
+    .html('')
+    .removeClass(['alert-success','alert-info'])
+    .addClass('alert-danger')
+    .fadeOut();
+    $.ajax({
+        type: 'GET',
+        url: 'select-stuffpack',
+        responseType: 'json',
+        data: { id : stuffpack_id },
+        complete: c => {
+            if ( typeof c.responseJSON != 'undefined' && c.responseJSON.errors )
+            {
+                $('#delete-stuff-pack-response')
+                .html('خطایی رخ داده است.')
+                .fadeIn();
+            }
+            else{
+                $('#delete-stuff-pack-name').html(c.responseJSON.code)
+            }
+            enableAll();
+        }
+    })
+})
+
+/***
+ *
+ * CONFIRM DELETE STUFFPACK
+ *
+ */
+
+ $(document).on('click','#delete-stuff-pack-btn', function(e){
+     e.preventDefault();
+     e.stopImmediatePropagation();
+     disableAll();
+
+     $.ajax({
+         url: 'delete-stuffpack',
+         type: 'post',
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data:{
+            id : stuffpack_id,
+        },
+        complete: c => {
+            if ( typeof c.responseJSON != 'undefined' && c.responseJSON.errors )
+            {
+                $('#delete-stuff-pack-response')
+                .html('خطایی رخ داده است.')
+                .fadeIn();
+            }
+            else{
+                $('#delete-stuff-pack-response')
+                .html('خذف شد.')
+                .fadeIn();
+                $('#delete-stuff-pack-btn').fadeOut();
+                $('#delete-cancel-btn').html('بستن');
+                console.log('deleted');
+            }
+            enableAll();
+        }
+     })
+ })
+
+ $('#delete-stuff-pack-modal').on('hidden.bs.modal', function (e) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+    disableAll();
+    if ($('#define-stuff-pack'))
+        $('#define-stuff-pack').get(0).click();
+    enableAll();
+})
 

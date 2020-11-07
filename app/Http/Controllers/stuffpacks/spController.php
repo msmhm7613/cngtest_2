@@ -124,4 +124,14 @@ class spController extends Controller
             }
         }
     }
+
+    public function delete(Request $request)
+    {
+        try {
+            DB::table('stuffpacks')->delete($request->id);
+            return response()->json(['status'=>'ok']);
+        } catch (PDOException $ex) {
+            return response()->json(['errors'=>$ex->errorInfo]);
+        }
+    }
 }

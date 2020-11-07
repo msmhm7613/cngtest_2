@@ -199,7 +199,9 @@
             <div class="modal-body">
                 <p class="alert alert-danger">
                     آیا شما مطمئنید میخواهید
+                    <b>
                     <span id="delete-stuff-pack-name"></span>
+                    </b>
                     را حذف کنید؟
 
                 </p>
@@ -211,7 +213,7 @@
                     حــذف
                 </button>
                 <button class="btn btn-info" type="button" data-dismiss="modal" id="delete-cancel-btn">
-                    <span class="fas fa-remove"></span>
+                    <span class="fas fa-exit"></span>
                     انصراف
                 </button>
             </div>
