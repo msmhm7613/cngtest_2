@@ -54,6 +54,7 @@ return array(
     'App\\Models\\Stuffpack' => $baseDir . '/app/Models/StuffPack.php',
     'App\\Models\\StuffpackList' => $baseDir . '/app/Models/StuffpackList.php',
     'App\\Models\\TempReciept' => $baseDir . '/app/Models/TempReciept.php',
+    'App\\Models\\TempRecieptList' => $baseDir . '/app/Models/TempRecieptList.php',
     'App\\Models\\TempStore' => $baseDir . '/app/Models/Tempstore.php',
     'App\\Models\\Unit' => $baseDir . '/app/Models/Unit.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

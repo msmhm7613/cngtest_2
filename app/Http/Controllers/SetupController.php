@@ -65,9 +65,6 @@ class SetupController extends Controller
             Config::set('database.connections.mysql.port', $request->dbport);
             Config::set('database.connections.mysql.password', $request->dbpassword);
 
-            Artisan::call('cache:clear');
-            Artisan::call('view:clear');
-            Artisan::call('config:clear');
             Artisan::call('migrate:fresh');
 
             $this->updateDotEnv('DB_INSTALLED'  , 1);

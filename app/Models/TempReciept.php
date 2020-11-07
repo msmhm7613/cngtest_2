@@ -10,8 +10,20 @@ class TempReciept extends Model
     use HasFactory;
 
     protected $fillable = [
+        'sender',
+        'referral_number',
+        'referral_date',
         'stuffpack_id',
-        'count'
+        'stuff_id',
+        'count',
+        'unit_id',
+        'comment',
+        'driver',
+        'car_no',
+        'car_type',
+        'description',
+        'creator_id',
+        'confirmer_id',
     ];
 
     public $timestamp = true;

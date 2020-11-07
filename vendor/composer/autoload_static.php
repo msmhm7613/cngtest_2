@@ -654,6 +654,7 @@ class ComposerStaticInit64d65c3c8d0ab36726bd2b4e417930d5
         'App\\Models\\Stuffpack' => __DIR__ . '/../..' . '/app/Models/StuffPack.php',
         'App\\Models\\StuffpackList' => __DIR__ . '/../..' . '/app/Models/StuffpackList.php',
         'App\\Models\\TempReciept' => __DIR__ . '/../..' . '/app/Models/TempReciept.php',
+        'App\\Models\\TempRecieptList' => __DIR__ . '/../..' . '/app/Models/TempRecieptList.php',
         'App\\Models\\TempStore' => __DIR__ . '/../..' . '/app/Models/Tempstore.php',
         'App\\Models\\Unit' => __DIR__ . '/../..' . '/app/Models/Unit.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

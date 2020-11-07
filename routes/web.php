@@ -82,4 +82,13 @@ Route::group(['namespace' => 'stuffpacks'], function () {
     Route::post('delete-stuffpack',[spController::class, 'delete']);
 });
 
+/**
+ *
+ * TEMP RECIEPT URLs
+ */
+Route::get('open-temp-reciept-insert-form', function(){
+    return view('temp-reciept.insert-new-temp-reciept');
+});
+Route::post('insert-new-temp-rec','App\Http\Controllers\TempRecieptController2@insert' );
+
 
