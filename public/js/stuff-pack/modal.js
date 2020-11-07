@@ -1,5 +1,5 @@
 var stuff_list_array = [];
-var my_stuff_list_array ;
+var my_stuff_list_array;
 
 function disableAll() {
     $(document).find('.btn', 'button', 'a').attr('disabled', true).prop('disabled', true).off()
@@ -238,7 +238,7 @@ $(document).on('click', '#insert-new-stuffpack-save-btn',
 
 $(document).on('click', '.stuffpack-edit-modal-open', function (e) {
     e.stopImmediatePropagation();
-    e.preventDefault();disableAll()
+    e.preventDefault(); disableAll()
     $('#stuffpack-list').val('');
     clickedButton = $(this).first().get();
     stuffpack_id = $(clickedButton).attr('data-id');
@@ -272,15 +272,15 @@ $(document).on('click', '.stuffpack-edit-modal-open', function (e) {
                     my_stuff_list_array = $('#stuffpack-list').val() ?? {};
                     my_stuff_list_array = JSON.parse(my_stuff_list_array)
 
-                    $.each(my_stuff_list_array,function(key,value){
-                        $.each(value , function ( k , v ){
-                            checkForExists(v[0],v[1],v[2])
+                    $.each(my_stuff_list_array, function (key, value) {
+                        $.each(value, function (k, v) {
+                            checkForExists(v[0], v[1], v[2])
                             refreshTable();
                         })
                     })
 
                 }
-                 console.log([stuff_list_array]);
+                console.log([stuff_list_array]);
 
             }
         }
@@ -293,30 +293,51 @@ $(document).on('click', '.stuffpack-edit-modal-open', function (e) {
  * SAVE UPDATES
  */
 
- $(document).on('click','#edit-new-stuffpack-save-btn',function(e){
+$(document).on('click', '#edit-new-stuffpack-save-btn', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-     disableAll();
-     console.log(stuff_list_array);
-     $.ajax({
-         url: 'update-stuffpack',
-         type: 'post',
-         responseType: 'json',
-         data: {
-             stuffpack_id : stuffpack_id,
-             code: $('#stuff-pack-code-input').val(),
-             name: $('#stuff-pack-name-input').val(),
-             serial: $('#stuff-pack-serial-input').val(),
-             description: $('#edit-new-stuffpack-description').val(),
-             list : stuff_list_array,
+    disableAll();
+    $('#edit-new-stuffpack-response')
+        .addClass('alert-danger')
+        .removeClass('alert-info', 'alert-success')
+        .html('').fadeOut();
+    console.log(stuff_list_array);
+    $.ajax({
+        url: 'update-stuffpack',
+        type: 'post',
+        responseType: 'json',
+        data: {
+            stuffpack_id: stuffpack_id,
+            code: $('#stuff-pack-code-input').val(),
+            name: $('#stuff-pack-name-input').val(),
+            serial: $('#stuff-pack-serial-input').val(),
+            description: $('#edit-new-stuffpack-description').val(),
+            list: stuff_list_array,
 
-         },
-         headers: {
+        },
+        headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-         complete: c => {
-             console.log('c', c);
-             enableAll();
-         }
-     })
- })
+        complete: c => {
+            console.log('c', c);
+            if (typeof c.responseJSON != 'undefined' && c.responseJSON.errors) {
+                $('#edit-new-stuffpack-response')
+                    .addClass('alert-danger')
+                    .removeClass(['alert-info', 'alert-success'])
+                    .html('خطا : ویرایش انجام نشد.')
+                    .fadeIn();
+            }
+            else if (typeof c.responseJSON != 'undefined' && c.responseJSON.status) {
+                $('#edit-new-stuffpack-response')
+                    .removeClass(['alert-info','alert-danger'])
+                    .addClass('alert-success')
+                    .html('تغییرات ثبت شد.')
+                    .fadeIn();
+            }
+            enableAll();
+        }
+    })
+})
+
+
+
