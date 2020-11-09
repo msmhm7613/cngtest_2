@@ -54,7 +54,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" id="serial-side-menu-btn" data-controller="serial">
                                      ثبت سریال و وضعیت کالا
                                 </a>
                             </li>

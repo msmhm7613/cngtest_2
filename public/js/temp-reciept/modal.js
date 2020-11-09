@@ -259,3 +259,10 @@ $(document).on('click', '#insert-new-reciept-save-btn', function (e) {
         }
     })
 })
+
+$(document).on('click', '#insert-new-reciept-back-btn', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if($('#temp-reciept-side-menu-btn'))
+        $('#temp-reciept-side-menu-btn').get(0).click();
+})
