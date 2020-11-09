@@ -42,6 +42,10 @@ class NewPanelController extends Controller
             case 'temp-reciept':
                 return view('temp-reciept.temp-reciept-table');
                 break;
+            
+            case 'serial':
+                return view('serial.serial-table');
+                break;
 
             default:
                 return '-';

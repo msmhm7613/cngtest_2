@@ -20,7 +20,10 @@ class Stuff extends Model
         'description'
     ];
 
-    
+    public function tempReciepts()
+    {
+        return $this->belongsTo(TempReciept::class);
+    }
 
     public $timestamps = true;
 }

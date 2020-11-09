@@ -26,5 +26,9 @@ class TempReciept extends Model
         'confirmer_id',
     ];
 
+    public function stuffs()
+    {
+        return $this->hasMany(Stuff::class);
+    }
     public $timestamp = true;
 }
