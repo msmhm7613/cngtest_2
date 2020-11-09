@@ -25,4 +25,17 @@
             </div>
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="mycard outset">
+            <div class="number">
+                <h1>
+                    <?php $temp_rec = \App\Models\TempReciept::count() ?>
+                    {{ $temp_rec }}
+                </h1>
+            </div>
+            <div class="desc">
+                تعداد رسید موقت
+            </div>
+        </div>
+    </div>
 </div>

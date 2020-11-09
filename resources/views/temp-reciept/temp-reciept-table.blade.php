@@ -61,14 +61,14 @@ $stuffpack = \App\Models\Stuffpack::all();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $ind = 0; ?>
+                    <?php $ind = 1; ?>
                     @foreach ($temp_reciept as $item)
                         <tr>
                             <td>
                                 {{ $ind++ }}
                             </td>
                             <td>
-                                {{ $item->id }}
+                                {{ $item->reciept_no }}
                             </td>
                             <td>
                                 {{ $item->sender }}

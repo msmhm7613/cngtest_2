@@ -44,7 +44,7 @@ class NewPanelController extends Controller
                 break;
 
             default:
-                return 'sorry I couldn\'t find that.';
+                return '-';
                 break;
         }
     }
