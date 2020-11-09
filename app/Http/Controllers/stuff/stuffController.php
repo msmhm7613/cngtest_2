@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\stuff;
 
 use App\Http\Controllers\Controller;
+use App\Models\Unit;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -19,8 +20,8 @@ class stuffController extends Controller
     public function validateStuff(Request $request)
     {
         $rules = [
-            'code' => ['required','string', 'alpha_dash', 'min:3', 'max:64', 'unique:stuffs,code',],
-            'name' => ['required','string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', ],
+            'code' => ['required', 'string', 'alpha_dash', 'min:3', 'max:64', 'unique:stuffs,code',],
+            'name' => ['required', 'string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64',],
             'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
             'creator_user_id' => ['numeric', 'exists:users,id'],
@@ -40,7 +41,7 @@ class stuffController extends Controller
 
         $rules = [
             'code' => ['required', 'string', 'min:3', 'max:64', 'unique:stuffs,code',],
-            'name' => ['required', 'string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', ],
+            'name' => ['required', 'string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64',],
             'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
             'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
@@ -51,16 +52,16 @@ class stuffController extends Controller
         $msg = [
 
             //code
-            'code.required'=> 'کد کالا الزامی است',
-            'code.string'  => 'کد کالا باید رشته باشد',
-            'code.min'     => 'کد کالا حداقل باید 3 کاراکتر باشد',
-            'code.max'     => 'کد کالا حداکثر میتواند 64 کاراکتر باشد',
-            'code.unique'  => 'کد کالا قبلا ثبت شده است.',
+            'code.required' => 'کد کالا الزامی است',
+            'code.string' => 'کد کالا باید رشته باشد',
+            'code.min' => 'کد کالا حداقل باید 3 کاراکتر باشد',
+            'code.max' => 'کد کالا حداکثر میتواند 64 کاراکتر باشد',
+            'code.unique' => 'کد کالا قبلا ثبت شده است.',
 
             //name
             'name.required' => 'نام کالا الزامی است',
         ];
-        $validator = Validator::make($request->all(), $rules,$msg);
+        $validator = Validator::make($request->all(), $rules, $msg);
 
         if ($validator->fails()) {
 
@@ -84,6 +85,98 @@ class stuffController extends Controller
             return response()->json(['errors' => $ex->getMessage()]);
         }
     }
+
+    /*
+     * Upload file and insert to data base
+     */
+    public function UploadStuff(Request $request)
+    {
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'file' => [
+                    'required',
+                    'mimes:csv,txt'
+                ]
+            ],
+            [
+                'file.required' => "فایلی ارسال نشده است !",
+                'file.mimes' => "تنها فرمت csv قابل پذیرش است"
+            ]
+        );
+        if ($validate->fails()) {
+            return response()->json(['errors' => $validate->getMessageBag()]);
+        }
+        $rules = [
+            'code' => ['required', 'string', 'min:3', 'max:64', 'unique:stuffs,code',],
+            'name' => ['required', 'string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64',],
+            'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
+            'has_unique_serial' => ['boolean'],
+            'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
+            'modifier_user_id' => ['numeric', 'exists:users,id', 'required'],
+            'description' => ['string', 'max:255', 'nullable'],
+        ];
+
+        $msg = [
+
+            //code
+            'code.required' => 'کد کالا الزامی است',
+            'code.string' => 'کد کالا باید رشته باشد',
+            'code.min' => 'کد کالا حداقل باید 3 کاراکتر باشد',
+            'code.max' => 'کد کالا حداکثر میتواند 64 کاراکتر باشد',
+            'code.unique' => 'کد کالا قبلا ثبت شده است.',
+
+            //name
+            'name.required' => 'نام کالا الزامی است',
+        ];
+        $erros = [];
+        $file = $request->file;
+        $fileName = uniqid();
+        $fileName = $fileName . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('tempUpload/'), $fileName);
+        $read = file_get_contents(public_path('tempUpload/' . $fileName));
+        unlink(public_path('tempUpload/' . $fileName));
+        $getline = explode("\n", $read);
+        foreach ($getline as $l => $line) {
+            if ($l == count($getline)-1|$l==0){
+                continue;
+            }
+            $getattr = explode(",", $line);
+            if (count($getattr) != 6) {
+                $message = "در سطر $l تعداد ستون ها کافی نمیباشد";
+                array_push($erros, $message);
+                continue;
+            }
+            if (! $unitid = Unit::where('name','LIKE','%'.$getattr[4].'%')->first()->id){
+                $message = "واحد اندازه گیری یافت نشد در سطر $l";
+                array_push($erros, $message);
+                continue;
+            }
+            $val = [
+                'code' => $getattr[0],
+                'name' => $getattr[1],
+                'latin_name' => $getattr[2],
+                'has_unique_serial' => $getattr[3],
+                'creator_user_id' => auth()->id(),
+                'modifier_user_id' => auth()->id(),
+                'unit_id' => $unitid,
+                'description' => $getattr[5],
+            ];
+            $validator = Validator::make($val, $rules, $msg);
+            if ($validator->fails()) {
+                array_push($erros, $validator->getMessageBag());
+                continue;
+            }
+            try {
+                Stuff::create($val);
+            } catch (Exception $ex) {
+                array_push($errrs, $ex->getMessage());
+            }
+        }
+        return back()->with($erros);
+    }
+
+
     /*
         SELECT STUFF FOR EDIT
     */
@@ -97,9 +190,9 @@ class stuffController extends Controller
             // response()->json(['stuff' => $selected_stuff]);
         } catch (PDOException $ex) {
             return response()->json(['errors' => [
-                'code'      => $ex->errorInfo[0],
-                'message'   => $ex->errorInfo[2],
-                'status'    => 'failed'
+                'code' => $ex->errorInfo[0],
+                'message' => $ex->errorInfo[2],
+                'status' => 'failed'
             ]]);
         }
     }
@@ -109,12 +202,12 @@ class stuffController extends Controller
         //$selected_stuff = $this->selectStuff($request->stuff_id);
 
         $rules = [
-            'code'              => ['string', 'alpha_dash', 'min:3', 'max:64', 'required',],
-            'name'              => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
-            'latin_name'        => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
+            'code' => ['string', 'alpha_dash', 'min:3', 'max:64', 'required',],
+            'name' => ['string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64', 'required'],
+            'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
             'has_unique_serial' => ['boolean'],
-            'description'       => ['string', 'max:255', 'nullable'],
-            'id'                => ['numeric', 'exists:stuffs,id', 'required'],
+            'description' => ['string', 'max:255', 'nullable'],
+            'id' => ['numeric', 'exists:stuffs,id', 'required'],
         ];
         $validator = Validator::make($request->all(), $rules);
 
@@ -153,18 +246,18 @@ class stuffController extends Controller
             return view('stuff.table');
         } catch (PDOException $ex) {
             $err = $ex->errorInfo;
-            if ( $err[0] == "23000" && $err[1] == 1451 )
-            {
-                $stuffpack_id   = \App\Models\StuffpackList::select('stuffpack_id')->where('stuff_id',$request->id)->first()->get();
-                $stuffpack      = \App\Models\Stuffpack::find($stuffpack_id)->first()->name;
-                $errorMsg       = 'این کالا عضوی از مجموعه کالای ' . "<b>" . $stuffpack . "</b>" . ' میباشد.';
-                $errorMsg       .= "<br/>";
-                $errorMsg       .= "ابتدا باید آن مجموعه کالا را حذف کنید.";
+            if ($err[0] == "23000" && $err[1] == 1451) {
+                $stuffpack_id = \App\Models\StuffpackList::select('stuffpack_id')->where('stuff_id', $request->id)->first()->get();
+                $stuffpack = \App\Models\Stuffpack::find($stuffpack_id)->first()->name;
+                $errorMsg = 'این کالا عضوی از مجموعه کالای ' . "<b>" . $stuffpack . "</b>" . ' میباشد.';
+                $errorMsg .= "<br/>";
+                $errorMsg .= "ابتدا باید آن مجموعه کالا را حذف کنید.";
                 return response()->json(['errors' => $errorMsg]);
             }
             return response()->json(['errors' => $ex->errorInfo]);
         }
     }
+
     public function uploadStuffFile(Request $request)
     {
         $file = $request->file('stuff_file');
@@ -173,9 +266,9 @@ class stuffController extends Controller
         $file->move($destinationPath, $file->getClientOriginalName());
 
         $json = file_get_contents('uploads\stuffs3.csv');
-        $json = json_encode(explode('\\n',$json));
-        $json = json_encode(explode(',',$json));
-        exit ( dd($json) );
+        $json = json_encode(explode('\\n', $json));
+        $json = json_encode(explode(',', $json));
+        exit (dd($json));
         $file_data = json_encode([
             'file_name' => $file->getClientOriginalName(),
             'file_ext' => $file->getClientOriginalExtension(),

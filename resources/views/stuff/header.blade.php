@@ -7,13 +7,17 @@
             <i class="fas fa-plus"></i>
             کالای جدید
         </a>
-        <a href="#"
+        <form id="form" action = {{route('uploadStuff')}} method="post" class="d-inline" enctype="multipart/form-data">
+        @csrf
+            <label
+            for="file-form"
         class="btn btn-info text-light"
-        id="insert-new-stuff-file-button"
-        data-user-id="{{ Auth::id() }}">
+        id="insert-new-stuff-file-button">
             <i class="fas fa-file-upload "></i>
             ارسال از طریق فایل
-        </a>
+        </label>
+        <input type="file" id="file-form" style="display: none" name="file">
+        </form>
     </div>
 
     {{-- <table class="table table-striped table-bordered " id="stuffs-table">
@@ -30,3 +34,9 @@
             </tr>
         </thead> --}}
 </div>
+<script>
+
+    document.getElementById("file-form").onchange = function() {
+        document.getElementById("form").submit();
+    };
+</script>

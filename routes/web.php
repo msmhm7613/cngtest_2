@@ -60,6 +60,7 @@ Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
  */
 Route::group(['namespace' => 'stuff'], function () {
     Route::post('insert-new-stuff', [stuffController::class, 'insert']);
+    Route::post('insert-new-stuff-file', [stuffController::class, 'UploadStuff'])->name('uploadStuff');
     Route::get('insert-new-stuff', [stuffController::class, 'insert']);
     Route::get('select-stuff', [stuffController::class, 'selectStuff']);
     Route::post('edit-stuff', [stuffController::class, 'editStuff']);
