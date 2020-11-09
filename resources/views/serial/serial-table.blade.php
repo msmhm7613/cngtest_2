@@ -33,7 +33,7 @@
     </div>
 
 
-    <table class="table table-striped table-borderd" id="serial-list-table">
+    <table class="table table-striped table-bordered" id="serial-list-table">
         <thead >
             <tr class="table-primary ">
                 <th>
@@ -64,6 +64,9 @@
             ذخیره
         </button>
     </div>
+</div>
+<div class="row alert" id="insert-new-serial-list-response">
+
 </div>
     <script src="{{ asset('js/serial/serial.js') }}">
     </script>
