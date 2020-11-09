@@ -247,24 +247,27 @@
         </table>
     </div>
 
-    <div class="row">
+    
+</div>
+<div class="row">
 
-        <div class="col">
-            <button class="btn btn-success hidden" id="insert-new-reciept-save-btn">
-                <i class="fas fa-save"></i>
-                ثبت
-            </button>
-        </div>
-        <div class="col">
-            <button class="btn btn-primary" id="insert-new-reciept-back-btn">
-                <i class="fas fa-backward"></i>
-                بازگشت
-            </button>
-        </div>
-        <div class="col">
-            <div class="mt-2 alert" id="insert-new-reciept-response">
+    <div class="col-md-6">
+        <button class="btn btn-success hidden" id="insert-new-reciept-save-btn">
+            <i class="fas fa-save"></i>
+            ثبت
+        </button>
+    </div>
+    <div class="col-md-6">
+        <button class="btn btn-primary" id="insert-new-reciept-back-btn">
+            <i class="fas fa-backward"></i>
+            بازگشت
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="mt-2 alert" id="insert-new-reciept-response">
 
-            </div>
         </div>
     </div>
 </div>
