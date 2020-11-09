@@ -1,12 +1,24 @@
-@extends ('layouts.app')
+@extends ('layouts.head')
 
 @section ( 'content' )
 
-    <div class="container">
-        <a href="#" class="btn btn-primary">{{ config('app.name','boluki') }}</a>
-        <h4>
-            {{ $db }}
-        </h4>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="cart">
+                <div class="cart-header">
+                     سیستم رهگیری قطعات شهاب خودرو
+                </div>
+                <div class="cart-body">
+                    @guest
+                        <a href="/login" class="btn btn-primary">
+                            ورود
+                        </a>
+                    @endguest
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 
 @endsection

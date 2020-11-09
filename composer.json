@@ -1,4 +1,5 @@
 {
+    
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
@@ -9,13 +10,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "aloko/nova-persian-datepicker": "^0.1.1",
+        "doctrine/dbal": "^2.11",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "laracasts/utilities": "^3.2",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "laravelcollective/html": "^6.2"
+        "laravelcollective/html": "^6.2",
+        "morilog/jalali": "3.*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

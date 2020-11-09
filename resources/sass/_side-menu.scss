@@ -1,0 +1,57 @@
+.side-menu
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 85vh;
+    font-weight: bold;
+    overflow: auto;
+    b#title{
+        overflow: hidden;
+    }
+
+    #accordion {
+        min-width: 100% !important;
+
+    }
+
+    .top
+    {
+        vertical-align: top;
+    }
+
+    .navbar-collapse
+    {
+        flex-grow: unset;
+    }
+
+    a{
+        &:hover{
+            background-color: #fff;
+        }
+
+    }
+    a.active{
+        position: relative;
+        background-color:#fff;
+        display: block;
+        border-right: 2px solid $indigo;
+        &::after{
+            color:$indigo;
+            content: '\f053';
+            font-family: "Font Awesome 5 Free";
+            font-style: normal;
+            font-weight: normal;
+            font-size: 1.0rem;
+            vertical-align: middle;
+            font-weight: 900;
+            float: left;
+        }
+    }
+}
+
+@media only screen and (max-width:768px)
+{
+    .side-menu{
+        justify-content: unset;
+    }
+}

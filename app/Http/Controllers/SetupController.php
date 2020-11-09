@@ -2,27 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use Facade\FlareClient\Http\Response;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Redirect;
+use PDOException;
 
 class SetupController extends Controller
 {
-    public function index(Request $request)
+    protected function index(Request $request)
     {
-        if ( env('DB_INSTALLED' , 0 ))
-            $data = 'DB_INSALLED';
-        else
-            $data = 'DB_NOT_INSTALLED';
-
-        request()->validate([
-            'dbname' => ['required','string','max:5']
+         $validator = Validator::make($request->all(), [
+            'dbname'        => ['string', 'required', 'min:3', 'max:25'],
+            'dbusername'    => ['string', 'required', 'min:3', 'max:25'],
+            'dbpassword'    => ['string', 'max:25', 'nullable'],
+            'dbport'        => ['numeric'],
         ]);
-        
-        return 'I get it - ' . ' - '. $data.' - ';
-    }
 
-    public function CheckDB()
-    {
 
+        if ($validator->fails()) {
+            die(dd($validator->getMessageBag()));
+        }
+
+        if (!env('DB_INSTALLED', 0)) {
+            $this->setupDB($request);
+        }
+        return view('new-panel');
     }
     protected function updateDotEnv($key, $newValue, $delim = '')
     {
@@ -48,5 +56,22 @@ class SetupController extends Controller
                 )
             );
         }
+    }
+
+    public function setupDB(Request $request)
+    {
+            Config::set('database.connections.mysql.database', $request->dbname);
+            Config::set('database.connections.mysql.username', $request->dbusername);
+            Config::set('database.connections.mysql.port', $request->dbport);
+            Config::set('database.connections.mysql.password', $request->dbpassword);
+
+            Artisan::call('migrate:fresh');
+
+            $this->updateDotEnv('DB_INSTALLED'  , 1);
+            $this->updateDotEnv('DB_PORT'       , $request->dbport);
+            $this->updateDotEnv('DB_DATABASE'   , $request->dbname);
+            $this->updateDotEnv('DB_USERNAME'   , $request->dbusername);
+            $this->updateDotEnv('DB_PASSWORD'   , $request->dbpassword);
+
     }
 }

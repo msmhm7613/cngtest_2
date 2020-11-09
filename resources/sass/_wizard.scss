@@ -14,9 +14,16 @@
 
     }
     form{
-        
+
         input{
             margin-top: .7rem;
+            position: relative;
+
+        }
+
+        input[type="submit"]{
+            background-color: $blue;
+            color:#eee;
         }
     }
 

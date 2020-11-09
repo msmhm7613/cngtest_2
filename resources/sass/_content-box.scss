@@ -1,0 +1,13 @@
+#content-box{
+    max-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    overflow: auto;
+}
+
+#main-content{
+    max-height: 85vh;
+
+}
