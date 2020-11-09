@@ -9,6 +9,9 @@
 @include('stuff.header')
 
 <?php
+
+use \App\Http\Controllers\stuff\StuffController;
+use \App\Models\Stuff;
     $stuff = \App\Models\Stuff::all();
 
     if ( $stuff->isEmpty() )

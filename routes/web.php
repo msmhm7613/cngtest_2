@@ -3,6 +3,9 @@
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\stuff\stuffController;
 use App\Http\Controllers\stuffpacks\spController;
+use App\Http\Controllers\tempReciept\TempRecieptController;
+use App\Http\Controllers\unit\unitController;
+use App\Http\Controllers\stuffpackList\StuffpackListController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
@@ -55,13 +58,14 @@ Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
 /********
  * Stuff URLs
  */
-Route::post ('insert-new-stuff' , 'App\Http\Controllers\stuff\stuffController@insert');
-Route::get  ('insert-new-stuff' , 'App\Http\Controllers\stuff\stuffController@insert');
-Route::get  ('select-stuff'     , 'App\Http\Controllers\stuff\StuffController@selectStuff');
-Route::post ('edit-stuff'       , 'App\Http\Controllers\stuff\StuffController@editStuff');
-Route::post ('delete-stuff'     , 'App\Http\Controllers\stuff\StuffController@deleteStuff');
-Route::post ('upload-stuff-file', 'App\Http\Controllers\stuff\StuffController@uploadStuffFile');
-
+Route::group(['namespace' => 'stuff'], function () {
+    Route::post('insert-new-stuff', [stuffController::class, 'insert']);
+    Route::get('insert-new-stuff', [stuffController::class, 'insert']);
+    Route::get('select-stuff', [stuffController::class, 'selectStuff']);
+    Route::post('edit-stuff', [stuffController::class, 'editStuff']);
+    Route::post('delete-stuff', [stuffController::class, 'deleteStuff']);
+    Route::post('upload-stuff-file', [stuffController::class, 'uploadStuffFile']);
+});
 
 
 /**
