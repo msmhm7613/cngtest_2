@@ -1,6 +1,7 @@
 @php
 $temp_reciept = \App\Models\TempReciept::all();
 $stuffpack = \App\Models\Stuffpack::all();
+
 @endphp
 <div class="header row">
     <button class="btn btn-success" id="open-insert-new-temp-reciept-modal">
@@ -79,10 +80,27 @@ $stuffpack = \App\Models\Stuffpack::all();
                                 {{ $item->referral_date }}
                             </td>
                             <td>
-                                {{ '0 ' }}
+                                @php
+                                $temp_reciept_stuffs_count =
+                                \App\Models\TempRecieptList::select()->where('reciept_id',$item->id)->where('stuff_id','<>',0);
+                                    @endphp
+                                    <span>
+                                        {{ $temp_reciept_stuffs_count->count() }}
+                                    </span>
+                                    @if ($temp_reciept_stuffs_count->count() )
+                                        <br />
+                                        <span class="badge badge-pill badge-secondary">
+                                            {{ $temp_reciept_stuffs_count->sum('count') }}
+                                        </span>
+                                    @endif
                             </td>
                             <td>
-                                {{ '0 ' }}
+                                @php
+                                $temp_reciept_stuffpacks_count = \App\Models\TempRecieptList::select()->where('reciept_id',$item->id)->where('stuffpack_id','<>',0);
+                                    @endphp
+                                    <span>
+                                        {{ $temp_reciept_stuffpacks_count->count() }}
+                                    </span>
                             </td>
                             <td>
                                 {{ $item->driver }}
