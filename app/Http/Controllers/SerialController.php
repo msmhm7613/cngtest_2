@@ -19,16 +19,10 @@ class SerialController extends Controller
 
             $stuffs = DB::table('temp_reciept_lists')->where('reciept_id','=',$rec_id)
             ->join('stuffs',"stuffs.id","=","temp_reciept_lists.stuff_id")->where('stuffs.has_unique_serial','=','1')
-            
             ->get();
 
-            /* $stuffpacks = DB::table('temp_reciept_lists')->where('reciept_id','=',$rec_id)
-            ->join('stuffpacks','stuffpacks','=','temp_reciept_lists.stuffpack_id')->where('stuffpacks.has_unique_serial','=','1')
-            ->get(); */
-            /* 
-            $stuffs = TempRecieptList::select('stuff_id')->where('reciept_id',$rec_id)->where('stuff_id','<>','0')->get();
-            $stuffs_serials = Stuff::where('id',$stuffs)->where('has_unique_serial','1'); */
-            return response()->json(['stuffs' => $stuffs,'rec_id' => $rec_id]);
+            $used = DB::table('serial_lists')->select('stuff_id')->where('rec_id',$rec_id)->get();
+            return response()->json(['stuffs' => $stuffs,'rec_id' => $rec_id, 'used' => $used]);
         } catch (PDOException $ex) {
             return response()->json(['errors' => $ex->errorInfo]);
         }

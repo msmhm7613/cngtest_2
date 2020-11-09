@@ -25,9 +25,12 @@ $(document).on('click', '#serial-get-list-btn', function (e) {
             }
             else {
                 if (typeof c.responseJSON.stuffs != 'undefined' && c.responseJSON.stuffs) {
+                    $('#serial-list-table tbody').html("");
                     $.each(c.responseJSON.stuffs, function (key, stuff) {
-
-                        for (let i = 1; i <= stuff.count; i++) {
+                        realNeeds = stuff.count - stuff.used;
+                        console.log(c.responseJSON.used);
+                        
+                        for (let i = 1; i <= realNeeds; i++) {
                             $('#serial-list-table tbody').append(
                                 `
                                 <tr>
