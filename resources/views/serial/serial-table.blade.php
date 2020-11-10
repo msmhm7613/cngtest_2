@@ -61,7 +61,7 @@
 <div class="row">
     <div class="col-md-6">
         <button class="btn btn-success form-control" id="save-serial-list-btn">
-            ذخیره
+            ذخـیـره
         </button>
     </div>
 </div>
