@@ -97,3 +97,11 @@ Route::get('open-temp-reciept-insert-form', function(){
 Route::post('insert-new-temp-rec','App\Http\Controllers\TempRecieptController2@insert' );
 
 
+/**
+ * SERIAL URLs
+ */
+
+ Route::post('get-serial-items-list' , 'App\Http\Controllers\SerialController@getList');
+ Route::post('insert-serial-list' , 'App\Http\Controllers\SerialListController@insert');
+
+ 

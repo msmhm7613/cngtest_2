@@ -15,13 +15,13 @@ $('#insert-new-stuff-button').on('click', function (e) {
     $('#insert-new-stuff-modal').modal('show');
 })
 function disableAll() {
-   /*  $(document).find('.btn').prop('disabled', true).attr('disabled', true);
-    console.log('disabled', Date.now()); */
+    $(document).find('.btn').prop('disabled', true).attr('disabled', true);
+    console.log('disabled', Date.now());
 }
 
 function enableAll() {
-    /* $(document).find('.btn').prop('disabled', false).attr('disabled', false);
-    console.log('enabled', Date.now()); */
+    $(document).find('.btn').prop('disabled', false).attr('disabled', false);
+    console.log('enabled', Date.now());
 }
 
 function reloadTable(e){

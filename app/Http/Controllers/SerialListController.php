@@ -20,8 +20,8 @@ class SerialListController extends Controller
             $rec_id = $x[2];
             $ser = $itemVal;
 
-            $res = DB::table('serial_lists')->where('stuff_id', '=', $st_id, 'and', 'rec_id', '=', $rec_id, 'and', 'serial', '=', $ser)->count();
-            if ($res === 0) {
+            //$res = DB::table('serial_lists')->where('stuff_id', '=', $st_id, 'and', 'rec_id', '=', $rec_id, 'and', 'serial', '=', $ser)->count();
+            //if ($res === 0) {
                 try {
                     $newSerialList = new \App\Models\SerialList();
 
@@ -34,7 +34,7 @@ class SerialListController extends Controller
                 } catch (PDOException $ex) {
                     response()->json(['errors' => $ex->errorInfo, 'serial list' => $serial_list]);
                 }
-            }
+            //}
         }
         return response()->json(['status'=>'ok' ]);
     }
