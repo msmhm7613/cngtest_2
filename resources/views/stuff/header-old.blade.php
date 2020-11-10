@@ -7,23 +7,13 @@
             <i class="fas fa-plus"></i>
             کالای جدید
         </a>
-        <a href="{{asset('tempUpload/sample.csv')}}" style="color: white"
-           class="btn btn-info">
-            <i class="fas fa-download"></i>
-            دانلود فایل نمونه
-        </a>
-        <form id="form" action = {{route('uploadStuff')}} method="post" class="d-inline p-0" enctype="multipart/form-data">
-        @csrf
-            <label
-            for="file-form-1"
-        class="btn btn-info text-light m-0"
-        id="insert-new-stuff-file-button">
+        <a href="#"
+        class="btn btn-info text-light"
+        id="insert-new-stuff-file-button"
+        data-user-id="{{ Auth::id() }}">
             <i class="fas fa-file-upload "></i>
             ارسال از طریق فایل
-        </label>
-        <input type="file" id="file-form-1" style="display: none" name="file">
-        </form>
-
+        </a>
     </div>
 
     {{-- <table class="table table-striped table-bordered " id="stuffs-table">
@@ -40,10 +30,3 @@
             </tr>
         </thead> --}}
 </div>
-<script>
-
-    document.getElementById("file-form-1").onchange = function() {
-        document.getElementById("form").submit();
-    };
-</script>
-

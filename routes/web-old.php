@@ -60,7 +60,6 @@ Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
  */
 Route::group(['namespace' => 'stuff'], function () {
     Route::post('insert-new-stuff', [stuffController::class, 'insert']);
-    Route::post('insert-new-stuff-file', [stuffController::class, 'UploadStuff'])->name('uploadStuff');
     Route::get('insert-new-stuff', [stuffController::class, 'insert']);
     Route::get('select-stuff', [stuffController::class, 'selectStuff']);
     Route::post('edit-stuff', [stuffController::class, 'editStuff']);
@@ -103,5 +102,3 @@ Route::post('insert-new-temp-rec','App\Http\Controllers\TempRecieptController2@i
 
  Route::post('get-serial-items-list' , 'App\Http\Controllers\SerialController@getList');
  Route::post('insert-serial-list' , 'App\Http\Controllers\SerialListController@insert');
-
- 
