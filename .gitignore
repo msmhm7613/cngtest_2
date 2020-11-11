@@ -8,3 +8,7 @@ yarn-error.log
 .env
 /.vscode/
 /.env
+/.env copy
+/.env.example
+/.gitattributes
+/node_modules

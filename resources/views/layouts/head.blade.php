@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="{{ asset('storage/images/logo_cropped.png') }}" type="image">
     <!-- Styles -->
     @if (App::isLocal())
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     @endif
     <style>
         @font-face {
