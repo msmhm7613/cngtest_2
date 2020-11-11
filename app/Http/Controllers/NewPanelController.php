@@ -47,6 +47,10 @@ class NewPanelController extends Controller
                 return view('serial.serial-table');
                 break;
 
+            case 'transfer':
+                return view('stuff-transfer.transfer-stuff');
+                break;
+
             default:
                 return '-';
                 break;
