@@ -1,0 +1,25 @@
+.form-group
+ {
+     button#add-to-stuffs-list-btn{
+         background-color: #38c172 !important;
+         i.fa-forward{
+             animation-name: pushit;
+             animation-duration: 2s;
+             animation-timing-function: cubic-bezier();
+             animation-iteration-count: infinite;
+             animation-direction: alternate;
+         }
+     }
+ }
+
+ @keyframes pushit
+ {
+    from{
+        transform: translateX(-0.5rem);
+    }
+    to{
+        transform: translateX(1rem);
+    }
+
+ }
+
