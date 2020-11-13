@@ -14,7 +14,7 @@ class AlertStuffpacksTableCode extends Migration
     public function up()
     {
         Schema::table('stuffpacks', function (Blueprint $table) {
-            $table->string('code')->unique()->change();
+            $table->string('code',155)->unique()->change();
         });
     }
 
