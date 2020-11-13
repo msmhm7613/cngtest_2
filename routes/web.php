@@ -114,3 +114,8 @@ Route::post('CarFile',[carController::class,'upload'])->name('carUpload');
 Route::post('CarInsert',[carController::class,'insert'])->name('carInsert');
 Route::post('carEdit',[carController::class,'edit']);
 Route::post('carUpdate',[carController::class,'update'])->name('carUpdate');
+
+/** test github */
+Route::get('test',function(){
+    echo 'test push';
+});
