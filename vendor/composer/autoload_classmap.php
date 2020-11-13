@@ -50,6 +50,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\BaseModel' => $baseDir . '/app/Models/BaseModel.php',
+    'App\\Models\\CarQueue' => $baseDir . '/app/Models/CarQueue.php',
     'App\\Models\\Contractor' => $baseDir . '/app/Models/Contractor.php',
     'App\\Models\\Kit' => $baseDir . '/app/Models/Kit.php',
     'App\\Models\\SerialList' => $baseDir . '/app/Models/SerialList.php',

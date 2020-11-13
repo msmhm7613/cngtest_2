@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\car\carController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\stuff\stuffController;
 use App\Http\Controllers\stuffpacks\spController;
@@ -104,4 +105,12 @@ Route::post('insert-new-temp-rec','App\Http\Controllers\TempRecieptController2@i
  Route::post('get-serial-items-list' , 'App\Http\Controllers\SerialController@getList');
  Route::post('insert-serial-list' , 'App\Http\Controllers\SerialListController@insert');
 
- 
+
+/*
+ * car queue
+ */
+
+Route::post('CarFile',[carController::class,'upload'])->name('carUpload');
+Route::post('CarInsert',[carController::class,'insert'])->name('carInsert');
+Route::post('carEdit',[carController::class,'edit']);
+Route::post('carUpdate',[carController::class,'update'])->name('carUpdate');

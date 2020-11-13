@@ -42,7 +42,7 @@ class NewPanelController extends Controller
             case 'temp-reciept':
                 return view('temp-reciept.temp-reciept-table');
                 break;
-            
+
             case 'serial':
                 return view('serial.serial-table');
                 break;
@@ -50,7 +50,12 @@ class NewPanelController extends Controller
             case 'transfer':
                 return view('stuff-transfer.transfer-stuff');
                 break;
-
+            case 'car-queue':
+                return view('car.index');
+                break;
+            case 'add-car-queue':
+                return view('car.create');
+                break;
             default:
                 return '-';
                 break;
