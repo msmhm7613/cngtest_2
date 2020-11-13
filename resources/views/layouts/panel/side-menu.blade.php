@@ -78,7 +78,7 @@
                     <div class="collapse" id="car-submenu" data-parent="#accordion">
                         <ul class="navbar-nav flex-column w-100">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" data-controller="car-queue">
                                     خودروهای در صف </a>
                             </li>
                            <!--  <li class="nav-item">
