@@ -15,14 +15,14 @@ class CreateTempRecieptsTable extends Migration
     {
         Schema::create('temp_reciepts', function (Blueprint $table) {
             $table->id();
-            $table->string('reciept_no');
-            $table->string('sender');
-            $table->string('referral_number');
-            $table->string('referral_date');
-            $table->string('driver');
-            $table->string('car_no');
-            $table->string('car_type');
-            $table->string('description')->nullable();
+            $table->string('reciept_no',30);
+            $table->string('sender',30);
+            $table->string('referral_number',30);
+            $table->string('referral_date',30);
+            $table->string('driver',30);
+            $table->string('car_no',30);
+            $table->string('car_type',30);
+            $table->string('description',255)->nullable();
             $table->unsignedBigInteger('creator_id');
             $table->unsignedBigInteger('confirmer_id');
             $table->timestamps();

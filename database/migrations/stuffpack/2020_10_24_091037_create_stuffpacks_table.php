@@ -15,10 +15,10 @@ class CreateStuffpacksTable extends Migration
     {
         Schema::create('stuffpacks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code');
-            $table->string('serial');
-            $table->string('description')->nullable();
+            $table->string('name',155);
+            $table->string('code',155);
+            $table->string('serial',155);
+            $table->string('description',255)->nullable();
             $table->unsignedBigInteger('creator_user_id');
             $table->unsignedBigInteger('modifier_user_id');
             
