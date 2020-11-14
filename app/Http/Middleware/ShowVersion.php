@@ -18,6 +18,7 @@ class ShowVersion
      */
     public function handle(Request $request, Closure $next)
     {
+        return $next($request);
         /* try {
             date_default_timezone_set('Asia/Tehran');
             $gitBasePath = base_path('.git'); // e.g in laravel: base_path().'/.git';
