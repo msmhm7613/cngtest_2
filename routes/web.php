@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\car\carController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\stuff\stuffController;
 use App\Http\Controllers\stuffpacks\spController;

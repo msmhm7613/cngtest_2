@@ -990,44 +990,43 @@ final class File extends Renderer
 
     private function createPopoverContentForTest(string $test, array $testData): string
     {
-        $testCSS = '';
+        switch ($testData['status']) {
+            case BaseTestRunner::STATUS_PASSED:
+                switch ($testData['size']) {
+                    case 'small':
+                        $testCSS = ' class="covered-by-small-tests"';
 
-        if ($testData['fromTestcase']) {
-            switch ($testData['status']) {
-                case BaseTestRunner::STATUS_PASSED:
-                    switch ($testData['size']) {
-                        case 'small':
-                            $testCSS = ' class="covered-by-small-tests"';
+                        break;
 
-                            break;
+                    case 'medium':
+                        $testCSS = ' class="covered-by-medium-tests"';
 
-                        case 'medium':
-                            $testCSS = ' class="covered-by-medium-tests"';
+                        break;
 
-                            break;
+                    default:
+                        $testCSS = ' class="covered-by-large-tests"';
 
-                        default:
-                            $testCSS = ' class="covered-by-large-tests"';
+                        break;
+                }
 
-                            break;
-                    }
+                break;
 
-                    break;
+            case BaseTestRunner::STATUS_SKIPPED:
+            case BaseTestRunner::STATUS_INCOMPLETE:
+            case BaseTestRunner::STATUS_RISKY:
+            case BaseTestRunner::STATUS_WARNING:
+                $testCSS = ' class="warning"';
 
-                case BaseTestRunner::STATUS_SKIPPED:
-                case BaseTestRunner::STATUS_INCOMPLETE:
-                case BaseTestRunner::STATUS_RISKY:
-                case BaseTestRunner::STATUS_WARNING:
-                    $testCSS = ' class="warning"';
+                break;
 
-                    break;
+            case BaseTestRunner::STATUS_FAILURE:
+            case BaseTestRunner::STATUS_ERROR:
+                $testCSS = ' class="danger"';
 
-                case BaseTestRunner::STATUS_FAILURE:
-                case BaseTestRunner::STATUS_ERROR:
-                    $testCSS = ' class="danger"';
+                break;
 
-                    break;
-            }
+            default:
+                $testCSS = '';
         }
 
         return sprintf(

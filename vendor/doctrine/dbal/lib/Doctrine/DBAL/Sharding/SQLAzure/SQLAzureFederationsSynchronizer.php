@@ -125,8 +125,6 @@ class SQLAzureFederationsSynchronizer extends AbstractSchemaSynchronizer
         $this->shardManager->selectGlobal();
         $globalSql = $this->synchronizer->getDropAllSchema();
 
-        $sql = [];
-
         if ($globalSql) {
             $sql[] = "-- Work on Root Federation\nUSE FEDERATION ROOT WITH RESET;";
             $sql   = array_merge($sql, $globalSql);

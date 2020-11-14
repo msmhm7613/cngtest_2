@@ -44,7 +44,7 @@ trait EnumeratesValues
     /**
      * The methods that can be proxied.
      *
-     * @var string[]
+     * @var array
      */
     protected static $proxies = [
         'average',

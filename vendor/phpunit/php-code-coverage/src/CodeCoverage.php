@@ -277,13 +277,11 @@ final class CodeCoverage
                 return;
             }
 
-            $size         = 'unknown';
-            $status       = -1;
-            $fromTestcase = false;
+            $size   = 'unknown';
+            $status = -1;
 
             if ($id instanceof TestCase) {
-                $fromTestcase = true;
-                $_size        = $id->getSize();
+                $_size = $id->getSize();
 
                 if ($_size === Test::SMALL) {
                     $size = 'small';
@@ -296,12 +294,11 @@ final class CodeCoverage
                 $status = $id->getStatus();
                 $id     = get_class($id) . '::' . $id->getName();
             } elseif ($id instanceof PhptTestCase) {
-                $fromTestcase = true;
-                $size         = 'large';
-                $id           = $id->getName();
+                $size = 'large';
+                $id   = $id->getName();
             }
 
-            $this->tests[$id] = ['size' => $size, 'status' => $status, 'fromTestcase' => $fromTestcase];
+            $this->tests[$id] = ['size' => $size, 'status' => $status];
 
             $this->data->markCodeAsExecutedByTestCase($id, $rawData);
         }

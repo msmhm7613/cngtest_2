@@ -68,8 +68,11 @@ class MessageFormatter implements MessageFormatterInterface
      * @param ResponseInterface|null $response Response that was received
      * @param \Throwable|null        $error    Exception that was received
      */
-    public function format(RequestInterface $request, ?ResponseInterface $response = null, ?\Throwable $error = null): string
-    {
+    public function format(
+        RequestInterface $request,
+        ?ResponseInterface $response = null,
+        ?\Throwable $error = null
+    ): string {
         $cache = [];
 
         /** @var string */
@@ -83,10 +86,10 @@ class MessageFormatter implements MessageFormatterInterface
                 $result = '';
                 switch ($matches[1]) {
                     case 'request':
-                        $result = Psr7\Message::toString($request);
+                        $result = Psr7\str($request);
                         break;
                     case 'response':
-                        $result = $response ? Psr7\Message::toString($response) : '';
+                        $result = $response ? Psr7\str($response) : '';
                         break;
                     case 'req_headers':
                         $result = \trim($request->getMethod()
