@@ -10,11 +10,11 @@ use App\Models\Unit;
 $tempstores = Tempstore::latest()->get();
 // لیست رسید ها
 $temp_lists = TempRecieptList::latest()->get();
-
+$stuff_packes = array();
+$stuffs = array();
 if (count($temp_lists)) {
 
-    $stuff_packes = array();
-    $stuffs = array();
+    
 
     foreach ($temp_lists as $stuff_item) {
 
