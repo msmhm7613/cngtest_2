@@ -13,17 +13,8 @@ use Doctrine\DBAL\Driver\IBMDB2\DB2Exception;
  */
 final class CannotCreateTemporaryFile extends DB2Exception
 {
-    /**
-     * @psalm-param array{message: string}|null $error
-     */
-    public static function new(?array $error): self
+    public static function new(string $message): self
     {
-        $message = 'Could not create temporary file';
-
-        if ($error !== null) {
-            $message .= ': ' . $error['message'];
-        }
-
-        return new self($message);
+        return new self('Could not create temporary file: ' . $message);
     }
 }

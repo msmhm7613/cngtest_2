@@ -352,7 +352,7 @@ final class Mapper
             $result['coverageFilter'] = $arguments->coverageFilter();
         }
 
-        if ($arguments->hasRandomOrderSeed()) {
+        if ($arguments->hasRandomOrderSeer()) {
             $result['randomOrderSeed'] = $arguments->randomOrderSeed();
         }
 

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\car;
 
 use App\Http\Controllers\Controller;
+use App\Imports\CarQueueImport;
+use App\Imports\StuffImport;
 use App\Models\CarQueue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class carController extends Controller
 {
@@ -19,7 +22,7 @@ class carController extends Controller
             [
                 'file' => [
                     'required',
-                    'mimes:csv,txt'
+                    'mimes:csv,xls,xlsx'
                 ]
             ],
             [
@@ -48,21 +51,26 @@ class carController extends Controller
             'workshop_phone' => 'required',
         ];
         if ($validate->fails()) {
-            return response()->json(['errors' => $validate->getMessageBag()]);
+            dd($request->file);
+            $message = "فرمت فایل ارسالی قابل قبول نیست !";
+            return "
+            <script>
+        window.alert('$message');
+                window.location = '/';
+    </script>
+        ";
         }
         $error = [];
         $file = $request->file;
         $fileName = uniqid();
         $fileName = $fileName . '.' . $file->getClientOriginalExtension();
         $file->move(public_path('tempUpload/'), $fileName);
-        $read = file_get_contents(public_path('tempUpload/' . $fileName));
+        $getline = Excel::toArray(new CarQueueImport, public_path('tempUpload/' . $fileName));
         unlink(public_path('tempUpload/' . $fileName));
-        $getline = explode("\n", $read);
-        foreach ($getline as $l => $line) {
-            if ($l == count($getline) - 1 | $l == 0) {
+        foreach ($getline[0] as $l => $getattr) {
+            if ( $l == 0) {
                 continue;
             }
-            $getattr = explode(",", $line);
             $arr = $this->reindex($getattr);
             if ($arr == -1) {
                 $message = "در سطر $l تعداد ستون ها کافی نمیباشد";
