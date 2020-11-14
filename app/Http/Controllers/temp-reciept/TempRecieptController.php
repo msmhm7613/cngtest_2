@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\temp-reciept;
 
 use App\Models\TempReciept;
 use Illuminate\Http\Request;
@@ -9,5 +9,5 @@ use PDOException;
 
 class TempRecieptController extends Controller
 {
-    
+
 }

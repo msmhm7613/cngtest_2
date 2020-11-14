@@ -1,8 +1,6 @@
 @guest
-
     <script>
         window.location('login')
-
     </script> ;
 @endguest
 
@@ -12,9 +10,18 @@
 
 use \App\Http\Controllers\stuff\StuffController;
 use \App\Models\Stuff;
-    $stuff = \App\Models\Stuff::all();
 
-    if ( $stuff->isEmpty() )
+    $stuffs = Stuff::all();
+
+    // paginate
+    $stuffs_copy = $stuffs;
+
+    $limit = 2;
+    $c_page = count($stuffs_copy) / $limit;
+
+    $stuffs = Stuff::skip(2)->take(2)->get();
+
+    if ( $stuffs->isEmpty() )
         {
             ?>
             <div class="row">
@@ -45,7 +52,7 @@ use \App\Models\Stuff;
             </thead>
         <tbody>
 
-            @foreach (\App\Models\Stuff::all() as $stuff)
+            @foreach ($stuffs as $stuff)
                 @php
                 $unit = \App\Models\Unit::where('id',$stuff->unit_id)->first();
                 $user = \App\Models\User::where('id',$stuff->creator_user_id)->first();
@@ -113,5 +120,13 @@ use \App\Models\Stuff;
             </tr>
         </tfoot>
     </table>
+    @for($i = 0;$i < $c_page;$i++)
+        <a onclick="paginate({{ $i + 1 }})">{{ $i + 1 }}</a>
+    @endfor
 <?php } ?>
 @include('stuff.footer')
+<script>
+    function paginate(page) {
+        
+    }
+</script>
