@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\stuff;
 
 use App\Http\Controllers\Controller;
+use App\Imports\StuffImport;
 use App\Models\Stuffpack;
 use App\Models\StuffpackList;
 use App\Models\Unit;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use PDOException;
 use App\Models\Stuff;
 use App\Models\User;
@@ -100,7 +102,7 @@ class stuffController extends Controller
             [
                 'file' => [
                     'required',
-                    'mimes:csv,txt'
+                    'mimes:csv,xls,xlsx'
                 ]
             ],
             [
@@ -109,7 +111,13 @@ class stuffController extends Controller
             ]
         );
         if ($validate->fails()) {
-            return response()->json(['errors' => $validate->getMessageBag()]);
+            $message = "فرمت فایل ارسالی قابل قبول نیست !";
+            return "
+            <script>
+        window.alert('$message');
+                window.location = '/';
+    </script>
+        ";
         }
         $rules = [
             'code' => ['required', 'string', 'min:3', 'max:64', 'unique:stuffs,code',],
@@ -138,23 +146,23 @@ class stuffController extends Controller
         $fileName = uniqid();
         $fileName = $fileName . '.' . $file->getClientOriginalExtension();
         $file->move(public_path('tempUpload/'), $fileName);
-        $read = file_get_contents(public_path('tempUpload/' . $fileName));
+        $getline = Excel::toArray(new StuffImport, public_path('tempUpload/' . $fileName));
         unlink(public_path('tempUpload/' . $fileName));
-        $getline = explode("\n", $read);
-        foreach ($getline as $l => $line) {
-            if ($l == count($getline) - 1 | $l == 0) {
+        foreach ($getline[0] as $l => $getattr) {
+            if ( $l == 0) {
                 continue;
             }
-            $getattr = explode(",", $line);
             if (count($getattr) != 6) {
                 $message = "در سطر $l تعداد ستون ها کافی نمیباشد";
                 array_push($erros, $message);
                 continue;
             }
-            if (!$unitid = Unit::where('name', 'LIKE', '%' . $getattr[4] . '%')->first()->id) {
+            if (!$unitid = Unit::where('name', 'LIKE', '%' . $getattr[4] . '%')->first()) {
                 $message = "واحد اندازه گیری یافت نشد در سطر $l";
                 array_push($erros, $message);
                 continue;
+            }else{
+                $unitid = $unitid->id;
             }
             $val = [
                 'code' => $getattr[0],
@@ -168,16 +176,32 @@ class stuffController extends Controller
             ];
             $validator = Validator::make($val, $rules, $msg);
             if ($validator->fails()) {
-                array_push($erros, $validator->getMessageBag());
+                $message = "نیاز به بررسی در خط $l";
+                array_push($erros, $message);
                 continue;
             }
             try {
                 Stuff::create($val);
             } catch (Exception $ex) {
-                array_push($errrs, $ex->getMessage());
+                $message = "نیاز به بررسی در خط $l";
+                array_push($erros, $message);
+                continue;
             }
         }
-        return back()->with($erros);
+        $m='';
+        if (count($erros)>0){
+            foreach ($erros as $e){
+                $m.=$e."       ";
+            }
+            return"
+            <script>
+        window.alert('$m');
+                window.location = '/';
+    </script>
+        ";
+        }else{
+            return back();
+        }
     }
 
 

@@ -132,7 +132,7 @@ abstract class AbstractPlatform
     public const TRIM_BOTH = TrimMode::BOTH;
 
     /** @var string[]|null */
-    protected $doctrineTypeMapping;
+    protected $doctrineTypeMapping = null;
 
     /**
      * Contains a list of all columns that should generate parseable column comments for type-detection
@@ -140,7 +140,7 @@ abstract class AbstractPlatform
      *
      * @var string[]|null
      */
-    protected $doctrineTypeComments;
+    protected $doctrineTypeComments = null;
 
     /** @var EventManager */
     protected $_eventManager;
@@ -1602,10 +1602,8 @@ abstract class AbstractPlatform
                 }
             }
 
-            $name = $column->getQuotedName($this);
-
             $columnData = array_merge($column->toArray(), [
-                'name' => $name,
+                'name' => $column->getQuotedName($this),
                 'version' => $column->hasPlatformOption('version') ? $column->getPlatformOption('version') : false,
                 'comment' => $this->getColumnComment($column),
             ]);
@@ -1618,7 +1616,7 @@ abstract class AbstractPlatform
                 $columnData['primary'] = true;
             }
 
-            $columns[$name] = $columnData;
+            $columns[$columnData['name']] = $columnData;
         }
 
         if (($createFlags & self::CREATE_FOREIGNKEYS) > 0) {
@@ -1744,7 +1742,7 @@ abstract class AbstractPlatform
 
         $query .= ')';
 
-        $sql = [$query];
+        $sql[] = $query;
 
         if (isset($options['foreignKeys'])) {
             foreach ((array) $options['foreignKeys'] as $definition) {

@@ -1641,7 +1641,7 @@ final class Configuration
         return $this->processIsolation;
     }
 
-    public function hasRandomOrderSeed(): bool
+    public function hasRandomOrderSeer(): bool
     {
         return $this->randomOrderSeed !== null;
     }

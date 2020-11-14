@@ -35,13 +35,6 @@ final class ReflectionMapper
                 );
             }
 
-            if ($returnType->getName() === 'static') {
-                return new StaticType(
-                    TypeName::fromReflection($method->getDeclaringClass()),
-                    $returnType->allowsNull()
-                );
-            }
-
             if ($returnType->getName() === 'mixed') {
                 return new MixedType;
             }
@@ -74,13 +67,9 @@ final class ReflectionMapper
             );
         }
 
-        assert($returnType instanceof ReflectionUnionType);
-
         $types = [];
 
         foreach ($returnType->getTypes() as $type) {
-            assert($type instanceof ReflectionNamedType);
-
             if ($type->getName() === 'self') {
                 $types[] = ObjectType::fromName(
                     $method->getDeclaringClass()->getName(),
