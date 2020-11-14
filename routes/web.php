@@ -116,5 +116,18 @@ Route::post('workshop/create', 'App\Http\Controllers\tempstore\TempstoreControll
 
 Route::post('transfer/create','App\Http\Controllers\transfer\TransferController@insert')->name('createTransfer');
 
+
 Route::get('check_serial/{reciept_no}','App\Http\Controllers\stuff\stuffController@check_serial');
 Route::get('pagination','App\Http\Controllers\stuff\stuffController@fetch_data');
+
+
+Route::get('check_serial/{reciept_no}','App\Http\Controllers\stuff\stuffController@check_serial');
+
+
+Route::post('carEdit',[carController::class,'edit']);
+Route::post('CarFile',[carController::class,'upload'])->name('carUpload');
+Route::post('CarInsert',[carController::class,'insert'])->name('carInsert');
+Route::post('carEdit',[carController::class,'edit']);
+Route::post('carUpdate',[carController::class,'update'])->name('carUpdate');
+
+

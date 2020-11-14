@@ -16,13 +16,13 @@ use \App\Models\Stuff;
     // paginate
     $stuffs_copy = $stuffs;
 
-    /*
     $limit = 2;
     $c_page = count($stuffs_copy) / $limit;
 
-    $stuffs = Stuff::skip(2)->take(2)->get();*/
+    $stuffs = Stuff::skip(2)->take(2)->get();
 
-    if ( $stuffs->isEmpty() )define-stuff
+    if ( $stuffs->isEmpty() )
+
         {
             ?>
             <div class="row">
@@ -124,3 +124,8 @@ use \App\Models\Stuff;
 
 <?php } ?>
 @include('stuff.footer')
+<script>
+    function paginate(page) {
+        
+    }
+</script>
