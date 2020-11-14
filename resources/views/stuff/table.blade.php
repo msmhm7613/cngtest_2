@@ -22,6 +22,7 @@ use \App\Models\Stuff;
     $stuffs = Stuff::skip(2)->take(2)->get();
 
     if ( $stuffs->isEmpty() )
+
         {
             ?>
             <div class="row">
@@ -120,9 +121,7 @@ use \App\Models\Stuff;
             </tr>
         </tfoot>
     </table>
-    @for($i = 0;$i < $c_page;$i++)
-        <a onclick="paginate({{ $i + 1 }})">{{ $i + 1 }}</a>
-    @endfor
+
 <?php } ?>
 @include('stuff.footer')
 <script>

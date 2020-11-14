@@ -9,6 +9,7 @@ class TempStore extends Model
 {
     use HasFactory;
 
+    protected $table = 'tempstores';
     protected $fillable = [
         'name' ,
         'manager',
