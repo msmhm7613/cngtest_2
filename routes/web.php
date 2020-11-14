@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\car\carController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\stuff\stuffController;
 use App\Http\Controllers\stuffpacks\spController;
@@ -28,13 +27,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('setup','\App\Http\Controllers\SetupController@index');
+Route::post('setup', '\App\Http\Controllers\SetupController@index');
 
 //Route::get('/panel', [PanelController::class , 'index']);
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::post('/welcome' , '\App\Http\Controllers\welController@index');
+Route::post('/welcome', '\App\Http\Controllers\welController@index');
 
 Auth::routes();
 
@@ -47,7 +46,7 @@ Route::post('deleteUser', '\App\Http\Controllers\UserController@deleteUser');
 Route::get('/selectUser', '\App\Http\Controllers\UserController@selectUser');
 
 
-Route::get('/new-panel','\App\Http\Controllers\NewPanelController@index');
+Route::get('/new-panel', '\App\Http\Controllers\NewPanelController@index');
 Route::post('/new-panel', '\App\Http\Controllers\NewPanelController@getContent');
 Route::get('new-panel-get-content', '\App\Http\Controllers\NewPanelController@getContent');
 
@@ -76,46 +75,45 @@ Route::group(['namespace' => 'stuff'], function () {
  */
 
 Route::group(['namespace' => 'stuffpacks'], function () {
-    Route::get('open-insert-form', function(){
+    Route::get('open-insert-form', function () {
         return view('stuff-pack.insert-form');
     });
-    Route::post('insert-new-stuffpack', [spController::class , 'insert']);
-    Route::get('select-stuffpack', [spController::class,'select']);
+    Route::post('insert-new-stuffpack', [spController::class, 'insert']);
+    Route::get('select-stuffpack', [spController::class, 'select']);
 
-    Route::post('open-edit-form',  [spController::class , 'edit']);
-    Route::post('update-stuffpack',[spController::class , 'update']);
+    Route::post('open-edit-form', [spController::class, 'edit']);
+    Route::post('update-stuffpack', [spController::class, 'update']);
 
-    Route::post('delete-stuffpack',[spController::class, 'delete']);
+    Route::post('delete-stuffpack', [spController::class, 'delete']);
 });
 
 /**
  *
  * TEMP RECIEPT URLs
  */
-Route::get('open-temp-reciept-insert-form', function(){
+Route::get('open-temp-reciept-insert-form', function () {
     return view('temp-reciept.insert-new-temp-reciept');
 });
-Route::post('insert-new-temp-rec','App\Http\Controllers\TempRecieptController2@insert' );
+Route::post('insert-new-temp-rec', 'App\Http\Controllers\TempRecieptController2@insert');
 
 
 /**
  * SERIAL URLs
  */
 
- Route::post('get-serial-items-list' , 'App\Http\Controllers\SerialController@getList');
- Route::post('insert-serial-list' , 'App\Http\Controllers\SerialListController@insert');
+Route::post('get-serial-items-list', 'App\Http\Controllers\SerialController@getList');
+Route::post('insert-serial-list', 'App\Http\Controllers\SerialListController@insert');
 
-
-/*
- * car queue
+/**
+ * WorkShop Urls
  */
 
-Route::post('CarFile',[carController::class,'upload'])->name('carUpload');
-Route::post('CarInsert',[carController::class,'insert'])->name('carInsert');
-Route::post('carEdit',[carController::class,'edit']);
-Route::post('carUpdate',[carController::class,'update'])->name('carUpdate');
+Route::post('workshop/create', 'App\Http\Controllers\tempstore\TempstoreController@insert')->name('createTempstore');
 
-/** test github */
-Route::get('test',function(){
-    echo 'test push';
-});
+/**
+ * Transfer Urls
+ */
+
+Route::post('transfer/create','App\Http\Controllers\transfer\TransferController@insert')->name('createTransfer');
+
+Route::get('check_serial/{reciept_no}','App\Http\Controllers\stuff\stuffController@check_serial');

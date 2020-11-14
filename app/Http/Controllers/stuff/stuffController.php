@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\stuff;
 
 use App\Http\Controllers\Controller;
+use App\Models\Stuffpack;
+use App\Models\StuffpackList;
 use App\Models\Unit;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,6 +15,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use App\Models\TempReciept;
+use App\Models\TempRecieptList;
 
 class stuffController extends Controller
 {
@@ -138,7 +142,7 @@ class stuffController extends Controller
         unlink(public_path('tempUpload/' . $fileName));
         $getline = explode("\n", $read);
         foreach ($getline as $l => $line) {
-            if ($l == count($getline)-1|$l==0){
+            if ($l == count($getline) - 1 | $l == 0) {
                 continue;
             }
             $getattr = explode(",", $line);
@@ -147,7 +151,7 @@ class stuffController extends Controller
                 array_push($erros, $message);
                 continue;
             }
-            if (! $unitid = Unit::where('name','LIKE','%'.$getattr[4].'%')->first()->id){
+            if (!$unitid = Unit::where('name', 'LIKE', '%' . $getattr[4] . '%')->first()->id) {
                 $message = "واحد اندازه گیری یافت نشد در سطر $l";
                 array_push($erros, $message);
                 continue;
@@ -277,5 +281,64 @@ class stuffController extends Controller
 
 
         ]);
+    }
+
+    public function check_serial($reciept_no)
+    {
+
+        // بررسی وضعیت سریال کالاهای موجود در یک رسید موقت
+        $reciept = TempReciept::where('reciept_no', $reciept_no)->first();
+        if (is_null($reciept))
+            return response()->json(['status' => 0, 'msg' => 'رسید موقت پیدا نشد']);
+
+        $recipt_list = TempRecieptList::where('reciept_id', $reciept->id)->get();
+
+        $stuff_arr = array();
+
+        foreach ($recipt_list as $item) {
+
+            $stuff_id = $item->stuff_id;
+            $stuffpack_id = $item->stuffpack_id;
+
+            if ($stuff_id != 0) {
+
+                $stuff = Stuff::find($stuff_id);
+
+                if ($stuff->has_unique_serial == 0) {
+
+                    $stuff_arr[] = [
+                        'code' => $stuff->code,
+                        'name' => $stuff->name,
+                        'latin_name' => $stuff->latin_name,
+                        'type' => 1
+                    ];
+                }
+                //continue;
+
+            } elseif ($stuffpack_id != 0) {
+
+                $stuffpack = StuffpackList::where('stuffpack_id', $stuffpack_id)->get();
+                foreach ($stuffpack as $item) {
+
+                    $stuff = Stuff::find($item->stuff_id);
+                    if ($stuff->has_unique_serial == 0) {
+
+                        $stuff_arr[] = [
+                            'code' => $stuff->code,
+                            'name' => $stuff->name,
+                            'latin_name' => $stuff->latin_name,
+                            'type' => 2
+                        ];
+                    }
+                    //continue;
+                }
+
+            } else {
+
+            }
+
+        }
+
+        return response()->json(['status' => 1, 'result' => $stuff_arr]);
     }
 }
