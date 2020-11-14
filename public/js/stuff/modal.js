@@ -65,7 +65,7 @@ $('#insert-new-stuff-save').on('click', (e) => {
             creator_user_id: user_id,
             modifier_user_id: user_id,
             unit_id: $('form#insert-new-stuff-form select#unit_id option:selected').val(),
-            has_unique_serial: $('#has_unique_serial').is(':checked') ? 1 : 0,
+            has_unique_serial: $('#has_unique_id').first().is(':checked') ? 1 : 0,
             description: $('textarea#edit-stuff-description').val(),
         },
 
