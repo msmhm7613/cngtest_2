@@ -117,3 +117,4 @@ Route::post('workshop/create', 'App\Http\Controllers\tempstore\TempstoreControll
 Route::post('transfer/create','App\Http\Controllers\transfer\TransferController@insert')->name('createTransfer');
 
 Route::get('check_serial/{reciept_no}','App\Http\Controllers\stuff\stuffController@check_serial');
+Route::get('pagination','App\Http\Controllers\stuff\stuffController@fetch_data');

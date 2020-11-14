@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\temp-reciept;
+namespace App\Http\Controllers;
 
 use App\Models\TempReciept;
 use Illuminate\Http\Request;

@@ -16,10 +16,11 @@ use \App\Models\Stuff;
     // paginate
     $stuffs_copy = $stuffs;
 
+    /*
     $limit = 2;
     $c_page = count($stuffs_copy) / $limit;
 
-    $stuffs = Stuff::skip(2)->take(2)->get();
+    $stuffs = Stuff::skip(2)->take(2)->get();*/
 
     if ( $stuffs->isEmpty() )
         {
@@ -120,13 +121,6 @@ use \App\Models\Stuff;
             </tr>
         </tfoot>
     </table>
-    @for($i = 0;$i < $c_page;$i++)
-        <a onclick="paginate({{ $i + 1 }})">{{ $i + 1 }}</a>
-    @endfor
+
 <?php } ?>
 @include('stuff.footer')
-<script>
-    function paginate(page) {
-        
-    }
-</script>

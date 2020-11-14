@@ -9,7 +9,8 @@
         </div>
         <div class="version">
             <small class="small badge badge-pill badge-warning eng ">
-                 {{  $Version[0]  }}
+                 {{-- {{  $Version[0]  }} --}}
+                 <?php exec('git show --tags') ?>
             </small>
             <small class="small" dir="ltr">
                 <?php 
@@ -18,7 +19,7 @@
                 
             </small>
             <small class="small">
-                kia
+                
             </small>
         </div>
 </div>
