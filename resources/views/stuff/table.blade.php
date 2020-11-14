@@ -22,7 +22,7 @@ use \App\Models\Stuff;
 
     $stuffs = Stuff::skip(2)->take(2)->get();*/
 
-    if ( $stuffs->isEmpty() )
+    if ( $stuffs->isEmpty() )define-stuff
         {
             ?>
             <div class="row">

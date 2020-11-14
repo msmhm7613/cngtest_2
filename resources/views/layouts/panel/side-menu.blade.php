@@ -55,7 +55,7 @@
 
                             <li class="nav-item">
                                 <a href="#" class="nav-link" id="serial-side-menu-btn" data-controller="serial">
-                                     ثبت سریال و وضعیت کالا
+                                    ثبت سریال و وضعیت کالا
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -78,13 +78,13 @@
                     <div class="collapse" id="car-submenu" data-parent="#accordion">
                         <ul class="navbar-nav flex-column w-100">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-controller="car-queue">
+                                <a href="#" class="nav-link">
                                     خودروهای در صف </a>
                             </li>
-                           <!--  <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    ورود از طریق فایل </a>
-                            </li> -->
+                            <!--  <li class="nav-item">
+                                 <a href="#" class="nav-link">
+                                     ورود از طریق فایل </a>
+                             </li> -->
                         </ul>
                     </div>
                 </li>
@@ -94,6 +94,10 @@
                         کارگاه </a>
                     <div class="collapse" id="workshop-submenu" data-parent="#accordion">
                         <ul class="navbar-nav flex-column w-100">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" id="define-workshop-btn" data-controller="define-workshop">
+                                    تعریف کارگاه </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     مرور اطلاعات نصب </a>
@@ -139,19 +143,19 @@
 
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                 معرفی پیمانکاران</a>
+                                    معرفی پیمانکاران</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                 معرفی کارگاه ها</a>
+                                    معرفی کارگاه ها</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                سطوح دسترسی</a>
+                                    سطوح دسترسی</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                مرکز دانلود</a>
+                                    مرکز دانلود</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
