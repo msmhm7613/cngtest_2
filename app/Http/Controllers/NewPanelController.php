@@ -56,6 +56,11 @@ class NewPanelController extends Controller
             case 'add-car-queue':
                 return view('car.create');
                 break;
+
+            case 'define-workshop':
+                return view('workshop.define-workshop');
+                break;
+                
             default:
                 return '-';
                 break;

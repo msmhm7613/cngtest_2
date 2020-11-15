@@ -72,13 +72,13 @@
                     </div>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" data-target="#car-submenu" href="#">
-                        <i class="fas fa-car "></i>
+                    <a class="nav-link" data-toggle="collapse" data-target="#car-submenu" href="#" >
+                        <i class="fas fa-car " ></i>
                         خودرو </a>
                     <div class="collapse" id="car-submenu" data-parent="#accordion">
                         <ul class="navbar-nav flex-column w-100">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" data-controller="car-queue">
                                     خودروهای در صف </a>
                             </li>
                             <!--  <li class="nav-item">
