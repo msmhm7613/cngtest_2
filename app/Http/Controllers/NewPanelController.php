@@ -58,7 +58,7 @@ class NewPanelController extends Controller
                 break;
 
             case 'define-workshop':
-                return view('workshop.define-workshop');
+                return view('workshop.workshop-table');
                 break;
                 
             default:

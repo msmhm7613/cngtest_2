@@ -16,12 +16,12 @@ class CreateTempstoresTable extends Migration
         Schema::create('tempstores', function (Blueprint $table) {
             $table->id();
             $table->string('name',30)          ->unique();
-            $table->string('manager',30)       ->default('---');
-            $table->string('code',30)          ->unique()->default('---');
-            $table->string('phone',30)         ->default('---');
-            $table->string('mobile',30)        ->default('---');
-            $table->string('address',30)       ->default('---');
-            $table->string('description',255)   ->default('---');
+            $table->string('manager',30)       ->default("---");
+            $table->string('code',30)          ->unique()->default("---");
+            $table->string('phone',30)         ->default("---");
+            $table->string('mobile',30)        ->default("---");
+            $table->string('address',30)       ->default("---");
+            $table->string('description',255)   ->default("---");
             $table->timestamps();
         });
     }

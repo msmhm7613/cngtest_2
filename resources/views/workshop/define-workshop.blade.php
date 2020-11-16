@@ -5,9 +5,9 @@
             تعریف کارگاه
         </h3>
     </div>
-
+</div>
     <div class="row">
-        <form action="{{ Route('createTempstore') }}" method="POST" class="form-horizontal col-sm-12" id="insert-tempstore-form">
+        <form action="" method="POST" class="form-horizontal col-sm-12" id="insert-tempstore-form">
             @csrf
             <div class="form-group  add">
                 <div class="row">
@@ -75,9 +75,16 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <button class="btn btn-success">ثبت کارگاه</button>
+                    <button class="btn btn-success form-control" id="new-workshop-save-btn" >ثبت کارگاه</button>
                 </div>
             </div>
         </form>
     </div>
-</div>
+    <div class="footer">
+        <div class="row">
+            <div id="insert-new-workshop-response" class="alert">
+
+            </div>
+        </div>
+    </div>
+

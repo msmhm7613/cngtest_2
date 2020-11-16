@@ -6,23 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Models\TempStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PDOException;
+
+
 class TempstoreController extends Controller
 {
     public function insert(Request $request)
     {
+        //return response()->json(['request ' => $request->all()]);
         $rules = [
-            'name' => ['string', 'required', 'min:3', 'max:25', 'unique:tempstores'],
-            'manager' => ['string', 'min:3', 'max:25', 'nullable'],
-            'code' => ['string', 'min:3', 'max:25', 'nullable'],
-            'phone' => ['string', 'min:3', 'max:25', 'nullable'],
-            'mobile' => ['string', 'min:3', 'max:25', 'nullable'],
-            'address' => ['string', 'min:3', 'max:25', 'nullable'],
-            'description' => ['string', 'min:3', 'max:25', 'nullable'],
+            'name' => ['required', 'string', 'min:3', 'max:25', 'unique:tempstores'],
+            'manager' => ['string'],
+            'code' => ['string','unique:tempstores'],
+            'phone' => ['string', ],
+            'mobile' => ['string',],
+            'address' => ['string',],
+            'description' => ['string',],
         ];
 
         $msg = [
             'name.unique' => 'نام کارگاه قبلا در سیستم ثبت شده است',
-            'name.required' => 'فیلد نام کارگاه خالی میباشد',
+            'name.required' => 'فیلد نام کارگاه الزامیست',
+            'name.min' => 'نام کارگاه حداقل باید 3 حرف باشد',
+            'name.max' => 'نام کارگاه حداکثر میتواند 25 حرف باشد',
         ];
 
         $validatore = Validator::make(
@@ -33,7 +39,8 @@ class TempstoreController extends Controller
 
         if ($validatore->fails()) {
             return response()->json([
-                'errors' => $validatore->getMessageBag()->toArray()
+                'errors' => $validatore->getMessageBag(),
+                'req'   => $request->all()
             ]);
         }
 
@@ -41,7 +48,8 @@ class TempstoreController extends Controller
 
         try {
             TempStore::create($request->all());
-        } catch (Exception $ex) {
+            return response()->json(['status' => 'ok', 'req'=>$request->all()]);
+        } catch (PDOException $ex) {
             return response()->json(
                 [
                     'errors' => $ex->getMessage()
