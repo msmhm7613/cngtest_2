@@ -38,7 +38,6 @@ return array(
     'App\\Http\\Controllers\\stuff\\stuffController' => $baseDir . '/app/Http/Controllers/stuff/stuffController-old.php',
     'App\\Http\\Controllers\\stuffpacks\\spController' => $baseDir . '/app/Http/Controllers/stuffpacks/spController.php',
     'App\\Http\\Controllers\\tempstore\\TempstoreController' => $baseDir . '/app/Http/Controllers/tempstore/TempstoreController.php',
-    'App\\Http\\Controllers\\tempstore\\old' => $baseDir . '/app/Http/Controllers/tempstore/Tempstore-old.php',
     'App\\Http\\Controllers\\transfer\\TransferController' => $baseDir . '/app/Http/Controllers/transfer/TransferController.php',
     'App\\Http\\Controllers\\unit\\unitController' => $baseDir . '/app/Http/Controllers/unit/unitController.php',
     'App\\Http\\Controllers\\welController' => $baseDir . '/app/Http/Controllers/welController.php',

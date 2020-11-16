@@ -7,6 +7,7 @@ use App\Models\TempStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PDOException;
+use Illuminate\Support\Facades\DB;
 
 
 class TempstoreController extends Controller
@@ -16,12 +17,12 @@ class TempstoreController extends Controller
         //return response()->json(['request ' => $request->all()]);
         $rules = [
             'name' => ['required', 'string', 'min:3', 'max:25', 'unique:tempstores'],
-            'manager' => ['string'],
-            'code' => ['string','unique:tempstores'],
-            'phone' => ['string', ],
-            'mobile' => ['string',],
-            'address' => ['string',],
-            'description' => ['string',],
+            'manager' => ['string', 'min:3', 'max:25', 'nullable'],
+            'code' => ['string', 'min:3', 'max:25', 'nullable'],
+            'phone' => ['string', 'min:3', 'max:25', 'nullable'],
+            'mobile' => ['string', 'min:3', 'max:25', 'nullable'],
+            'address' => ['string', 'min:3', 'max:25', 'nullable'],
+            'description' => ['string', 'min:3', 'max:25', 'nullable'],
         ];
 
         $msg = [
@@ -47,8 +48,19 @@ class TempstoreController extends Controller
         // insert new tempstore
 
         try {
-            TempStore::create($request->all());
-            return response()->json(['status' => 'ok', 'req'=>$request->all()]);
+            DB::table('tempstores')->insert(
+                [
+                    'name' => $request->name,
+                    'manager'=>$request->manager ?? "نامشخص",
+                    'code'=>$request->code ?? "نامشخص",
+                    'phone'=>$request->phone ?? "00000",
+                    'mobile'=>$request->mobile ?? "00000",
+                    'address'=>$request->address ?? "نامشخص",
+                    'description'=>$request->description ?? "نامشخص",
+
+                ]
+            );
+            return response()->json(['status' => 'ok', 'req' => $request->all()]);
         } catch (PDOException $ex) {
             return response()->json(
                 [
@@ -57,5 +69,4 @@ class TempstoreController extends Controller
             );
         }
     }
-
 }
