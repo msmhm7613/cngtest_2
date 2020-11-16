@@ -53,16 +53,16 @@
 <body style="font-family: iran;">
 
     <div class="wrapper">
-        <div class="container" id="header">
+        <div class="container-fluid" id="header">
             {{--@yield( 'header' )
             --}}
             @include('layouts.panel.slider')
             @include('layouts.panel.header')
         </div>
-        <div class="container" id="main-content">
+        <div class="container-fluid" id="main-content">
             @yield ( 'content' )
         </div>
-        <div class="container" id="footer">
+        <div class="container-fluid" id="footer">
             @yield( 'footer' )
         </div>
     </div>

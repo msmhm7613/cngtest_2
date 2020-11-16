@@ -23,10 +23,10 @@ error_reporting(E_ALL);
 
 @section('content')
     <div class="row">
-        <div class="col-md-3 p-0">
+        <div class="col-md-3">
             @include ('layouts.panel.side-menu')
         </div>
-        <div class="col-md-9 ">
+        <div class="col-md-9" >
             <div class="" id="preloader">
                 <div class="spinner-grow text-success"></div>
                 <p class="loading-text text-light">
