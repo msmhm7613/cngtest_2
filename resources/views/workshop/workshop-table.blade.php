@@ -11,7 +11,7 @@ $tempstores = \App\Models\Tempstore::all();
     </div>
 @else
     <?php $ind = 1; ?>
-    <table class="table table-bordered" id="workshops-table">
+    <table class="table table-border table-striped" id="workshops-table">
 
         <thead>
             <tr class="table-primary">
