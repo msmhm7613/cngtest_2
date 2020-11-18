@@ -28,7 +28,8 @@ use \App\Models\Stuff;
         }else{
 ?>
     <?php
-    $ind = 1 ?>
+    $ind = 1 
+    ?>
         
         <table class="table table-striped table-bordered " id="stuffs-table">
             <thead>

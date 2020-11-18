@@ -8,7 +8,7 @@
 
 <?php echo $__env->make('stuff-pack.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-<?php if(App\Models\StuffPack::all()->count()): ?>
+<?php if(App\Models\Stuffpack::all()->count()): ?>
     <?php $ind = 1 ?>
     <table class="table table-striped table-bordered " id="stuff-packs-table">
         <thead>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
 
-            <?php $__currentLoopData = \App\Models\StuffPack::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stuff_pack): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = \App\Models\Stuffpack::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stuff_pack): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php
                 $unit = \App\Models\Unit::where('id',$stuff_pack->unit_id)->first();
                 $user = \App\Models\User::where('id',$stuff_pack->creator_user_id)->first();

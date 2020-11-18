@@ -28,7 +28,8 @@ use \App\Models\Stuff;
         }else{
 ?>
     @php
-    $ind = 1 @endphp
+    $ind = 1 
+    @endphp
         {{-- TODO: Create pagination --}}
         <table class="table table-striped table-bordered " id="stuffs-table">
             <thead>

@@ -8,7 +8,7 @@
 
 @include('stuff-pack.header')
 
-@if (App\Models\StuffPack::all()->count())
+@if (App\Models\Stuffpack::all()->count())
     @php $ind = 1 @endphp
     <table class="table table-striped table-bordered " id="stuff-packs-table">
         <thead>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
 
-            @foreach (\App\Models\StuffPack::all() as $stuff_pack)
+            @foreach (\App\Models\Stuffpack::all() as $stuff_pack)
                 @php
                 $unit = \App\Models\Unit::where('id',$stuff_pack->unit_id)->first();
                 $user = \App\Models\User::where('id',$stuff_pack->creator_user_id)->first();
