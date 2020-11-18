@@ -13,15 +13,7 @@ use \App\Models\Stuff;
 
     $stuffs = Stuff::all();
 
-    // paginate
-    $stuffs_copy = $stuffs;
-
-    $limit = 2;
-    $c_page = count($stuffs_copy) / $limit;
-
-    $stuffs = Stuff::skip(2)->take(2)->get();
-
-    if ( $stuffs->isEmpty() )
+   if ( $stuffs->isEmpty() )
 
         {
             ?>
@@ -124,8 +116,5 @@ use \App\Models\Stuff;
 
 <?php } ?>
 @include('stuff.footer')
-<script>
-    function paginate(page) {
-        
-    }
-</script>
+
+

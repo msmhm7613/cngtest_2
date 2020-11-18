@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PDOException;
 use Illuminate\Support\Facades\DB;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Exception;
 
 class TempstoreController extends Controller
 {
@@ -67,6 +68,21 @@ class TempstoreController extends Controller
                     'errors' => $ex->getMessage()
                 ]
             );
+        }
+    }
+
+    public function storeFile(Request $request)
+    {
+        try {
+        $file = $request->file('file')->store('import/tempstore');
+
+        Excel::import(new \App\Imports\TempstoreImport_2, $file );
+        return back()->withInput(['target'=>'getData']);
+        return redirect()->route('/new-panel',['target' => 'getData']);
+        }catch (Exception $ex)
+        {
+            dd($ex->getMessage());exit();
+            
         }
     }
 }

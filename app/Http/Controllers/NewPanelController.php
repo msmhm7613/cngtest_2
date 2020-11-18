@@ -60,6 +60,10 @@ class NewPanelController extends Controller
             case 'define-workshop':
                 return view('workshop.workshop-table');
                 break;
+
+            case 'getData':
+                return view('getData.getDate-table');
+                break;
                 
             default:
                 return '-';

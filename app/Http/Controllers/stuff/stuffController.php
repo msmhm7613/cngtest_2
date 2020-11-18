@@ -47,8 +47,20 @@ class stuffController extends Controller
 
         $rules = [
             'code' => ['required', 'string', 'min:3', 'max:64', 'unique:stuffs,code',],
-            'name' => ['required', 'string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64',],
-            'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
+            'name' => [
+                'required',
+                'string',
+                //'regex:/^[\pL0-9 -_]+$/u',
+                'min:3',
+                'max:64',
+            ],
+            'latin_name' => [
+                'string',
+                //'regex:/^[a-zA-Z0-9 -_]+$/u',
+                'min:3',
+                'max:64',
+                'nullable'
+            ],
             'has_unique_serial' => ['boolean'],
             'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
             'modifier_user_id' => ['numeric', 'exists:users,id', 'required'],
@@ -97,8 +109,12 @@ class stuffController extends Controller
      */
     public function UploadStuff(Request $request)
     {
-        $validate = Validator::make(
-            $request->all(),
+        /* $file = $request->file('file')->store('xlsx');
+        return response()->json(['file'=>$file]); */
+        $file = $request->file('file')->store('stuffs');
+        $uploadedFile = Excel::toArray(new StuffImport, $file);
+        $validator = Validator::make(
+            $uploadedFile,
             [
                 'file' => [
                     'required',
@@ -106,23 +122,28 @@ class stuffController extends Controller
                 ]
             ],
             [
-                'file.required' => "فایلی ارسال نشده است !",
-                'file.mimes' => "تنها فرمت csv قابل پذیرش است"
+                'file.required' => "فایل ارسالی مطابق نمونه نیست.لطفا نمونه فایل را دانلود کنید. !",
+                'file.mimes' => "فرمت فایل قابل قبول نیست"
             ]
         );
-        if ($validate->fails()) {
-            $message = "فرمت فایل ارسالی قابل قبول نیست !";
-            return "
-            <script>
-        window.alert('$message');
-                window.location = '/';
-    </script>
-        ";
+        if ($validator->fails()) {
+            
+            //return response()->json(['errors' => $validator->errors()->all(), 'file' => $uploadedFile ]);
         }
         $rules = [
             'code' => ['required', 'string', 'min:3', 'max:64', 'unique:stuffs,code',],
-            'name' => ['required', 'string', 'regex:/^[\pL0-9 -_]+$/u', 'min:3', 'max:64',],
-            'latin_name' => ['string', 'regex:/^[a-zA-Z0-9 -_]+$/u', 'min:3', 'max:64', 'nullable'],
+            'name' => ['required',
+            'string',
+            //'regex:/^[\pL0-9 -_]+$/u',
+            'min:3',
+            'max:64',
+        ],
+            'latin_name' => ['string',
+            //'regex:/^[a-zA-Z0-9 -_]+$/u',
+            'min:3',
+            'max:64',
+            'nullable'
+        ],
             'has_unique_serial' => ['boolean'],
             'creator_user_id' => ['numeric', 'exists:users,id', 'required'],
             'modifier_user_id' => ['numeric', 'exists:users,id', 'required'],
@@ -141,67 +162,63 @@ class stuffController extends Controller
             //name
             'name.required' => 'نام کالا الزامی است',
         ];
-        $erros = [];
-        $file = $request->file;
-        $fileName = uniqid();
-        $fileName = $fileName . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('tempUpload/'), $fileName);
-        $getline = Excel::toArray(new StuffImport, public_path('tempUpload/' . $fileName));
-        unlink(public_path('tempUpload/' . $fileName));
+        $errors = [];
+        
+       
+        $getline = Excel::toArray(new StuffImport,$file);
+        $ind = 0;
         foreach ($getline[0] as $l => $getattr) {
-            if ( $l == 0) {
-                continue;
-            }
-            if (count($getattr) != 6) {
+            //exit(dd($l));
+           
+            if (count($getattr) < 6 && $l === 0 ) {
                 $message = "در سطر $l تعداد ستون ها کافی نمیباشد";
-                array_push($erros, $message);
+                array_push($errors, $message);
+            break;
+            }
+            if (count($getattr) > 6 && $l === 0 ) {
+                $message = "در سطر $l تعداد ستون ها بیشتر از حد انتظار است";
+                array_push($errors, $message);
+            break;
+            }
+
+            if ( $l === 0) {
                 continue;
             }
-            if (!$unitid = Unit::where('name', 'LIKE', '%' . $getattr[4] . '%')->first()) {
+            
+            if (!$unitid = Unit::where('name', 'LIKE', '%' . trim($getattr[4]) . '%')->first()) {
                 $message = "واحد اندازه گیری یافت نشد در سطر $l";
-                array_push($erros, $message);
+                array_push($errors, $message);
                 continue;
             }else{
                 $unitid = $unitid->id;
             }
             $val = [
-                'code' => $getattr[0],
-                'name' => $getattr[1],
-                'latin_name' => $getattr[2],
-                'has_unique_serial' => $getattr[3],
-                'creator_user_id' => auth()->id(),
-                'modifier_user_id' => auth()->id(),
-                'unit_id' => $unitid,
-                'description' => $getattr[5],
+                'code' => trim($getattr[0]),
+                'name' => trim($getattr[1]),
+                'latin_name' => trim($getattr[2]),
+                'has_unique_serial' => $getattr[3] ?? 0,
+                'creator_user_id' => auth()->id() ?? Auth()->user->id(),
+                'modifier_user_id' => auth()->id() ?? Auth()->user->id(),
+                'unit_id' => $unitid ?? 1,
+                'description' => (trim($getattr[5]) == "") ? "ندارد": trim($getattr[5]),
             ];
             $validator = Validator::make($val, $rules, $msg);
             if ($validator->fails()) {
-                $message = "نیاز به بررسی در خط $l";
-                array_push($erros, $message);
+                
+                array_push($errors,[$l => $validator->getMessageBag()]);
                 continue;
             }
             try {
+                
                 Stuff::create($val);
+                $ind ++;
             } catch (Exception $ex) {
-                $message = "نیاز به بررسی در خط $l";
-                array_push($erros, $message);
+                $message = "نیاز به بررسی در خط $l".' :<p class="eng"> '.$ex->getMessage() . "</p>";
+                array_push($errors, $message);
                 continue;
             }
         }
-        $m='';
-        if (count($erros)>0){
-            foreach ($erros as $e){
-                $m.=$e."       ";
-            }
-            return"
-            <script>
-        window.alert('$m');
-                window.location = '/';
-    </script>
-        ";
-        }else{
-            return back();
-        }
+            return response()->json([ 'errors' => $errors,'success'=> $ind]);
     }
 
 
@@ -296,7 +313,7 @@ class stuffController extends Controller
         $json = file_get_contents('uploads\stuffs3.csv');
         $json = json_encode(explode('\\n', $json));
         $json = json_encode(explode(',', $json));
-        exit (dd($json));
+        //exit (dd($json));
         $file_data = json_encode([
             'file_name' => $file->getClientOriginalName(),
             'file_ext' => $file->getClientOriginalExtension(),

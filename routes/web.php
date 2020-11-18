@@ -48,7 +48,7 @@ Route::post('deleteUser', '\App\Http\Controllers\UserController@deleteUser');
 Route::get('/selectUser', '\App\Http\Controllers\UserController@selectUser');
 
 
-Route::get('/new-panel', '\App\Http\Controllers\NewPanelController@index');
+Route::get('/new-panel/', '\App\Http\Controllers\NewPanelController@index');
 Route::post('/new-panel', '\App\Http\Controllers\NewPanelController@getContent');
 Route::get('new-panel-get-content', '\App\Http\Controllers\NewPanelController@getContent');
 
@@ -62,12 +62,11 @@ Route::get('init_panel', 'App\Http\Controllers\PanelController@init');
  */
 Route::group(['namespace' => 'stuff'], function () {
     Route::post('insert-new-stuff', [stuffController::class, 'insert']);
-    Route::post('insert-new-stuff-file', [stuffController::class, 'UploadStuff'])->name('uploadStuff');
+    Route::post('insert-new-stuff-file', [stuffController::class, 'UploadStuff']);
     Route::get('insert-new-stuff', [stuffController::class, 'insert']);
     Route::get('select-stuff', [stuffController::class, 'selectStuff']);
     Route::post('edit-stuff', [stuffController::class, 'editStuff']);
     Route::post('delete-stuff', [stuffController::class, 'deleteStuff']);
-    Route::post('upload-stuff-file', [stuffController::class, 'uploadStuffFile']);
 });
 
 
@@ -135,3 +134,6 @@ Route::post('carEdit',  [carController::class,'edit'    ] );
 Route::post('carUpdate',[carController::class,'update'  ] )->name('carUpdate');
 
 
+/* Route::post('workshop/import', [\App\Http\Controllers\TestImportController::class, 'index']);
+ */
+Route::post('importTempstores',[App\Http\Controllers\tempstore\TempstoreController::class, 'storeFile']);
