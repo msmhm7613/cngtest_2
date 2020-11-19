@@ -26,22 +26,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c82404a0-5991-47bd-93d6-fccb3aefecc5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/modals/user/access_list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/modals/user/edit_access_list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/modals/user/show-access.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cngtest_2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cngtest_2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/modals/user/edit-user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/modals/user/edit-user.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/modals/user/insert-new-user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/modals/user/insert-new-user.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/panel/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/panel/side-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/tables/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/tables/users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/temp-reciept/temp-reciept-table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/temp-reciept/temp-reciept-table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/J4GKhpx1Odpr7VfEis2G12K6hJcO78LKvasaXZrY" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/XDyTvqI5Vfe4BlXIyBaPjEapS5CG4ggo3fAJvvsu" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +219,7 @@
       <updated>1605372438376</updated>
       <workItem from="1605372443377" duration="2543000" />
       <workItem from="1605794434390" duration="3441000" />
-      <workItem from="1605800429810" duration="12823000" />
+      <workItem from="1605800429810" duration="14399000" />
     </task>
     <servers />
   </component>
@@ -278,6 +263,10 @@
     </state>
     <state x="546" y="312" width="264" height="151" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1605806485613" />
     <state x="2006" y="386" width="309" height="135" key="NewPhpFileDialog/44.22.1322.746/1366.0.1600.900@1366.0.1600.900" timestamp="1605373139519" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1605814989581">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605814989581" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1605804168304">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
