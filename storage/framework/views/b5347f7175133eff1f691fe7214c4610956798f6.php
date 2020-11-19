@@ -7,17 +7,25 @@
             </div>
             <div class="modal-body">
                 <form action="" method="POST" class="form-horizontal" id="insert-user-form">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <div class="form-group row add">
-                        {{-- <label for="title" class="control-label col-sm-2">{{ نام کاربری: }}</label> --}}
+                        
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <input type="text" autofocus class=" inset" placeholder="نام کاربری" id="username" name="username">
-                                @error('username')
+                                <?php $__errorArgs = ['username'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                     <small id="small-1">
-                                        {{ $message }}
+                                        <?php echo e($message); ?>
+
                                     </small>
-                                @enderror
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 
                             </div>
                         </div>
@@ -30,22 +38,28 @@
                             <div class="form-group">
                                 <select name="role" id="role" class="form-control">
                                     <option value=1>
-                                        {{ 'مدیر سیستم' }}
+                                        <?php echo e('مدیر سیستم'); ?>
+
                                     </option>
                                     <option value=2>
-                                        {{ 'مسئول سایت' }}
+                                        <?php echo e('مسئول سایت'); ?>
+
                                     </option>
                                     <option value=3>
-                                        {{ 'پیمانکار' }}
+                                        <?php echo e('پیمانکار'); ?>
+
                                     </option>
                                     <option value=4>
-                                        {{ 'انبار' }}
+                                        <?php echo e('انبار'); ?>
+
                                     </option>
                                     <option value=5>
-                                        {{ 'انبار موقت' }}
+                                        <?php echo e('انبار موقت'); ?>
+
                                     </option>
                                     <option value=6>
-                                        {{ 'کارگاه' }}
+                                        <?php echo e('کارگاه'); ?>
+
                                     </option>
                                 </select>
                             </div>
@@ -62,7 +76,7 @@
                                 </select>
                             </div>
                         </div>
-                        @include('layouts.modals.user.access_list')
+                        <?php echo $__env->make('layouts.modals.user.access_list', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
                 </form>
             </div>
@@ -82,3 +96,4 @@
     </div>
 </div>
 
+<?php /**PATH C:\wamp\www\cngtest_2\resources\views/layouts/modals/user/insert-new-user.blade.php ENDPATH**/ ?>

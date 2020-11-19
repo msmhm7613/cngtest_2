@@ -1,8 +1,8 @@
-@php
+<?php
     $temp_reciept = \App\Models\TempReciept::all();
     $stuffpack = \App\Models\Stuffpack::all();
 
-@endphp
+?>
 <div class="header row">
     <button class="btn btn-success" id="open-insert-new-temp-reciept-modal">
         <i class="fas fa-plus"></i>
@@ -10,13 +10,13 @@
     </button>
 </div>
 
-@if ($temp_reciept->count() == 0)
+<?php if($temp_reciept->count() == 0): ?>
     <div class="row">
         <div class="alert alert-info">
             هنوز رسیدی ثبت نشده است.
         </div>
     </div>
-@else
+<?php else: ?>
     <div class="contents">
         <table class="table table-bordered">
             <div class="">
@@ -62,66 +62,78 @@
                 </thead>
                 <tbody>
                 <?php $ind = 1; ?>
-                @foreach ($temp_reciept as $item)
+                <?php $__currentLoopData = $temp_reciept; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td>
-                            {{ $ind++ }}
+                            <?php echo e($ind++); ?>
+
                         </td>
                         <td>
-                            {{ $item->reciept_no }}
+                            <?php echo e($item->reciept_no); ?>
+
                         </td>
                         <td>
-                            {{ $item->sender }}
+                            <?php echo e($item->sender); ?>
+
                         </td>
                         <td>
-                            {{ $item->referral_number }}
+                            <?php echo e($item->referral_number); ?>
+
                         </td>
                         <td>
-                            {{ $item->referral_date }}
+                            <?php echo e($item->referral_date); ?>
+
                         </td>
                         <td>
-                            @php
+                            <?php
                                 $temp_reciept_stuffs_count =
                                 \App\Models\TempRecieptList::select()->where('reciept_id',$item->id)->where('stuff_id','<>',0);
-                            @endphp
+                            ?>
                             <span>
-                                        {{ $temp_reciept_stuffs_count->count() }}
+                                        <?php echo e($temp_reciept_stuffs_count->count()); ?>
+
                                     </span>
-                            @if ($temp_reciept_stuffs_count->count() )
+                            <?php if($temp_reciept_stuffs_count->count() ): ?>
                                 <br/>
                                 <span class="badge badge-pill badge-secondary">
-                                            {{ $temp_reciept_stuffs_count->sum('count') }}
+                                            <?php echo e($temp_reciept_stuffs_count->sum('count')); ?>
+
                                         </span>
-                            @endif
+                            <?php endif; ?>
                         </td>
                         <td>
-                            @php
+                            <?php
                                 $temp_reciept_stuffpacks_count = \App\Models\TempRecieptList::select()->where('reciept_id',$item->id)->where('stuffpack_id','<>',0);
-                            @endphp
+                            ?>
                             <span>
-                                        {{ $temp_reciept_stuffpacks_count->count() }}
+                                        <?php echo e($temp_reciept_stuffpacks_count->count()); ?>
+
                                     </span>
                         </td>
                         <td>
-                            {{ $item->driver }}
+                            <?php echo e($item->driver); ?>
+
                         </td>
                         <td>
-                            {{ $item->car_no }}
+                            <?php echo e($item->car_no); ?>
+
                         </td>
                         <td>
-                            {{ $item->car_type }}
+                            <?php echo e($item->car_type); ?>
+
                         </td>
                         <td>
-                            {{ '--- ' }}
+                            <?php echo e('--- '); ?>
+
                         </td>
                         <td>
-                            {{ $item->description }} &nbsp; <span type="button" onclick="get_stuffs({{ $item->reciept_no }})"><i type="button" data-toggle="modal"
-                                                                                                                                 data-target="#modal_{{ $item->reciept_no }}" class="fa fa-eye"
+                            <?php echo e($item->description); ?> &nbsp; <span type="button" onclick="get_stuffs(<?php echo e($item->reciept_no); ?>)"><i type="button" data-toggle="modal"
+                                                                                                                                 data-target="#modal_<?php echo e($item->reciept_no); ?>" class="fa fa-eye"
                                                                                                                                  aria-hidden="true"></i> </span>
 
                         </td>
                     </tr>
-                    <div id="modal_{{ $item->reciept_no }}" class="modal fade" role="dialog">
+                    <div id="modal_<?php echo e($item->reciept_no); ?>" class="modal fade" role="dialog">
                         <div class="modal-dialog" dir="rtl" style="direction: rtl!important;">
                             <!-- Modal content-->
                             <div class="modal-content">
@@ -129,7 +141,7 @@
                                     <h4 class="modal-title">کالاهایی که نیاز به شماره سریال دارند</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="res_{{ $item->reciept_no }}"></div>
+                                    <div id="res_<?php echo e($item->reciept_no); ?>"></div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
@@ -137,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
                 <tfoot>
                 <tr class="table-primary">
@@ -182,6 +194,7 @@
             </div>
         </table>
     </div>
-@endif
-@include('temp-reciept.footer')
-<script src="{{ asset('js/temp-reciept/temp_reciept.js') }}"></script>
+<?php endif; ?>
+<?php echo $__env->make('temp-reciept.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<script src="<?php echo e(asset('js/temp-reciept/temp_reciept.js')); ?>"></script>
+<?php /**PATH C:\wamp\www\cngtest_2\resources\views/temp-reciept/temp-reciept-table.blade.php ENDPATH**/ ?>
