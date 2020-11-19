@@ -19,6 +19,7 @@ class UserController extends Controller
         $rules = array(
             'username' => 'required|min:3|max:25',
             'password' => 'required|min:8|max:25',
+            'acc_arr' => 'required'
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -28,38 +29,51 @@ class UserController extends Controller
             return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
         } else {
             try {
+
+                $c = count($request->acc_arr);
+
+                $acc_string = '';
+
+                $acc_string = $request->acc_arr[0];
+
+                for ($i = 1; $i < $c; $i++) {
+                    $acc_string .= ',' . $request->acc_arr[$i];
+                }
+
                 $newUser = new User();
                 $newUser->username = $request->username;
                 $newUser->password = Hash::make($request->password);
-                $newUser->role      = $request->role;
+                $newUser->role = $request->role;
                 $newUser->title     = $request->title;
+                $newUser->access = $acc_string;
                 $newUser->save();
                 /* return response('کاربر با موفقیت ثبت شد');*/
 
-                return view ( 'layouts.tables.users' );
+                return view('layouts.tables.users');
             } catch (\Illuminate\Database\QueryException $ex) {
                 //if($ex->errorInfo[0] == 23000)
                 $error_data = response()->json(['errors' => [
-                    'code'      => $ex->errorInfo[0],
-                    'message'   => $ex->errorInfo[2],
-                    'status'    => 'failed'
+                    'code' => $ex->errorInfo[0],
+                    'message' => $ex->errorInfo[2],
+                    'status' => 'failed'
                 ]]);
                 return $error_data;
             }
         }
     }
+
     public function selectUser(Request $request)
     {
 
         try {
 
             $selected_user = DB::select('select * from users where id = ?', [$request->id]);
-            return response()->json(['user'=>$selected_user]);
+            return response()->json(['user' => $selected_user]);
         } catch (PDOException $ex) {
             $error_data = response()->json(['errors' => [
-                'code'      => $ex->errorInfo[0],
-                'message'   => $ex->errorInfo[2],
-                'status'    => 'failed'
+                'code' => $ex->errorInfo[0],
+                'message' => $ex->errorInfo[2],
+                'status' => 'failed'
             ]]);
             return $error_data;
         }
@@ -78,8 +92,8 @@ class UserController extends Controller
             $newUser = User::select('select * from users where id = ?', [$request->id]);
             $newUser->username = $request->username;
             $newUser->password = Hash::make($request->password);
-            $newUser->role      = $request->role;
-            $newUser->title     = $request->title;
+            $newUser->role = $request->role;
+            $newUser->title = $request->title;
             $newUser->save();
             return response()->json();
         }
@@ -87,8 +101,8 @@ class UserController extends Controller
 
     public function editUser(Request $request)
     {
-        if($request->id === 1 )
-        return;
+        if ($request->id === 1)
+            return;
 
         $rules = array(
             'username' => '',
@@ -103,36 +117,40 @@ class UserController extends Controller
         } else {
             try {
 
+                $c = count($request->acc_edit);
+
+                $acc_string = '';
+
+                $acc_string = $request->acc_edit[0];
+
+                for ($i = 1; $i < $c; $i++) {
+                    $acc_string .= ',' . $request->acc_edit[$i];
+                }
+
                 $updateList = [];
 
-                if($request->username)
-                {
-                    $updateList['username']=$request->username;
+                if ($request->username) {
+                    $updateList['username'] = $request->username;
                 }
-                if($request->password)
-                {
-                    $updateList2['passwordcheck']='darim';
-                    $updateList['password'] = Hash::make( $request->password );
-                }
-                else
-                {
+                if ($request->password) {
+                    $updateList2['passwordcheck'] = 'darim';
+                    $updateList['password'] = Hash::make($request->password);
+                } else {
                     $updateList2['passwordcheck'] = 'nadarim';
                 }
                 $updateList['role'] = $request->role;
                 $updateList['title'] = $request->title;
+                $updateList['access'] = $acc_string;
 
-
-
-                DB::table('users')->where('id',$request->id)
-
-                ->update($updateList);
-                return response()->json([$updateList,$updateList2]);
+                DB::table('users')->where('id', $request->id)
+                    ->update($updateList);
+                return response()->json([$updateList, $updateList2]);
             } catch (\Illuminate\Database\QueryException $ex) {
                 //if($ex->errorInfo[0] == 23000)
                 $error_data = response()->json(['errors' => [
-                    'code'      => $ex->errorInfo[0],
-                    'message'   => $ex->errorInfo[2],
-                    'status'    => 'failed'
+                    'code' => $ex->errorInfo[0],
+                    'message' => $ex->errorInfo[2],
+                    'status' => 'failed'
                 ]]);
                 return $error_data;
             }
@@ -141,16 +159,16 @@ class UserController extends Controller
 
     public function deleteUser(Request $request)
     {
-/*         if($request->id === 1)
-        return;
-        $numberOfAdmins = count(DB::select('select * from users where role = ?', [1]));
-        if ($request->role == 1 && $numberOfAdmins < 2 )
-        {
-            return response()->json(['errors'=>[
-                'msg' => 'شما باید حداقل یک ادمین داشته باشید',
-                'number_of_admins' => $numberOfAdmins,
-            ]]);
-        } */
+        /*         if($request->id === 1)
+                return;
+                $numberOfAdmins = count(DB::select('select * from users where role = ?', [1]));
+                if ($request->role == 1 && $numberOfAdmins < 2 )
+                {
+                    return response()->json(['errors'=>[
+                        'msg' => 'شما باید حداقل یک ادمین داشته باشید',
+                        'number_of_admins' => $numberOfAdmins,
+                    ]]);
+                } */
 
         try {
             //return DB::table('users')->select()->where('id','=',$request->id);

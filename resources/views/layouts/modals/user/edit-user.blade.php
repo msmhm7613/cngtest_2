@@ -10,6 +10,7 @@
                 </div>
                 <form action="" method="POST" class="form-horizontal" id="edit-user-form">
                     @csrf
+                    <input type="hidden" id="user_id">
                     <div class="form-group row add">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -50,6 +51,19 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="acc_select">سطح دسترسی</label>
+                                <select class="form-control" id="acc_edit_select" onchange="load_edit_access()">
+                                    <option selected disabled>انتخاب کنید</option>
+                                    <option value="1">انبار و کالا</option>
+                                    <option value="2">خودرو</option>
+                                    <option value="3">کارگاه</option>
+                                    <option value="4">امکانات</option>
+                                </select>
+                            </div>
+                        </div>
+                        @include('layouts.modals.user.edit_access_list')
                     </div>
                 </form>
             </div>

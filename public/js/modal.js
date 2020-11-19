@@ -30,7 +30,7 @@ $(document).on('click', '#insert-new-user-save-btn', function (e) {
         }
     });
     $('#content-box').load('addUser', {
-            data: $('#insert-new-user-form').serialize(),
+            data: $('#insert-new-user-form').serialize() + "&title=" + $('#title').text(),
         },
         function (statusTxt) {
             console.log(statusTxt);
@@ -64,13 +64,14 @@ $(document).on('click', '#newUserBtn', function (e) {
         $.ajax({
             type: 'POST',
             url: 'addUser',
-            data: {
+            data: $('#insert-user-form').serialize(),
+            /*data: {
                 '_token': $('input[name="_token"]').val(),
                 'username': $('input[name="username"]').val(),
                 'password': $('input[name="password"]').val(),
                 'role': $('#role').val(),
-                'title': $('#role :selected').text(),
-            },
+                'access': $('input[name="access"]').val(),
+            },*/
             success: function (data) {
                 $('#response').removeClass('hidden')
                 if (data.errors) {
@@ -155,7 +156,11 @@ $(document).on('click', '#btnEdit', function (e) {
                     $('input#editUsername').val(data.user[0]['username']).attr('placeholder', 'نام کاربری جدید')
                     $('input#editPassword').val("").attr('placeholder', 'رمزعبور جدید')
                     $('select#editRole').val(data.user[0]['role'])
+                    $('input#user_id').val(data.user[0]['id']);
 
+                    var access = data.user[0]['access'];
+                    var acc_array = access.split(",");
+                    acc_array.map(check_access)
                 } catch (error) {
                     // console.log(error)
                 }
@@ -163,6 +168,7 @@ $(document).on('click', '#btnEdit', function (e) {
             }
         }
     })
+
 
     /**
      * ********************
@@ -176,17 +182,12 @@ $(document).on('click', '#btnEdit', function (e) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        var form_data = $('#edit-user-form').serialize();
+
         $.ajax({
             type: 'POST',
             url: 'editUser',
-            data: {
-                '_token': $('input[name="_token"]').val(),
-                'username': ($('#editUsername').val()),
-                'password': ($('#editPassword').val()),
-                'role': $('#editRole').val(),
-                'title': $('#editRole :selected').text(),
-                'id': id,
-            },
+            data: form_data  + "&id=" + $('#user_id').val() + "&title=" + $('#title').text(),
             success: function (data) {
 
                 if (data.errors) {
@@ -221,7 +222,7 @@ $(document).on('click', '#btnEdit', function (e) {
     /**
      * END OF UPDATE
 
-    */
+     */
 
 
 })
@@ -346,3 +347,69 @@ $(document).on('click', '#insert-new-contractor-form-show-btn', function (e) {
     e.preventDefault();
 
 })
+function check_access(acc_id) {
+    $(`#e_${acc_id}`).attr('checked','checked');
+}
+function show_access(acc_id) {
+    // alist.classList.add('hidden');
+    //console.log('alist',alist);
+
+    $(`#a${acc_id}`).removeClass('hidden').fadeIn(300);
+
+}
+function load_access(id) {
+    $.ajax({
+        type: 'GET',
+        url: 'selectUser',
+        data: {
+            'id': id,
+        },
+        success: function (data) {
+            alist = $.each($('#show-access #access-body [id^=ac] [id^=a]'),(ak,av)=>{
+                //console.log(av.addClass());
+                $(av).addClass('hidden');
+            });
+            var access = data.user[0]['access'];
+            var acc_array = access.split(",");
+            acc_array.map(show_access);
+            $('#show-access').modal('show');
+        }
+    });
+}
+
+function load_sub_access() {
+
+    var div_id = $('#acc_select').val();
+
+    $('#d_1').fadeOut();
+    $('#d_2').fadeOut();
+    $('#d_3').fadeOut();
+    $('#d_4').fadeOut();
+
+    if(div_id == 1)
+        $('#d_1').fadeIn();
+    else if (div_id == 2)
+        $('#d_2').fadeIn();
+    else if (div_id == 3)
+        $('#d_3').fadeIn();
+    else if (div_id == 4)
+        $('#d_4').fadeIn();
+}
+function load_edit_access() {
+
+    var div_id = $('#acc_edit_select').val();
+
+    $('#ed_1').fadeOut();
+    $('#ed_2').fadeOut();
+    $('#ed_3').fadeOut();
+    $('#ed_4').fadeOut();
+
+    if(div_id == 1)
+        $('#ed_1').fadeIn();
+    else if (div_id == 2)
+        $('#ed_2').fadeIn();
+    else if (div_id == 3)
+        $('#ed_3').fadeIn();
+    else if (div_id == 4)
+        $('#ed_4').fadeIn();
+}
