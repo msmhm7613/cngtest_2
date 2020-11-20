@@ -27,6 +27,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c82404a0-5991-47bd-93d6-fccb3aefecc5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/transfer-stuff/transfer.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/transfer-stuff/transfer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/stuff-transfer/transfer-stuff.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/stuff-transfer/transfer-stuff.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/ApDfXwKFnQUXqpBLSANUg5UzllWZ2hv2JrlEbOLt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/views/7812a41711841db00de0151a6fa9cfd594d97c22.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/7812a41711841db00de0151a6fa9cfd594d97c22.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +44,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="hadi_13990829" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -192,6 +196,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -219,7 +224,8 @@
       <updated>1605372438376</updated>
       <workItem from="1605372443377" duration="2543000" />
       <workItem from="1605794434390" duration="3441000" />
-      <workItem from="1605800429810" duration="14399000" />
+      <workItem from="1605800429810" duration="15792000" />
+      <workItem from="1605855458385" duration="5068000" />
     </task>
     <servers />
   </component>
@@ -263,13 +269,25 @@
     </state>
     <state x="546" y="312" width="264" height="151" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1605806485613" />
     <state x="2006" y="386" width="309" height="135" key="NewPhpFileDialog/44.22.1322.746/1366.0.1600.900@1366.0.1600.900" timestamp="1605373139519" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1605855483149">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605855483149" />
     <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1605814989581">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605814989581" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1605804168304">
+    <state x="394" y="152" key="git4idea.merge.GitPullDialog" timestamp="1605855714902">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1605804168304" />
+    <state x="394" y="152" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1605855714902" />
+    <state x="473" y="255" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1605816786427">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="473" y="255" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1366.728@0.0.1366.728" timestamp="1605816786427" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1605859426479">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1605859426479" />
   </component>
 </project>
