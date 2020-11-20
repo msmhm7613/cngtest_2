@@ -37,36 +37,6 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <select name="role" id="editRole" class="form-control">
-                                    <option value=1>
-                                        <?php echo e('مدیر سیستم'); ?>
-
-                                    </option>
-                                    <option value=2>
-                                        <?php echo e('مسئول سایت'); ?>
-
-                                    </option>
-                                    <option value=3>
-                                        <?php echo e('پیمانکار'); ?>
-
-                                    </option>
-                                    <option value=4>
-                                        <?php echo e('انبار'); ?>
-
-                                    </option>
-                                    <option value=5>
-                                        <?php echo e('انبار موقت'); ?>
-
-                                    </option>
-                                    <option value=6>
-                                        <?php echo e('کارگاه'); ?>
-
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
                                 <label for="acc_select">سطح دسترسی</label>
                                 <select class="form-control" id="acc_edit_select" onchange="load_edit_access()">
                                     <option selected disabled>انتخاب کنید</option>

@@ -30,7 +30,7 @@ $(document).on('click', '#insert-new-user-save-btn', function (e) {
         }
     });
     $('#content-box').load('addUser', {
-            data: $('#insert-new-user-form').serialize() + "&title=" + $('#title').text(),
+            data: $('#insert-new-user-form').serialize(),
         },
         function (statusTxt) {
             console.log(statusTxt);
@@ -187,7 +187,7 @@ $(document).on('click', '#btnEdit', function (e) {
         $.ajax({
             type: 'POST',
             url: 'editUser',
-            data: form_data  + "&id=" + $('#user_id').val() + "&title=" + $('#title').text(),
+            data: form_data  + "&id=" + $('#user_id').val(),
             success: function (data) {
 
                 if (data.errors) {
@@ -267,7 +267,6 @@ $(document).on('click', '#btnDelete', function (e) {
             if (data.user) {
                 $('#deleteResponse').removeClass('hidden');
                 $('#sureDeleteUsername').text(" " + data.user[0]['username'] + " ")
-                $('#sureDeleteRole').text(" " + data.user[0]['title'] + " ")
                 del_role = data.user[0]['role'];
             } else {
                 $('#deleteResponse').removeClass('hidden');

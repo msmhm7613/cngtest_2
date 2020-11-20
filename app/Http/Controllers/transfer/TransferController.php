@@ -74,7 +74,8 @@ class TransferController extends Controller
                         $transfers[] = [
                             'transfer_id' => $transfer->id,
                             'stuff_id' => $request->stuffs_id[$i],
-                            'stuffpack_id' => 0
+                            'stuffpack_id' => 0,
+                            'count' => $request->stuffs_num[$i],
                         ];
                     }
                 }
@@ -86,12 +87,13 @@ class TransferController extends Controller
                         $transfers[] = [
                             'transfer_id' => $transfer->id,
                             'stuff_id' => 0,
-                            'stuffpack_id' => $request->stuffspack_id[$i]
+                            'stuffpack_id' => $request->stuffspack_id[$i],
+                            'count' => $request->stuffs_num[$i],
                         ];
                     }
                 }
             }
-
+            
             // create transfer List
             TransferList::insert($transfers);
 

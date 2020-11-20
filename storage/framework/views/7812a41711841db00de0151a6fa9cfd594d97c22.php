@@ -38,9 +38,7 @@ if (count($temp_lists)) {
 }
 ?>
 <div class="stuff-header">
-    <?php echo e(Route('createTransfer')); ?>
-
-    <form action="" method="POST" id="transfer-form" class="form-horizontal col-md-12">
+    <form action="<?php echo e(Route('createTransfer')); ?>" method="POST" class="form-horizontal col-md-12">
     <div class="header row p-3 text-center outset bg-lightgreen">
         <h3 class="display-6">
             <div class="i fas fa-new"></div>
@@ -303,7 +301,7 @@ if (count($temp_lists)) {
             <div class="row">
 
                 <div class="col">
-                    <button class="btn btn-success hidden" type="button" id="insert-new-reciept-save-btn-trnsfer">
+                    <button class="btn btn-success hidden" type="submit" id="insert-new-reciept-save-btn-trnsfer">
                         <i class="fas fa-save"></i>
                         ثبت
                     </button>
@@ -335,10 +333,6 @@ if (count($temp_lists)) {
             $('#stuffpack_div').fadeIn();
         else
             $('#stuff_div').fadeIn();
-    });
-
-    $('#insert-new-reciept-save-btn-trnsfer').click(function () {
-        alert('sdj');
     });
 </script>
 <?php /**PATH C:\wamp\www\cngtest_2\resources\views/stuff-transfer/transfer-stuff.blade.php ENDPATH**/ ?>

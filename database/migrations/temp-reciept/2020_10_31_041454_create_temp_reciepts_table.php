@@ -25,6 +25,7 @@ class CreateTempRecieptsTable extends Migration
             $table->string('description',255)->nullable();
             $table->unsignedBigInteger('creator_id');
             $table->unsignedBigInteger('confirmer_id');
+            $table->unsignedBigInteger('tempstore_id')->default(1);
             $table->timestamps();
         });
     }

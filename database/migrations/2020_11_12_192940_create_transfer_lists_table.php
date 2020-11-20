@@ -19,6 +19,7 @@ class CreateTransferListsTable extends Migration
             $table->foreign('transfer_id')->references('id')->on('transfers')->onDelete('cascade');
             $table->string('stuff_id')->default(0);
             $table->string('stuffpack_id')->default(0);
+            $table->unsignedMediumInteger('count')->min(1);
             $table->timestamps();
         });
     }

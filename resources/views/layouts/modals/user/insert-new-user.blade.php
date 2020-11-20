@@ -28,30 +28,6 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <select name="role" id="role" class="form-control">
-                                    <option value=1>
-                                        {{ 'مدیر سیستم' }}
-                                    </option>
-                                    <option value=2>
-                                        {{ 'مسئول سایت' }}
-                                    </option>
-                                    <option value=3>
-                                        {{ 'پیمانکار' }}
-                                    </option>
-                                    <option value=4>
-                                        {{ 'انبار' }}
-                                    </option>
-                                    <option value=5>
-                                        {{ 'انبار موقت' }}
-                                    </option>
-                                    <option value=6>
-                                        {{ 'کارگاه' }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
                                 <label for="acc_select">سطح دسترسی</label>
                                 <select class="form-control" id="acc_select" onchange="load_sub_access()">
                                     <option selected disabled>انتخاب کنید</option>

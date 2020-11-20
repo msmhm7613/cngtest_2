@@ -43,8 +43,8 @@ class UserController extends Controller
                 $newUser = new User();
                 $newUser->username = $request->username;
                 $newUser->password = Hash::make($request->password);
-                $newUser->role = $request->role;
-                $newUser->title     = $request->title;
+                $newUser->role = 1;
+                $newUser->title     = $request->username;
                 $newUser->access = $acc_string;
                 $newUser->save();
                 /* return response('کاربر با موفقیت ثبت شد');*/
@@ -92,8 +92,8 @@ class UserController extends Controller
             $newUser = User::select('select * from users where id = ?', [$request->id]);
             $newUser->username = $request->username;
             $newUser->password = Hash::make($request->password);
-            $newUser->role = $request->role;
-            $newUser->title = $request->title;
+            $newUser->role = 1;
+            $newUser->title = $request->username;
             $newUser->save();
             return response()->json();
         }
