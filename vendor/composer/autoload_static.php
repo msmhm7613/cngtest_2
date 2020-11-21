@@ -710,6 +710,7 @@ class ComposerStaticInit64d65c3c8d0ab36726bd2b4e417930d5
         'App\\Models\\Kit' => __DIR__ . '/../..' . '/app/Models/Kit.php',
         'App\\Models\\SerialList' => __DIR__ . '/../..' . '/app/Models/SerialList.php',
         'App\\Models\\Store' => __DIR__ . '/../..' . '/app/Models/Store.php',
+        'App\\Models\\StoreInventory' => __DIR__ . '/../..' . '/app/Models/StoreInventory.php',
         'App\\Models\\Stuff' => __DIR__ . '/../..' . '/app/Models/Stuff.php',
         'App\\Models\\Stuffpack' => __DIR__ . '/../..' . '/app/Models/StuffPack.php',
         'App\\Models\\StuffpackList' => __DIR__ . '/../..' . '/app/Models/StuffpackList.php',

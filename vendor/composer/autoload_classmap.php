@@ -60,6 +60,7 @@ return array(
     'App\\Models\\Kit' => $baseDir . '/app/Models/Kit.php',
     'App\\Models\\SerialList' => $baseDir . '/app/Models/SerialList.php',
     'App\\Models\\Store' => $baseDir . '/app/Models/Store.php',
+    'App\\Models\\StoreInventory' => $baseDir . '/app/Models/StoreInventory.php',
     'App\\Models\\Stuff' => $baseDir . '/app/Models/Stuff.php',
     'App\\Models\\Stuffpack' => $baseDir . '/app/Models/StuffPack.php',
     'App\\Models\\StuffpackList' => $baseDir . '/app/Models/StuffpackList.php',

@@ -51,7 +51,7 @@ function add_transfer_list() {
 function remove_row(e) {
     $(e).parent().parent().each(function () {
         var code = $(this).find(".code").text();
-        console.log($("[data-code=" + code + "]").removeAttr('disabled'));
+        $("[data-code=" + code + "]").removeAttr('disabled');
     });
     $(e).parent().parent().remove();
 }

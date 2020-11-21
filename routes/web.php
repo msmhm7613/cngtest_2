@@ -137,3 +137,6 @@ Route::post('carUpdate',[carController::class,'update'  ] )->name('carUpdate');
 /* Route::post('workshop/import', [\App\Http\Controllers\TestImportController::class, 'index']);
  */
 Route::post('importTempstores',[App\Http\Controllers\tempstore\TempstoreController::class, 'storeFile']);
+
+// Inventory Stores Url
+Route::get('get_inventory/{temp_id}','App\Http\Controllers\StoreInventory\InventoryController@get_inventory');
