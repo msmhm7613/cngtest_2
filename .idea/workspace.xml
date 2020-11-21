@@ -25,26 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c82404a0-5991-47bd-93d6-fccb3aefecc5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TempRecieptController2.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TempRecieptController2.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/temp-reciept/TempRecieptController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/temp-reciept/TempRecieptController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/transfer/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/transfer/TransferController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/transfer-stuff/transfer.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/transfer-stuff/transfer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/stuff-transfer/transfer-stuff.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/stuff-transfer/transfer-stuff.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/views/7812a41711841db00de0151a6fa9cfd594d97c22.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/7812a41711841db00de0151a6fa9cfd594d97c22.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-    </list>
+    <list default="true" id="c82404a0-5991-47bd-93d6-fccb3aefecc5" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -244,7 +225,7 @@
       <workItem from="1605885464304" duration="7010000" />
       <workItem from="1605950614387" duration="249000" />
       <workItem from="1605950875201" duration="10275000" />
-      <workItem from="1605976541773" duration="4638000" />
+      <workItem from="1605976541773" duration="5099000" />
     </task>
     <servers />
   </component>

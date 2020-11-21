@@ -43,8 +43,6 @@ class UserController extends Controller
                 $newUser = new User();
                 $newUser->username = $request->username;
                 $newUser->password = Hash::make($request->password);
-                $newUser->role = 1;
-                $newUser->title     = $request->username;
                 $newUser->access = $acc_string;
                 $newUser->save();
                 /* return response('کاربر با موفقیت ثبت شد');*/
@@ -92,8 +90,6 @@ class UserController extends Controller
             $newUser = User::select('select * from users where id = ?', [$request->id]);
             $newUser->username = $request->username;
             $newUser->password = Hash::make($request->password);
-            $newUser->role = 1;
-            $newUser->title = $request->username;
             $newUser->save();
             return response()->json();
         }
@@ -138,8 +134,6 @@ class UserController extends Controller
                 } else {
                     $updateList2['passwordcheck'] = 'nadarim';
                 }
-                $updateList['role'] = $request->role;
-                $updateList['title'] = $request->title;
                 $updateList['access'] = $acc_string;
 
                 DB::table('users')->where('id', $request->id)
