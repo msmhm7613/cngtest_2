@@ -25,7 +25,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c82404a0-5991-47bd-93d6-fccb3aefecc5" name="Default Changelist" comment="" />
+    <list default="true" id="c82404a0-5991-47bd-93d6-fccb3aefecc5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -225,7 +228,9 @@
       <workItem from="1605885464304" duration="7010000" />
       <workItem from="1605950614387" duration="249000" />
       <workItem from="1605950875201" duration="10275000" />
-      <workItem from="1605976541773" duration="5099000" />
+      <workItem from="1605976541773" duration="5494000" />
+      <workItem from="1606040223668" duration="136000" />
+      <workItem from="1606118142575" duration="744000" />
     </task>
     <servers />
   </component>
